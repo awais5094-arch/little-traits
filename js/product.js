@@ -16,7 +16,9 @@
     selectedColor: null,
     selectedSize: null, // Explicitly null initially so size selection is required
     activeImageIndex: 0,
-    quantity: 1
+    quantity: 1,
+    showSizeError: false,
+    openPanels: new Set()
   };
 
   function resolveProductFromUrl() {
@@ -56,15 +58,24 @@
       <a href="shop.html">Shop</a>
       <span aria-hidden="true">/</span>
       <a href="${catLink}">${catName}</a>
-      <span aria-hidden="true">/</span>
-      <span style="color: var(--text-primary); font-weight: 500;">${product.name}</span>
+      <span aria-hidden="true" class="breadcrumb__tail">/</span>
+      <span class="breadcrumb__tail breadcrumb__current" aria-current="page">${product.name}</span>
     `;
+  }
+
+  function focusKey(el) {
+    if (!el || !el.closest || !el.closest("#pdp-mount")) return null;
+    for (const attr of ["data-select-size", "data-select-color", "data-gallery-idx", "data-accordion-toggle"]) {
+      if (el.hasAttribute(attr)) return `[${attr}="${el.getAttribute(attr)}"]`;
+    }
+    return el.id ? `#${el.id}` : null;
   }
 
   function renderProductView() {
     const mount = document.getElementById("pdp-mount");
     const app = window.LittleTraitsApp;
     if (!mount || !currentProduct || !app) return;
+    const restoreFocus = focusKey(document.activeElement);
 
     document.title = `${currentProduct.name} — ${app.formatPKR(
       currentProduct.price
@@ -84,7 +95,7 @@
           data-gallery-idx="${idx}"
           aria-label="View product image ${idx + 1}: ${img.alt}"
         >
-          <img src="${img.src}" alt="${img.alt}" />
+          <img src="${img.src}" alt="" />
         </button>
       `
       )
@@ -100,7 +111,7 @@
             data-select-color="${col.name}"
             aria-pressed="${isSelected}"
           >
-            <span class="color-choice-swatch" style="background-color: ${col.hex};"></span>
+            <span class="color-choice-swatch" style="background-color: ${col.hex};" aria-hidden="true"></span>
             <span>${col.name}</span>
           </button>
         `;
@@ -117,7 +128,7 @@
             data-select-size="${sz}"
             aria-pressed="${isSelected}"
           >
-            ${sz}
+            ${sz.replace("-", "–")}
           </button>
         `;
       })
@@ -156,22 +167,19 @@
           </div>
         </div>
 
-        <!-- Right Column: Clean, Breathable, Mother-Friendly Product Controls -->
+        <!-- Right Column: Product information & purchase controls -->
         <div class="pdp-info">
           <div class="pdp-info__top">
-            <div class="pdp-age-pill">
-              <span>Ages ${currentProduct.ageGroup}</span>
-              <span>•</span>
-              <span>${currentProduct.fabricSummary}</span>
-            </div>
-            <h1 class="heading-lg" style="margin-bottom: 0.35rem;">${currentProduct.name}</h1>
+            <span class="pdp-age-pill">Ages ${currentProduct.ageGroup}</span>
+            <h1 class="pdp-title">${currentProduct.name}</h1>
+            <p class="pdp-fabric">${currentProduct.fabricSummary}</p>
             <div class="pdp-price">
               <span>${app.formatPKR(currentProduct.price)}</span>
-              <span class="pdp-price__tax">In Stock • Cash on Delivery Available</span>
+              <span class="pdp-price__tax">In stock • Cash on Delivery</span>
             </div>
           </div>
 
-          <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.75;">
+          <p class="pdp-description">
             ${currentProduct.shortDescription}
           </p>
 
@@ -179,24 +187,24 @@
           <div class="pdp-selector-block">
             <div class="pdp-selector-header">
               <div>
-                <span class="pdp-selector-label">Colour:</span>
+                <span class="pdp-selector-label">Colour</span>
                 <span class="pdp-selector-value" id="selected-color-label">${
                   state.selectedColor ? state.selectedColor.name : ""
                 }</span>
               </div>
             </div>
-            <div class="color-options-row" role="radiogroup" aria-label="Select colour">
+            <div class="color-options-row" role="group" aria-label="Select colour">
               ${colorsHtml}
             </div>
           </div>
 
-          <!-- Size Selection (Required — 1 Click Away) -->
-          <div class="pdp-selector-block">
+          <!-- Size Selection (Required) -->
+          <div class="pdp-selector-block" id="pdp-size-block">
             <div class="pdp-selector-header">
               <div>
-                <span class="pdp-selector-label">Select Child Size: <span style="color: var(--accent-berry);">*</span></span>
-                <span class="pdp-selector-value" id="selected-size-label">
-                  ${state.selectedSize ? state.selectedSize : "Choose size"}
+                <span class="pdp-selector-label">Size</span>
+                <span class="pdp-selector-value ${state.selectedSize ? "" : "is-placeholder"}" id="selected-size-label">
+                  ${state.selectedSize ? state.selectedSize.replace("-", "–") : "Select your child’s size"}
                 </span>
               </div>
               <button type="button" class="size-guide-trigger" data-open-size-guide>
@@ -204,87 +212,139 @@
                 Size Guide
               </button>
             </div>
-            <div class="size-options-grid" role="radiogroup" aria-label="Select size">
+            <div class="size-options-grid" role="group" aria-label="Select size">
               ${sizesHtml}
             </div>
-            <div class="pdp-validation-msg" id="pdp-size-error" role="alert">
-              Please select your child’s size above before adding to bag.
+            <div class="pdp-validation-msg ${state.showSizeError ? "is-visible" : ""}" id="pdp-size-error" role="alert">
+              ${state.showSizeError ? "Please choose a size first." : ""}
             </div>
           </div>
 
-          <!-- Quantity & Add to Cart Actions -->
-          <div class="pdp-purchase-row">
-            <div class="qty-control" aria-label="Product quantity">
-              <button type="button" class="qty-btn" id="pdp-qty-dec" aria-label="Decrease quantity">−</button>
-              <input
-                type="number"
-                id="pdp-qty-input"
-                class="qty-input"
-                value="${state.quantity}"
-                min="1"
-                max="15"
-                aria-label="Quantity"
-              />
-              <button type="button" class="qty-btn" id="pdp-qty-inc" aria-label="Increase quantity">+</button>
+          <!-- Quantity & primary purchase action -->
+          <div class="pdp-purchase">
+            <div class="pdp-purchase-row" id="pdp-purchase-row">
+              <div class="qty-control" role="group" aria-label="Quantity">
+                <button type="button" class="qty-btn" id="pdp-qty-dec" aria-label="Decrease quantity">−</button>
+                <input
+                  type="number"
+                  id="pdp-qty-input"
+                  class="qty-input"
+                  value="${state.quantity}"
+                  min="1"
+                  max="15"
+                  aria-label="Quantity"
+                />
+                <button type="button" class="qty-btn" id="pdp-qty-inc" aria-label="Increase quantity">+</button>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-lg" id="pdp-add-to-cart-btn">
+                Add to Bag <span class="btn__divider" aria-hidden="true"></span> <span class="btn__price">${app.formatPKR(currentProduct.price * state.quantity)}</span>
+              </button>
             </div>
 
-            <button type="button" class="btn btn-primary" id="pdp-add-to-cart-btn" style="min-height: 52px; font-size: 0.94rem;">
-              Add to Shopping Bag — ${app.formatPKR(currentProduct.price * state.quantity)}
+            <button type="button" class="btn btn-outline btn-block" id="pdp-buy-now-btn">
+              Buy now — Cash on Delivery
             </button>
           </div>
 
-          <!-- Secondary Honest Demo Buy Now Action -->
-          <button type="button" class="btn btn-gold" id="pdp-buy-now-btn" style="width: 100%; min-height: 48px;">
-            Buy Now with Cash on Delivery (Preview)
-          </button>
+          <ul class="pdp-reassurance-list">
+            <li class="pdp-reassurance-item">Gentle on sensitive skin</li>
+            <li class="pdp-reassurance-item">7-day size exchange</li>
+            <li class="pdp-reassurance-item">Delivery across Pakistan</li>
+          </ul>
 
-          <!-- Simple One-Glance Reassurance Strip for Mothers -->
-          <div class="pdp-reassurance-list">
-            <span class="pdp-reassurance-item">✓ Gentle on Sensitive Skin</span>
-            <span class="pdp-reassurance-item">✓ 7-Day Easy Size Exchange</span>
-            <span class="pdp-reassurance-item">✓ All-Pakistan Dispatch</span>
-          </div>
-
-          <!-- Clean Collapsible Accordions (Closed by Default to Avoid Visual Clutter) -->
+          <!-- Collapsible details (closed by default) -->
           <div class="pdp-accordions">
-            <div class="accordion-item">
-              <button type="button" class="accordion-trigger" data-accordion-toggle="details-panel" aria-expanded="false">
-                <span>Garment Details &amp; Fit</span>
-                <span aria-hidden="true">+</span>
-              </button>
-              <div class="accordion-content" id="details-panel" style="display: none;">
-                <ul>
-                  ${detailsListHtml}
-                </ul>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">SKU: ${currentProduct.sku}</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" id="care-accordion">
-              <button type="button" class="accordion-trigger" data-accordion-toggle="care-panel" aria-expanded="false">
-                <span>Fabric &amp; Wash Care</span>
-                <span aria-hidden="true">+</span>
-              </button>
-              <div class="accordion-content" id="care-panel" style="display: none;">
-                <p><strong>Material:</strong> ${currentProduct.fabricSummary}</p>
-                <p style="margin-top: 0.35rem;">${currentProduct.fabricCare}</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" id="delivery-accordion">
-              <button type="button" class="accordion-trigger" data-accordion-toggle="delivery-panel" aria-expanded="false">
-                <span>Delivery &amp; Size Exchange</span>
-                <span aria-hidden="true">+</span>
-              </button>
-              <div class="accordion-content" id="delivery-panel" style="display: none;">
-                <p><strong>Delivery:</strong> ${config.shippingNote}</p>
-                <p style="margin-top: 0.35rem;"><strong>Exchanges:</strong> ${config.exchangeNote}</p>
-              </div>
-            </div>
+            ${accordionHtml("details-panel", "Garment details &amp; fit", `
+              <ul>${detailsListHtml}</ul>
+              <p class="accordion-meta">SKU: ${currentProduct.sku}</p>
+            `)}
+            ${accordionHtml("care-panel", "Fabric &amp; wash care", `
+              <p><strong>Material:</strong> ${currentProduct.fabricSummary}</p>
+              <p>${currentProduct.fabricCare}</p>
+            `)}
+            ${accordionHtml("delivery-panel", "Delivery &amp; size exchange", `
+              <p><strong>Delivery:</strong> ${config.shippingNote}</p>
+              <p><strong>Exchanges:</strong> ${config.exchangeNote}</p>
+            `)}
           </div>
         </div>
       </div>
     `;
+
+    renderStickyBar();
+
+    if (restoreFocus) {
+      const el = mount.querySelector(restoreFocus);
+      if (el) el.focus({ preventScroll: true });
+    }
+  }
+
+  function accordionHtml(id, title, body) {
+    const open = state.openPanels.has(id);
+    return `
+      <div class="accordion-item">
+        <button type="button" class="accordion-trigger" data-accordion-toggle="${id}" aria-expanded="${open}" aria-controls="${id}">
+          <span>${title}</span>
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="accordion-content" id="${id}" ${open ? "" : "hidden"}>
+          ${body}
+        </div>
+      </div>
+    `;
+  }
+
+  // Mobile-only bar that keeps price + Add to Bag reachable once the main button scrolls away
+  function renderStickyBar() {
+    const app = window.LittleTraitsApp;
+    let bar = document.getElementById("pdp-sticky-bar");
+    if (!bar) {
+      bar = document.createElement("div");
+      bar.id = "pdp-sticky-bar";
+      bar.className = "pdp-sticky-bar";
+      bar.setAttribute("aria-hidden", "true");
+      document.body.appendChild(bar);
+      observePurchaseRow(bar);
+    }
+    bar.innerHTML = `
+      <div class="pdp-sticky-bar__info">
+        <span class="pdp-sticky-bar__name">${currentProduct.name}</span>
+        <span class="pdp-sticky-bar__meta">${app.formatPKR(currentProduct.price)}${
+          state.selectedSize ? ` • ${app.formatSize(state.selectedSize)}` : ""
+        }</span>
+      </div>
+      <button type="button" class="btn btn-primary" data-sticky-add tabindex="-1">
+        ${state.selectedSize ? "Add to Bag" : "Choose size"}
+      </button>
+    `;
+  }
+
+  function observePurchaseRow(bar) {
+    if (!("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const row = document.getElementById("pdp-purchase-row");
+        if (!row) return;
+        const rect = row.getBoundingClientRect();
+        const scrolledPast = rect.bottom < 0;
+        entries.forEach(() => {
+          bar.classList.toggle("is-visible", scrolledPast);
+          document.body.classList.toggle("has-sticky-bar", scrolledPast);
+        });
+      },
+      { threshold: [0, 1] }
+    );
+    const attach = () => {
+      const row = document.getElementById("pdp-purchase-row");
+      if (row) io.observe(row);
+    };
+    attach();
+    // Re-attach after each re-render replaces the purchase row
+    new MutationObserver(() => {
+      io.disconnect();
+      attach();
+    }).observe(document.getElementById("pdp-mount"), { childList: true });
   }
 
   function renderRelatedProducts() {
@@ -292,46 +352,60 @@
     const app = window.LittleTraitsApp;
     if (!relatedGrid || !currentProduct || !app) return;
 
-    const others = products.filter((p) => p.id !== currentProduct.id);
-    // Prioritize same category or secondary category matches
-    others.sort((a, b) => {
-      const aScore = a.category === currentProduct.category ? 2 : 1;
-      const bScore = b.category === currentProduct.category ? 2 : 1;
-      return bScore - aScore;
-    });
+    const related = (p) =>
+      p.category === currentProduct.category ||
+      (p.secondaryCategories || []).includes(currentProduct.category) ||
+      (currentProduct.secondaryCategories || []).includes(p.category);
+    const others = products
+      .filter((p) => p.id !== currentProduct.id)
+      .sort((a, b) => Number(related(b)) - Number(related(a)));
 
-    const topThree = others.slice(0, 3);
-    relatedGrid.innerHTML = topThree
+    relatedGrid.innerHTML = others
+      .slice(0, 4)
       .map((p) => app.renderProductCard(p))
       .join("");
   }
 
   function validateSizeSelection() {
-    const errEl = document.getElementById("pdp-size-error");
-    if (!state.selectedSize) {
-      if (errEl) errEl.classList.add("is-visible");
-      return false;
+    if (state.selectedSize) {
+      state.showSizeError = false;
+      return true;
     }
-    if (errEl) errEl.classList.remove("is-visible");
-    return true;
+    state.showSizeError = true;
+    renderProductView();
+    const block = document.getElementById("pdp-size-block");
+    if (block) {
+      const top = block.getBoundingClientRect().top + window.scrollY - 110;
+      window.scrollTo({ top, behavior: "smooth" });
+      const firstSize = block.querySelector("[data-select-size]");
+      if (firstSize) firstSize.focus({ preventScroll: true });
+    }
+    return false;
+  }
+
+  function addSelectionToBag() {
+    const app = window.LittleTraitsApp;
+    if (!app || !currentProduct) return false;
+    return app.addToCart({
+      productId: currentProduct.id,
+      size: state.selectedSize,
+      colorName: state.selectedColor.name,
+      quantity: state.quantity,
+      silent: true
+    });
   }
 
   function bindProductEvents() {
     document.addEventListener("click", (e) => {
       const target = e.target;
 
-      // Gallery thumbnail click
       const thumbBtn = target.closest("[data-gallery-idx]");
       if (thumbBtn) {
-        state.activeImageIndex = parseInt(
-          thumbBtn.getAttribute("data-gallery-idx"),
-          10
-        );
+        state.activeImageIndex = parseInt(thumbBtn.getAttribute("data-gallery-idx"), 10);
         renderProductView();
         return;
       }
 
-      // Colour variation click
       const colorBtn = target.closest("[data-select-color]");
       if (colorBtn && currentProduct) {
         const colName = colorBtn.getAttribute("data-select-color");
@@ -346,73 +420,49 @@
         return;
       }
 
-      // Size variation click
       const sizeBtn = target.closest("[data-select-size]");
       if (sizeBtn) {
         state.selectedSize = sizeBtn.getAttribute("data-select-size");
+        state.showSizeError = false;
         renderProductView();
         return;
       }
 
-      // Quantity decrement
       if (target.closest("#pdp-qty-dec")) {
         state.quantity = Math.max(1, state.quantity - 1);
         renderProductView();
         return;
       }
 
-      // Quantity increment
       if (target.closest("#pdp-qty-inc")) {
         state.quantity = Math.min(15, state.quantity + 1);
         renderProductView();
         return;
       }
 
-      // Add to Cart
-      if (target.closest("#pdp-add-to-cart-btn")) {
+      if (target.closest("#pdp-add-to-cart-btn") || target.closest("[data-sticky-add]")) {
         if (!validateSizeSelection()) return;
-        const app = window.LittleTraitsApp;
-        if (app && currentProduct) {
-          app.addToCart({
-            productId: currentProduct.id,
-            size: state.selectedSize,
-            colorName: state.selectedColor.name,
-            quantity: state.quantity
-          });
-          app.openDrawer("cart-drawer");
-        }
+        if (addSelectionToBag()) window.LittleTraitsApp.openDrawer("cart-drawer");
         return;
       }
 
-      // Buy Now (Honest Demo Checkout State)
       if (target.closest("#pdp-buy-now-btn")) {
         if (!validateSizeSelection()) return;
-        const app = window.LittleTraitsApp;
-        if (app && currentProduct) {
-          app.addToCart({
-            productId: currentProduct.id,
-            size: state.selectedSize,
-            colorName: state.selectedColor.name,
-            quantity: state.quantity
-          });
-          app.openDemoCheckoutModal();
-        }
+        if (addSelectionToBag()) window.LittleTraitsApp.openDemoCheckoutModal();
         return;
       }
 
-      // Accordion toggles
       const accBtn = target.closest("[data-accordion-toggle]");
       if (accBtn) {
         const panelId = accBtn.getAttribute("data-accordion-toggle");
         const panel = document.getElementById(panelId);
         if (panel) {
-          const isHidden = panel.style.display === "none";
-          panel.style.display = isHidden ? "block" : "none";
-          accBtn.setAttribute("aria-expanded", isHidden ? "true" : "false");
-          const iconSpan = accBtn.querySelector("span:last-child");
-          if (iconSpan) iconSpan.textContent = isHidden ? "−" : "+";
+          const willOpen = panel.hidden;
+          panel.hidden = !willOpen;
+          accBtn.setAttribute("aria-expanded", String(willOpen));
+          if (willOpen) state.openPanels.add(panelId);
+          else state.openPanels.delete(panelId);
         }
-        return;
       }
     });
 
@@ -427,12 +477,11 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     currentProduct = resolveProductFromUrl();
-    if (currentProduct) {
-      state.selectedColor = currentProduct.colors[0];
-      state.activeImageIndex = 0;
-      state.selectedSize = null; // Require explicit user selection per brief
-      state.quantity = 1;
-    }
+    if (!currentProduct) return;
+    state.selectedColor = currentProduct.colors[0];
+    state.activeImageIndex = 0;
+    state.selectedSize = null; // Size must be chosen explicitly before adding to bag
+    state.quantity = 1;
     bindProductEvents();
     renderProductView();
     renderRelatedProducts();

@@ -7,29 +7,31 @@ This document provides another developer or AI assistant with everything needed 
 ## 1. Completed Features
 
 1. **Five Connected Views (`index.html`, `shop.html`, `product.html`, `about.html`, `contact.html`)**:
-   - **Homepage (`index.html`)**: Split Boys/Girls photographic hero, arched category tiles + 4-column Value Propositions strip, 6-piece debut arrival grid, *Made for Pakistani Seasons* textile story, 100% WordPress/Elementor-friendly 2-column *Built for Every Little Adventure* playwear banner, dual collection spotlights, 4-card *Garment Anatomy* grid, *Fast Age/Size Finder* strip, service bar, and complete footer.
-   - **Shop / Category Page (`shop.html`)**: Supports URL parameters (`?category=boys`, `?size=2-3Y`, `?sort=price-asc`) and interactive filtering without page reloads. Includes category pill bar, desktop sidebar filters, mobile slide-over filter drawer, live product counter, removable active filter chips, and an empty state when a filter combination yields 0 items.
-   - **Reusable Product Detail Page (`product.html`)**: Single dynamic layout populated from `window.LITTLE_TRAITS_PRODUCTS` in `js/data.js` via `?id=lt-01` .. `lt-06` (or `?slug=...`). Designed with clean, breathable spacing for mothers shopping kidswear: 1-click Size Guide pill button, high-contrast size pills, Deep Navy + Golden Honey pill CTAs, and collapsed accordions by default.
-   - **Our Story / About Us (`about.html`)**: Dedicated brand origin story, fabric philosophy, and 3-column core values page for client pitch completeness.
-   - **Contact & Customer Care (`contact.html`)**: Dedicated customer support page with WhatsApp/Email cards, Size Guide modal trigger, interactive demo inquiry form (`#demo-contact-form`), and 4-card FAQ grid (`#faq-section`).
+   - **Homepage (`index.html`)** — v1.2 order: split hero (H1 + two Boys/Girls photo panels, 2-up on mobile) → Shop by age chip strip → New Season Arrivals (6) → merged craft story → Baby & Co-ords editorial banners → service bar → footer. See `DESIGN.md` §6 for the reasoning.
+   - **Shop / Category Page (`shop.html`)** — URL-synced filters (`?category=boys&size=2-3Y&sort=price-asc`). Department tabs with counts in the header; one horizontal toolbar (size chips + result count + sort); applied-filter tags underneath; helpful empty state. **No sidebar and no filter drawer** (removed on purpose, see `DESIGN.md`).
+   - **Product Detail Page (`product.html`)** — rendered from `window.PRODUCTS` (`js/data.js`) via `?id=lt-01` … `lt-06` or `?slug=`. Purchase controls sit directly under price/description; navy Add to Bag (with live price) is the one primary action, "Buy now — Cash on Delivery" is outline. Mobile sticky Add-to-Bag bar (`#pdp-sticky-bar`, appended to `body`). Accordions keep their open state across re-renders.
+   - **Our Story (`about.html`)** — story, "The details you feel" numbered list (the depth that used to crowd the homepage), navy CTA card.
+   - **Contact (`contact.html`)** — three tappable action cards (WhatsApp `wa.me` link, `mailto:`, size guide), then demo form (`#demo-contact-form`) beside a `<details>` FAQ (`#faq-section`).
 
 2. **Interactive Shopping & Demo Mechanics**:
-   - **Required Size Validation**: Clicking *Add to Shopping Bag* or *Buy Now* on `product.html` without selecting a child size blocks submission and displays an accessible inline alert (`#pdp-size-error`).
-   - **Colour-Linked Gallery**: Selecting a colour variation updates the active colour label, variation summary pill, and switches the main stage photograph to the corresponding colourway image.
-   - **Persistent Cart Drawer (`localStorage`)**: Slide-out shopping bag (`#cart-drawer`) stores items under key `little_traits_cart_v1`, merges identical `productId + size + color` variations, calculates PKR subtotals (`Rs.`), supports `+`/`-` quantity updates and item removal, and displays a clean empty-bag state.
-   - **Live Catalogue Search Drawer**: Accessible from the header on every page; filters the 6 demo products in real time by name, subtitle, category, or fabric keyword (e.g., `"linen"`, `"frock"`, `"romper"`, `"boys"`).
-   - **Size & Fit Guide Modal**: Accessible from the announcement bar, mobile menu, PDP, and footer; renders a 10-row centimetre chart (`6–12M` to `8–10Y`).
+   - **Required size validation**: Add to Bag / Buy now / sticky bar without a size shows an inline alert, scrolls to the size block and focuses the first size.
+   - **Colour-linked gallery**: choosing a colour swaps the main image to that colourway.
+   - **Cart drawer (`localStorage` key `little_traits_demo_cart_v1`)**: merges identical `productId + size + colour`, PKR subtotal, +/- (focus stays on the pressed button), remove, empty state. Header bag badge shows the count and the button's `aria-label` includes it. PDP Add to Bag opens the drawer (`addToCart({ silent: true })` skips the toast).
+   - **Search drawer**: live filter over the 6 products; the query is HTML-escaped before rendering.
+   - **Size & Fit Guide modal**: announcement bar, mobile menu, homepage age strip, PDP, About, Contact and footer all open it (`[data-open-size-guide]`).
+   - **Overlays**: one manager (`openOverlay` / `closeAllOverlays` in `js/app.js`) handles focus in/out, `inert` on the page behind, Escape and backdrop close.
+   - **Shared helpers**: `LittleTraitsApp.formatPKR()` and `LittleTraitsApp.formatSize()` (renders `8-10Y` as `8–10Y`; data keeps the hyphen).
 
-3. **Responsive & Accessibility Checks Passed**:
-   - Verified zero horizontal overflow (`scrollWidth <= innerWidth`) across **`1440px`, `1024px`, `768px`, `390px`, and `360px`**.
-   - Verified all 26 local images load cleanly with `naturalWidth > 0`.
+3. **Responsive Verification (v1.2, headless Chrome)**:
+   - Zero horizontal overflow on Home, Shop (default + filtered), PDP (`lt-01`, `lt-06`), About and Contact at **1440, 1280, 1180, 1100, 1025, 1024, 900, 820, 768, 600, 480, 390, 360, 320px**.
+   - `npm run check` passes (core files, 6 products, all image references).
 
 ---
 
 ## 2. Simulated Behaviours vs. Production Scope
 
 To keep the prototype honest and aligned with the brief:
-- **Checkout (`#demo-checkout-modal`)**: Clicking *"Buy Now (Preview WooCommerce Checkout)"* on the PDP or *"Proceed to Checkout Preview"* inside the Shopping Bag opens a transparent Demo Checkout Modal. It displays the exact items and PKR subtotal from the user's bag and explains that live order placement, Cash on Delivery (COD), and courier dispatch will be handled by native WooCommerce checkout in production. It never pretends an order has been placed.
+- **Checkout (`#demo-checkout-modal`)**: Clicking *"Buy now — Cash on Delivery"* on the PDP or *"Checkout"* inside the Shopping Bag opens a transparent Demo Checkout Modal. It displays the exact items and PKR subtotal from the user's bag and explains that live order placement, Cash on Delivery (COD), and courier dispatch will be handled by native WooCommerce checkout in production. It never pretends an order has been placed.
 - **No Fabricated Social Proof**: We did not invent star ratings, customer reviews, fake discounts, certifications, or delivery guarantees.
 
 ---
@@ -69,3 +71,21 @@ The following business details are currently marked as clean placeholders in `js
   - Replaced the complex numbered-pin hotspot section on `index.html` with a clean, 100% WordPress/Elementor-friendly 2-column Playwear & Sibling Sets banner (`Built for Every Little Adventure.`) and added a 4-column Value Propositions strip below Shop by Collection.
   - Simplified the Product Detail Page (`product.html` / `js/product.js`): removed the Catalogue Jump bar, increased right-column breathing room (`gap: 1.85rem`), added a 1-click `Size Guide` pill button, simplified the reassurance strip, and collapsed the 3 detail accordions by default for effortless browsing by mothers.
   - Added complete `about.html` (*Our Story*) and `contact.html` (*Contact & Customer Care* with interactive inquiry form and FAQs) and wired them across Header, Mobile Drawer, and Footer.
+
+- **`v1.2.0` (Independent design + frontend review — Oct 16, 2026)**:
+  - **Homepage**: products moved up (hero compressed, 2-up on mobile; age strip replaces size finder); fabric story, garment anatomy and value props merged into one craft section; collection tiles and navy closing CTA removed; Co-ords banner uses the sibling photo.
+  - **Shop**: sidebar and mobile filter drawer removed in favour of one horizontal toolbar; dashed chips for sizes with no matches; applied filters under the toolbar; better empty state.
+  - **PDP**: purchase block directly under the description; one primary button; outline COD Buy now; mobile sticky bar; size validation scrolls and focuses; 4 related products.
+  - **Shell**: header now actually sticks (`#site-header-mount { display: contents }`; before, the sticky header was trapped in its wrapper); bag count badge sits on the icon; shorter mobile announcement; desktop nav split into shop links (left) and brand links (right); compact footer; mobile menu with age chips.
+  - **Accessibility**: `--accent-gold-text` for gold text (old gold text was ~2:1); closed overlays leave the tab order; `inert` page behind overlays; focus management; stretched-link cards; search query escaping; size/age chips ≥40px tall, size buttons 46px, cart qty buttons 40px (was 26px); the PDP qty stepper is 34px wide × 52px tall at ≤480.
+  - **Content**: badges reduced to Signature/Limited; "Co-ords & Sets" naming; size labels shown with en dash.
+  - **Docs**: `DESIGN.md` §6 records the direction and decisions; this changelog; README + WordPress mapping updated to the new structure.
+
+---
+
+## 6. Open Items for the Next Pass
+
+- **Not tested in real devices or Safari/Firefox** — verification used headless Chrome device emulation only. `inert` and `:has()` need Safari ≥15.5/17.4 for full effect (fallbacks degrade gracefully).
+- **Sticky PDP bar button** is `tabindex="-1"` inside an `aria-hidden` bar (duplicate of the in-page Add to Bag for touch users). If the client wants it keyboard reachable, remove both attributes and toggle `aria-hidden` with visibility.
+- **Photography**: the craft section and banners reuse product photos; when the client shoots real fabric/detail images, swap `p4-detail.jpg` (craft) and the banner images first.
+- **Copy** is placeholder throughout (claims, contact numbers, delivery promises) and was intentionally not audited.

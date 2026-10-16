@@ -17,164 +17,135 @@
   <div id="site-header-mount"></div>
 
   <main id="main-content">
-    <!-- ====================================================================
-         PAGE HERO: CONTACT & CUSTOMER CARE
-         ==================================================================== -->
-    <section class="inner-page-hero" aria-labelledby="contact-hero-heading">
+    <!-- PAGE HERO (COMPACT — ACTIONS FOLLOW IMMEDIATELY) -->
+    <section class="inner-page-hero inner-page-hero--compact" aria-labelledby="contact-hero-heading">
       <div class="container inner-page-hero__inner">
-        <nav class="breadcrumb" aria-label="Breadcrumb" style="justify-content: center;">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">Contact &amp; Care</span>
+          <span aria-current="page">Contact</span>
         </nav>
-        <span class="eyebrow">We’re Here to Help</span>
-        <h1 class="heading-xl" id="contact-hero-heading" style="margin-bottom: 1rem;">
-          Questions about sizing, fabric, or delivery?
-        </h1>
+        <h1 class="heading-xl" id="contact-hero-heading">How can we help?</h1>
         <p class="text-lead">
-          Whether you need help picking the right size for your child or arranging a 7-day size exchange, our team is one click away.
+          Sizing advice, delivery questions, or a 7-day exchange — reach us the way that suits you.
         </p>
       </div>
     </section>
 
-    <!-- ====================================================================
-         SECTION 1: CONTACT CARDS & INQUIRY FORM
-         ==================================================================== -->
-    <section class="contact-section" aria-label="Contact Information and Inquiry Form">
+    <!-- SECTION 1: QUICK CONTACT ACTIONS -->
+    <section class="contact-actions" aria-label="Ways to reach us">
+      <div class="container">
+        <div class="contact-actions__grid">
+          <article class="contact-action">
+            <div class="contact-action__icon contact-action__icon--whatsapp" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+            </div>
+            <div class="contact-action__body">
+              <h2 class="heading-sm">WhatsApp</h2>
+              <p>Fastest for measurements, stock checks, and Cash on Delivery orders.</p>
+              <p class="contact-action__detail">+92 300 000 0000 <span>(placeholder)</span></p>
+            </div>
+            <a href="https://wa.me/923000000000" class="btn btn-primary btn-block" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          </article>
+
+          <article class="contact-action">
+            <div class="contact-action__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </div>
+            <div class="contact-action__body">
+              <h2 class="heading-sm">Email</h2>
+              <p>For size exchanges, gift orders, and press enquiries.</p>
+              <p class="contact-action__detail">hello@littletraits.pk <span>(placeholder)</span></p>
+            </div>
+            <a href="mailto:hello@littletraits.pk" class="btn btn-outline btn-block">Send an email</a>
+          </article>
+
+          <article class="contact-action">
+            <div class="contact-action__icon contact-action__icon--gold" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="10" rx="1"/><line x1="6" y1="7" x2="6" y2="11"/><line x1="10" y1="7" x2="10" y2="13"/><line x1="14" y1="7" x2="14" y2="11"/><line x1="18" y1="7" x2="18" y2="13"/></svg>
+            </div>
+            <div class="contact-action__body">
+              <h2 class="heading-sm">Size help</h2>
+              <p>Compare your child’s height and chest in centimetres.</p>
+              <p class="contact-action__detail">Mon–Sat, 10am–6pm PKT</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-block" data-open-size-guide>Open size chart</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FORM + FAQ -->
+    <section class="contact-section" aria-label="Message form and frequently asked questions">
       <div class="container">
         <div class="contact-grid">
-          <!-- Left Column: Direct Support Cards -->
-          <div class="contact-cards-stack">
-            <div class="contact-info-card">
-              <span class="eyebrow" style="margin-bottom: 0.15rem;">Fastest Response</span>
-              <h2 class="heading-sm">WhatsApp &amp; Phone Support</h2>
-              <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                Message us directly for quick garment measurements, stock checks, or Cash on Delivery order assistance.
-              </p>
-              <p style="font-weight: 700; color: var(--text-primary); margin-top: 0.35rem;">
-                +92 (300) 000-0000 <span style="font-weight: 400; font-size: 0.8rem; color: var(--text-muted);">(Client Placeholder)</span>
-              </p>
-              <span style="font-size: 0.8rem; color: var(--text-muted);">Monday – Saturday, 10:00 AM to 6:00 PM PKT</span>
-            </div>
-
-            <div class="contact-info-card">
-              <span class="eyebrow eyebrow--sage" style="margin-bottom: 0.15rem;">Email &amp; Exchanges</span>
-              <h2 class="heading-sm">Customer Care Desk</h2>
-              <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                For size exchange requests, bulk gift orders, or press inquiries, send us an email anytime.
-              </p>
-              <p style="font-weight: 700; color: var(--text-primary); margin-top: 0.35rem;">
-                hello@littletraits.pk <span style="font-weight: 400; font-size: 0.8rem; color: var(--text-muted);">(Client Placeholder)</span>
-              </p>
-            </div>
-
-            <div class="contact-info-card" style="background-color: var(--bg-sand);">
-              <h2 class="heading-sm">Not sure which size to order?</h2>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                Compare your child’s height and chest measurements in centimetres using our interactive chart.
-              </p>
-              <div>
-                <button type="button" class="btn btn-gold" data-open-size-guide>
-                  Open Size Chart (6M – 10Y)
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column: Clean WordPress/WPForms-Friendly Contact Form -->
           <div class="contact-form-card">
-            <h2 class="heading-md" style="margin-bottom: 0.4rem;">Send Us a Message</h2>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.75rem;">
-              Fill out the form below and we’ll get back to you within 24 hours.
-            </p>
+            <h2 class="heading-md">Send us a message</h2>
+            <p class="contact-form-card__intro">We reply within one working day.</p>
 
             <form id="demo-contact-form">
               <div class="form-field">
-                <label for="contact-name" class="form-label">Your Name *</label>
-                <input type="text" id="contact-name" class="form-input" placeholder="e.g., Ayesha Khan" required />
+                <label for="contact-name" class="form-label">Your name *</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="e.g. Ayesha Khan" autocomplete="name" required />
               </div>
 
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+              <div class="form-row">
                 <div class="form-field">
-                  <label for="contact-phone" class="form-label">Phone / WhatsApp Number *</label>
-                  <input type="tel" id="contact-phone" class="form-input" placeholder="03XX-XXXXXXX" required />
+                  <label for="contact-phone" class="form-label">Phone / WhatsApp *</label>
+                  <input type="tel" id="contact-phone" class="form-input" placeholder="03XX-XXXXXXX" autocomplete="tel" required />
                 </div>
-
                 <div class="form-field">
-                  <label for="contact-email" class="form-label">Email Address</label>
-                  <input type="email" id="contact-email" class="form-input" placeholder="you@example.com" />
+                  <label for="contact-email" class="form-label">Email</label>
+                  <input type="email" id="contact-email" class="form-input" placeholder="you@example.com" autocomplete="email" />
                 </div>
               </div>
 
               <div class="form-field">
-                <label for="contact-topic" class="form-label">How can we help you?</label>
+                <label for="contact-topic" class="form-label">Topic</label>
                 <select id="contact-topic" class="form-select">
-                  <option value="Sizing & Fit Advice">Sizing &amp; Fit Advice</option>
-                  <option value="Delivery & COD Question">Delivery &amp; Cash on Delivery Question</option>
-                  <option value="7-Day Size Exchange">7-Day Size Exchange Request</option>
-                  <option value="General Inquiry">General Brand Inquiry</option>
+                  <option value="Sizing & Fit Advice">Sizing &amp; fit advice</option>
+                  <option value="Delivery & COD Question">Delivery &amp; Cash on Delivery</option>
+                  <option value="7-Day Size Exchange">7-day size exchange</option>
+                  <option value="General Inquiry">Something else</option>
                 </select>
               </div>
 
               <div class="form-field">
                 <label for="contact-message" class="form-label">Message *</label>
-                <textarea id="contact-message" class="form-textarea" rows="4" placeholder="Tell us your child's age or which outfit you are looking at..." required></textarea>
+                <textarea id="contact-message" class="form-textarea" rows="4" placeholder="Tell us your child's age or which outfit you're looking at…" required></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary" style="width: 100%; min-height: 52px;">
-                Send Message
-              </button>
+              <button type="submit" class="btn btn-primary btn-block btn-lg">Send message</button>
 
-              <div id="contact-form-success" role="status" aria-live="polite" style="display: none; margin-top: 1.25rem; padding: 1rem 1.25rem; background-color: var(--bg-sage-tint); border: 1px solid var(--accent-sage); border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.9rem;">
-                <strong>Thank you! Your demo message has been recorded.</strong><br />
-                In the live WordPress store, this form connects directly to Elementor Forms / WPForms and forwards inquiries to the client’s email &amp; WhatsApp.
+              <div id="contact-form-success" class="notice-box notice-box--success" role="status" aria-live="polite" hidden>
+                <strong>Thank you — message received.</strong> In the live store this form forwards to the client’s email and WhatsApp.
               </div>
             </form>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- ====================================================================
-         SECTION 2: FREQUENTLY ASKED QUESTIONS (DELIVERY, EXCHANGES & CARE)
-         ==================================================================== -->
-    <section id="faq-section" style="padding-bottom: var(--section-space);" aria-labelledby="faq-heading">
-      <div class="container">
-        <div class="section-head">
-          <div>
+          <div class="faq-block" id="faq-section">
             <span class="eyebrow">Helpful Answers</span>
-            <h2 class="heading-lg" id="faq-heading">Frequently Asked Questions</h2>
+            <h2 class="heading-md" id="faq-heading">Frequently asked questions</h2>
+
+            <div class="faq-list">
+              <details class="faq-item" open>
+                <summary>How does delivery work in Pakistan?</summary>
+                <p>Orders go out by tracked courier to Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad, and all major cities. Flat-rate and free-delivery thresholds will be confirmed at launch.</p>
+              </details>
+              <details class="faq-item">
+                <summary>What if the size doesn’t fit?</summary>
+                <p>Exchange any unworn, unwashed piece with tags attached within 7 days. If your child is between sizes, we recommend sizing up.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Can I pay with Cash on Delivery?</summary>
+                <p>Yes. Cash on Delivery in PKR and direct bank transfer are both available at checkout.</p>
+              </details>
+              <details class="faq-item">
+                <summary>How should I wash Little Traits pieces?</summary>
+                <p>Everything is pre-washed to minimise shrinkage. Machine wash cold on a gentle cycle with mild detergent and line dry in the shade.</p>
+              </details>
+            </div>
           </div>
-        </div>
-
-        <div class="faq-grid">
-          <article class="faq-card">
-            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">How does nationwide delivery work in Pakistan?</h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
-              Orders are dispatched via tracked courier across Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad, and all major cities. Exact flat-rate shipping and free-delivery thresholds will be finalized by the client at launch.
-            </p>
-          </article>
-
-          <article class="faq-card">
-            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">What if the size doesn’t fit my child?</h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
-              Children grow quickly! We offer a simple 7-day size exchange on unworn, unwashed garments with original tags attached. If your child is between sizes, we recommend sizing up.
-            </p>
-          </article>
-
-          <article class="faq-card">
-            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">Can I pay with Cash on Delivery (COD)?</h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
-              Yes. Both Cash on Delivery (COD) in PKR and Direct Bank Transfer are supported natively through WooCommerce checkout upon store launch.
-            </p>
-          </article>
-
-          <article class="faq-card">
-            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">How should I wash Little Traits garments?</h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
-              All our combed cottons, muslins, and linen blends are pre-washed to minimize shrinkage. Machine wash cold on a gentle cycle with mild detergent and line dry in the shade.
-            </p>
-          </article>
         </div>
       </div>
     </section>
@@ -192,7 +163,7 @@
       if (form && successBox) {
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          successBox.style.display = "block";
+          successBox.hidden = false;
           form.reset();
         });
       }

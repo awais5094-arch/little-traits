@@ -17,90 +17,63 @@
   <div id="site-header-mount"></div>
 
   <main id="main-content">
-    <!-- Category Header & Quick Department Navigation -->
+    <!-- Category header: title + department pills (the single department control) -->
     <section class="shop-header" aria-labelledby="shop-page-title">
       <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <span aria-hidden="true">/</span>
-          <span id="breadcrumb-current">Shop All Pieces</span>
+          <span id="breadcrumb-current" aria-current="page">All Pieces</span>
         </nav>
 
-        <div style="max-width: 680px;">
-          <span class="eyebrow" id="shop-eyebrow">Debut Capsule •Ages 6M – 10Y</span>
-          <h1 class="heading-lg" id="shop-page-title">All Collection Pieces</h1>
-          <p class="text-lead" id="shop-page-desc" style="margin-top: 0.5rem; font-size: 0.96rem;">
+        <div class="shop-header__intro">
+          <div>
+            <span class="eyebrow" id="shop-eyebrow">Debut Capsule • Ages 6M – 10Y</span>
+            <h1 class="heading-lg" id="shop-page-title">All Pieces</h1>
+          </div>
+          <p class="shop-header__desc" id="shop-page-desc">
             Every piece from our debut seasonal edit — breathable cottons, soft weaves, and comfortable silhouettes made for everyday play.
           </p>
         </div>
 
-        <!-- Category Pills / Tabs -->
-        <div class="shop-category-tabs" id="shop-category-tabs" role="tablist" aria-label="Department Filter">
+        <div class="chip-scroller chip-scroller--tabs" id="shop-category-tabs" role="group" aria-label="Department">
           <!-- Populated dynamically -->
         </div>
       </div>
     </section>
 
-    <!-- Main Shop Workspace -->
-    <section class="shop-workspace" aria-label="Product Catalogue">
+    <section class="shop-workspace" aria-label="Product catalogue">
       <div class="container">
-        <!-- Toolbar: Product Count, Mobile Filter Trigger, Sorting -->
+        <!-- Toolbar: size filter + sort -->
         <div class="shop-toolbar">
-          <div class="shop-toolbar__left">
-            <button type="button" class="btn btn-outline filter-drawer-trigger" id="open-mobile-filters-btn" style="min-height: 40px; padding: 0.45rem 0.95rem; font-size: 0.82rem;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
-              Filter by Category &amp; Size
-            </button>
-            <span id="shop-results-count" style="font-size: 0.88rem; font-weight: 600; color: var(--text-secondary);" aria-live="polite">
-              Showing 6 of 6 pieces
-            </span>
+          <div class="shop-toolbar__sizes">
+            <span class="shop-toolbar__label" id="size-filter-label">Size</span>
+            <div class="chip-scroller" id="shop-size-chips" role="group" aria-labelledby="size-filter-label">
+              <!-- Populated dynamically -->
+            </div>
           </div>
-
-          <div class="shop-toolbar__right">
+          <div class="shop-toolbar__end">
+            <span class="shop-results-count" id="shop-results-count" aria-live="polite">6 pieces</span>
             <div class="sort-select-wrap">
-              <label for="shop-sort-select">Sort by:</label>
+              <label for="shop-sort-select">Sort</label>
               <select id="shop-sort-select" class="sort-select">
-                <option value="featured">Featured Edit</option>
-                <option value="price-asc">Price: Low to High (PKR)</option>
-                <option value="price-desc">Price: High to Low (PKR)</option>
-                <option value="name-asc">Alphabetical (A–Z)</option>
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A–Z</option>
               </select>
             </div>
           </div>
         </div>
 
-        <!-- Active Filter Tags Row -->
-        <div class="active-filters-bar" id="active-filters-bar" style="display: none;"></div>
+        <!-- Applied filter overview -->
+        <div class="active-filters-bar" id="active-filters-bar" hidden></div>
 
-        <div class="shop-layout">
-          <!-- Desktop Sidebar Filters -->
-          <aside class="shop-sidebar" aria-label="Catalogue Filters">
-            <div id="desktop-filters-mount"></div>
-          </aside>
-
-          <!-- Product Grid & Empty State Container -->
-          <div>
-            <div class="product-grid" id="shop-product-grid" aria-live="polite"></div>
-            <div id="shop-empty-state" style="display: none;"></div>
-          </div>
-        </div>
+        <div class="product-grid" id="shop-product-grid"></div>
+        <div id="shop-empty-state" hidden></div>
       </div>
     </section>
   </main>
-
-  <!-- Mobile Filter Drawer -->
-  <aside class="drawer drawer--left" id="mobile-filter-drawer" aria-label="Filter Products" aria-hidden="true">
-    <div class="drawer__header">
-      <span class="drawer__title">Filter Collection</span>
-      <button type="button" class="icon-btn" id="close-mobile-filter-btn" aria-label="Close filters">✕</button>
-    </div>
-    <div class="drawer__body" id="mobile-filters-mount"></div>
-    <div class="drawer__footer">
-      <button type="button" class="btn btn-primary" id="apply-mobile-filters-btn" style="width: 100%;">
-        View Matching Pieces
-      </button>
-    </div>
-  </aside>
 
   <!-- Shared Footer Mount -->
   <div id="site-footer-mount"></div>

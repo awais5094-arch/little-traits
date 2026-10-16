@@ -35,18 +35,18 @@ Runs `scripts/verify-build.js`, which verifies that all required HTML, CSS, JS, 
 
 ```text
 little-traits/
-├── index.html                  # Homepage (Split Boys/Girls hero, Shop by Collection, Value Props, WP-friendly sections)
+├── index.html                  # Homepage (split hero, shop by age, arrivals, craft story, banners)
 ├── shop.html                   # Shop / Category listing page (department + size filters, sorting, empty state)
 ├── product.html                # Single reusable Product Detail Page populated dynamically via URL (?id=lt-01)
-├── about.html                  # Our Story / Brand values page (WordPress-friendly 2-column & 3-column sections)
+├── about.html                  # Our Story (story, garment details list, CTA)
 ├── contact.html                # Contact & Customer Care page (WhatsApp/Email cards, demo contact form & FAQs)
 ├── css/
 │   └── styles.css              # Complete design system, Deep Navy & Golden Honey palette, breathable spacing
 ├── js/
 │   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & size chart data
 │   ├── app.js                  # Shared Header, Footer, Search Drawer, persistent Cart Drawer & Modals
-│   ├── shop.js                 # Category/size filter controller, sorting, URL sync & mobile filter drawer
-│   └── product.js              # Simplified, mother-friendly PDP controller with 1-click size guide & collapsed accordions
+│   ├── shop.js                 # Department/size filter toolbar, sorting, URL sync, empty state
+│   └── product.js              # PDP controller: variants, size validation, sticky mobile bar, accordions
 ├── assets/
 │   └── images/                 # 26 locally stored, watermark-free product, editorial & textile photographs
 ├── scripts/
@@ -64,37 +64,26 @@ little-traits/
 ## 3. Scope & Connected Views
 
 1. **Homepage (`index.html`)**:
-   - Announcement bar with Size Chart trigger and PKR notice.
-   - Sticky header with desktop navigation, mobile navigation drawer, live search drawer, and persistent shopping bag drawer.
-   - Split photographic hero featuring **The Boys Collection** and **The Girls Collection** entry points.
-   - Arch-shaped department cards (`Boys`, `Girls`, `Baby & Toddler`, `Co-ords & Knits`) + 4-column **Value Propositions Strip** (*100% Soft & Gentle*, *Made to Play*, *Easy 7-Day Exchanges*, *Loved by Mothers*).
-   - **New Season Arrivals** 6-product showcase with hover image swap, colour swatches, and size pills.
-   - **Made for Pakistani Seasons** brand & material story with 3 fabric pillars and single Elementor-friendly visual card.
-   - **Built for Every Little Adventure** 2-column WordPress/Elementor-friendly Playwear & Cozy Sets feature banner.
-   - Dual image-led collection spotlight banners (*The First Steps & Nursery Edit* and *Two-Piece Co-ord Sets*).
-   - **Garment Construction & Details** 4-card breakdown (*French-Finished Seams*, *Soft-Stretch Waistbands*, *Azo-Free Pigments*, *Wide Keyhole Openings*).
-   - **Fast Age / Size Finder** strip (`6–12M` to `6–10 Years`) linking directly into pre-filtered shop views.
-   - Service promise bar & complete footer.
+   - Announcement bar (short COD/exchange line on mobile), sticky header (shop links left, logo centre, Our Story/Contact/Search/Bag right), mobile menu, search drawer, cart drawer.
+   - Split hero: headline + two Boys/Girls photo panels (side by side on mobile).
+   - **Shop by age** chip strip linking to pre-filtered shop views + size chart.
+   - **New Season Arrivals** — all 6 pieces.
+   - **Craft story** — one image + three fabric/finishing points.
+   - Baby and Co-ords editorial banners, service bar, compact footer.
 
 2. **Shop / Category Page (`shop.html`)**:
-   - Dynamic collection banner and heading that updates when filtering (`All Pieces`, `Boys`, `Girls`, `Baby & Toddler`, `Co-ords & Knits`).
-   - Category tabs with item counts, sidebar size filter (`6-12M` through `8-10Y`), and sorting (`Featured`, `Price: Low to High`, `Price: High to Low`, `Alphabetical`).
-   - Mobile filter drawer for comfortable thumb filtering on `360px–768px` screens.
-   - Active filter chips and a clear empty state with one-click filter reset when a category + size combination has 0 matches.
+   - Heading, description and breadcrumb update with the department (`All`, `Boys`, `Girls`, `Baby & Toddler`, `Co-ords & Sets`).
+   - Department tabs with counts; one horizontal toolbar with size chips (`6–12M` to `8–10Y`), result count and sort.
+   - Applied-filter tags and an empty state with "Show all sizes" / "Reset filters".
 
-3. **Reusable Product Detail Page (`product.html`)**:
-   - Single template rendering any of the 6 demo products via `?id=lt-01` .. `?id=lt-06` with clean, breathable spacing designed for effortless browsing by mothers.
-   - 3-image vertical/horizontal thumbnail gallery with colour-linked image switching.
-   - PKR pricing (`Rs.`), colour variation buttons, and **required child size selection** with 1-click **Size Guide** pill button and inline validation warning.
-   - Quantity stepper, Deep Navy **Add to Shopping Bag** pill button, and Golden Honey **Buy Now with Cash on Delivery (Preview)** button.
-   - Collapsible accordions (collapsed by default to keep the page uncluttered) for *Garment Details & Fit*, *Fabric & Wash Care*, and *Delivery & Size Exchange*.
-   - Related products section (*You May Also Love*).
+3. **Product Detail Page (`product.html`)**:
+   - One template for `?id=lt-01` … `lt-06`; thumbnails with colour-linked image switching.
+   - Price, colour, **required size** (with Size Guide), quantity + navy **Add to Bag**, outline **Buy now — Cash on Delivery**, reassurance ticks, three accordions.
+   - Mobile sticky Add-to-Bag bar; four related products.
 
-4. **Our Story / About Us (`about.html`)**:
-   - Brand story hero, 2-column origin & craft narrative, 3-column core values grid, and 2-column collection exploration banner.
+4. **Our Story (`about.html`)**: story, "The details you feel" numbered list, navy CTA card.
 
-5. **Contact & Customer Care (`contact.html`)**:
-   - Customer care hero, WhatsApp & Email support cards, interactive Size Chart card, working demo contact inquiry form (`#demo-contact-form`), and 4-card FAQ grid (`#faq-section`).
+5. **Contact (`contact.html`)**: WhatsApp / Email / Size-help action cards, demo form (`#demo-contact-form`), FAQ (`#faq-section`).
 
 ---
 
@@ -102,6 +91,6 @@ little-traits/
 
 - **Languages:** Semantic HTML5, modern CSS3 (Custom Properties, CSS Grid, Flexbox, `clamp()` fluid typography), Vanilla ES6+ JavaScript.
 - **Fonts:** Google Fonts (`Fraunces` variable optical serif + `Plus Jakarta Sans`).
-- **Storage:** `localStorage` (`little_traits_cart_v1`) for persistent demo cart state across page reloads.
+- **Storage:** `localStorage` (`little_traits_demo_cart_v1`) for persistent demo cart state across page reloads.
 - **Target Production Platform:** WordPress 6.x + WooCommerce + Elementor (see `WORDPRESS-MAPPING.md`).
 - **AI Assistant / Model Used:** Built in Cursor using `gemini-4-argon` (as exposed by the Cursor runtime environment).

@@ -34,18 +34,19 @@ All colour tokens are defined in `:root` inside `css/styles.css` so they map 1:1
 
 | Token | Hex | Role & Usage |
 | :--- | :--- | :--- |
-| `--bg-linen` | `#FDFBF7` | Primary page background — crisp, bright warm off-white cream |
+| `--bg-canvas` | `#FDFBF7` | Primary page background — crisp, bright warm off-white cream |
 | `--bg-sand` | `#F3EFE6` | Secondary section background, soft oatmeal sand frames, and pills |
-| `--bg-oat` | `#E8E1D3` | Subtle hover surface and active card accents |
+| `--bg-oat` | `#EAE3D5` | Subtle hover surface and active card accents |
 | `--bg-card` | `#FFFFFF` | Product card surface & modal backgrounds for crisp garment contrast |
-| `--text-primary` / `--accent-navy` | `#1A2E4C` | Deep Midnight Navy — announcement bar, primary headings, pill buttons, and prices |
-| `--text-secondary` | `#4A5970` | Slate Navy — subtitles, fabric notes, and descriptions |
-| `--text-muted` | `#748296` | Muted Slate — SKU labels, age badges, and captions |
-| `--accent-gold` | `#E5A83B` | Warm Golden Honey / Ochre — secondary pill buttons, badges, and playful highlights |
-| `--accent-terracotta` | `#C2744B` | Cozy Caramel — warm secondary accent |
-| `--accent-sage` | `#4D6F5E` | Meadow Sage — Boys collection badge, stock indicators, and botanical accents |
-| `--accent-blush` | `#F2DFD7` | Soft Clay Blush — Girls collection accents and gentle callout backgrounds |
-| `--border-subtle` | `#E5DFD3` | Hairline structural borders across cards, accordions, and tables |
+| `--bg-sage-tint` / `--bg-ochre-tint` | `#EDF3EF` / `#FDF5E4` | Baby / Co-ords editorial banner panels |
+| `--text-primary` / `--bg-navy` | `#1A2E4C` | Deep Midnight Navy — announcement bar, headings, primary buttons, prices |
+| `--text-secondary` | `#4A5568` | Subtitles, fabric notes, and descriptions |
+| `--text-muted` | `#6B7685` | Captions, age labels (≥4.5:1 on cream) |
+| `--accent-gold` | `#E5A83B` | Golden Honey — **fills only**: Shop CTA on navy, badges, cart count, icon rules. ~2:1 on cream, so never use it for text on light surfaces |
+| `--accent-gold-text` | `#9A6510` | Gold **text** on light surfaces: eyebrows, numerals, active-filter accents (4.7:1 on cream). `--accent-terracotta` aliases this |
+| `--accent-caramel` | `#C2744B` | Warm secondary accent (sparingly) |
+| `--accent-sage` | `#4D6F5E` | Meadow Sage — stock indicators and botanical accents |
+| `--border-subtle` | `#E8E2D5` | Hairline borders across cards, accordions, and tables |
 
 ---
 
@@ -60,19 +61,62 @@ All colour tokens are defined in `:root` inside `css/styles.css` so they map 1:1
 ## 5. Layout, Spacing & Component Rules
 
 - **Container & Grid:** Max width `1320px` (`--container-max`) with fluid horizontal padding (`1.25rem` on mobile up to `3.5rem` on desktop).
-- **Avoidance of Generic AI Patterns:** No neon gradients, random floating blobs, glassmorphic cards, or fake customer review carousels. Visual interest comes from **arch-topped department frames** (`border-radius: 140px 140px 12px 12px`), **linen-bordered editorial collages**, **interactive numbered lookbook pins**, and **tactile garment anatomy cards**.
+- **Avoidance of Generic AI Patterns:** No neon gradients, random floating blobs, glassmorphic cards, or fake customer review carousels. Visual interest comes from real photography, soft tinted panels, pill shapes, and the serif/sans contrast — not from decoration on every section.
 - **Product Card Discipline:**
-  - `4:5` vertical portrait aspect ratio (`aspect-ratio: 4 / 5`) — standard for kidswear photography and works well with both child model shots and flat-lays.
+  - `4:5` vertical portrait aspect ratio — standard for kidswear photography and works with both model shots and flat-lays.
   - Secondary image cross-fade on desktop hover.
-  - Displays: Category + Age Range (`1Y – 10Y`), Title, Subtitle, Colour Swatch dots, available Size Pills, and clear `Rs.` price.
+  - Displays: age range + colour swatches, title, subtitle, `Rs.` price and a quiet "Choose size →" cue. Below 480px the subtitle and cue text hide so prices never wrap.
+  - Badges are rare (`Signature`, `Limited` only). If every card has a badge, none of them mean anything.
+  - The whole card is one link (`.product-card__link::after` stretched link); the image link is `tabindex="-1"` so keyboard users get one stop per product.
+- **Button hierarchy (one primary per view):**
+  - `.btn-primary` (navy) — the single main action: Add to Bag, Checkout, Send message, WhatsApp.
+  - `.btn-outline` — secondary: Buy now (COD), Send an email, Open size chart.
+  - `.btn-gold` — only on navy surfaces (About CTA card), where gold has contrast.
+  - `.btn-light` / `.btn-light-outline` — on photos and navy.
+  - `.link-arrow` / `.btn-text` — tertiary ("Shop all pieces", "Continue shopping").
 - **Motion & Accessibility:**
-  - Gentle `0.3s cubic-bezier(0.22, 1, 0.36, 1)` transitions on hover and drawer slides.
-  - Full `@media (prefers-reduced-motion: reduce)` support disabling animations when requested by the OS.
-  - Visible `:focus-visible` outlines in `--accent-terracotta` (`#C86D51`) and semantic ARIA attributes (`aria-expanded`, `aria-pressed`, `role="dialog"`, `aria-live`).
+  - Gentle `cubic-bezier(0.22, 1, 0.36, 1)` transitions; full `prefers-reduced-motion` support.
+  - Navy `:focus-visible` outline (gold on navy surfaces).
+  - Closed drawers/modals use `visibility: hidden` so they leave the tab order; the page behind an open overlay is `inert`; focus moves to the close button on open and returns to the trigger on close.
 
 ---
 
-## 6. Photographic Asset Sources & Licensing
+## 6. v1.2 Refinement — Direction & Decisions
+
+The v1.2 pass (independent ecommerce design + frontend review) kept the identity, logo, palette and typography, and changed **structure, hierarchy and responsive behaviour**.
+
+### Homepage order (shop first, story second)
+1. **Split hero** — H1 + "Ages 6M – 10Y" + "Shop all 6 pieces", then two compact Boys/Girls photo panels (16/10 capped at 520px on desktop → 6/5 tablet → 4/5 → 3/4 phones). Both panels stay **side by side on mobile** so both entry points sit above the fold.
+2. **Shop by age strip** — one pill card of size chips linking to `shop.html?size=…` + Size chart button. Replaces the old separate size-finder section.
+3. **New Season Arrivals** — 6 products (now reached within ~1.5 screens on mobile).
+4. **Craft story** — one merged section (image + 3 fabric/finishing points + "Read our story"). Replaces the old fabric story, garment anatomy and value-props strip, which repeated each other.
+5. **Two editorial collection banners** — Baby ("First Steps Edit") and Co-ords ("Matching Sets for Siblings", sibling photo).
+6. **Service bar** — COD, 7-day size exchange, nationwide delivery, small-batch quality.
+
+Removed: arch collection tiles (duplicated hero + nav), the navy closing CTA (the footer follows directly). The deeper material/detail content moved to About rather than being deleted.
+
+### Shop: one horizontal filter bar
+Baymard's guidance for catalogues with few filter types is a horizontal toolbar with applied filters shown beneath it. With 6–15 pieces and only two facets (department, size), the old sidebar + mobile drawer + pill bar duplicated each other. Now:
+- Department tabs (with counts) in the page header.
+- Toolbar: size chips (scrollable; sizes with zero matches are dashed) + result count + sort. Sizes get their own row ≤1024px.
+- Applied-filter tags below the toolbar; "Clear all" only when 2+ filters apply.
+- Empty state offers "Show all sizes in X" and "Reset filters".
+
+### PDP: purchase controls first
+- Info column order: age pill → title → fabric → price + "In stock • Cash on Delivery" → description → colour → size (with Size Guide) → Add to Bag (with live price) → outline "Buy now — Cash on Delivery" → 3 reassurance ticks → accordions.
+- Mobile (≤768): single column, image capped at `min(72vh, 640px)`, and a **sticky bottom bar** (name, price/size, Add to Bag or "Choose size") appears once the main button scrolls out of view.
+- Size validation scrolls to the size block and focuses the first size. Add to Bag opens the cart drawer instead of a toast that covered the drawer's CTA.
+
+### About & Contact
+- About owns the depth: story → "The details you feel" (numbered 01–04 list with one image) → navy CTA card.
+- Contact leads with three tappable action cards (WhatsApp, Email, Size help), then the form beside the FAQ.
+
+### Breakpoints
+`1180` (editorial banners stack) · `1024` (mobile nav, 2-up grids, PDP thumbs below) · `900` (story/contact/about stack) · `768` (single-column PDP + sticky bar, short announcement, 60px header) · `600` (banners one column) · `480` (compact cards) · `360` (smaller logo, price dropped from the Add to Bag label).
+
+---
+
+## 7. Photographic Asset Sources & Licensing
 
 All 26 photographs in `assets/images/` are stored locally (zero external image hotlinks) and sourced from **Unsplash** under the [Unsplash License](https://unsplash.com/license) (free for commercial and non-commercial use, no watermark, attribution appreciated).
 
@@ -80,9 +124,9 @@ All 26 photographs in `assets/images/` are stored locally (zero external image h
 | :--- | :--- | :--- |
 | `hero-boys.jpg` | Homepage Boys Hero & `lt-01` Main | `https://images.unsplash.com/photo-1519238263530-99bdd11df2ea` |
 | `hero-girls.jpg` | Homepage Girls Hero & `lt-02` Main | `https://images.unsplash.com/photo-1518831959646-742c3a14ebf7` |
-| `editorial-play.jpg` | Homepage "Shop the Look: Courtyard Morning" | `https://images.unsplash.com/photo-1471286174890-9c112ffca5b4` |
+| `editorial-play.jpg` | About CTA card | `https://images.unsplash.com/photo-1471286174890-9c112ffca5b4` |
 | `editorial-rack.jpg` | Fabric Collage & Co-ords Spotlight Banner | `https://images.unsplash.com/photo-1567113463300-102a7eb3cb26` |
-| `editorial-wardrobe.jpg` | Nursery Spotlight Banner | `https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4` |
+| `editorial-wardrobe.jpg` | About story image | `https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4` |
 | `p1-alt.jpg` | `lt-01` Alternate (Charcoal Botanical) | `https://images.unsplash.com/photo-1503919545889-aef636e10ad4` |
 | `p1-detail.jpg` | `lt-01` Detail (Linen-Cotton Weave) | `https://images.unsplash.com/photo-1596870230751-ebdfce98ec42` |
 | `p2-alt.jpg` | `lt-02` Alternate (Rosewater Clay) | `https://images.unsplash.com/photo-1543163521-1bf539c55dd2` |
@@ -100,7 +144,7 @@ All 26 photographs in `assets/images/` are stored locally (zero external image h
 | `p6-alt.jpg` | `lt-06` Alternate (Layered Flat-lay) | `https://images.unsplash.com/photo-1596870230751-ebdfce98ec42` |
 | `p6-detail.jpg` | `lt-06` Detail (Stripe Cotton Bloomer) | `https://images.unsplash.com/photo-1567113463300-102a7eb3cb26` |
 | `fabric-linen.jpg` | Homepage Fabric Collage (Macro Weave) | `https://images.unsplash.com/photo-1584100936595-c0654b55a2e2` |
-| `fabric-buttons.jpg` | Homepage Fabric Collage (Folded Stack) | `https://images.unsplash.com/photo-1558769132-cb1aea458c5e` |
+| `fabric-buttons.jpg` | About "The details you feel" image | `https://images.unsplash.com/photo-1558769132-cb1aea458c5e` |
 | `fabric-fold.jpg` | Auxiliary Textile Detail | `https://images.unsplash.com/photo-1620799140408-edc6dcb6d633` |
 
 *(Note: When the client photographs their actual 10–15 garments, replacing these files in `assets/images/` or uploading them to the WordPress Media Library with a `4:5` portrait crop will preserve the exact visual balance of the layout.)*

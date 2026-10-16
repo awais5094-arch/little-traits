@@ -12,7 +12,7 @@ This prototype was specifically architected so every visual section, CSS token, 
 - **Recommended Lightweight Plugins:**
   - *Variation Swatches for WooCommerce* (converts standard WooCommerce dropdown attributes `pa_colour` and `pa_size` into the exact circular colour swatches and rectangular size pills shown in `product.html`).
   - *FIBOSearch (Ajax Search for WooCommerce)* (reproduces the live header search drawer `#search-drawer`).
-  - *Husky / WOOF or Elementor Taxonomy Filter* (reproduces the category + size filter sidebar and mobile drawer on `shop.html`).
+  - *Husky / WOOF or Elementor Taxonomy Filter* (reproduces the horizontal size-chip toolbar on `shop.html`; use a horizontal layout, not a sidebar).
 
 ---
 
@@ -65,30 +65,27 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 
 ### B. Homepage (`index.html`)
 1. **Split Boys / Girls Hero (`section.hero`):**
-   - Elementor Flexbox Container (`2 columns` on desktop, `1 column` stacked on mobile).
+   - Heading row (H1 + age badge + "Shop all" link) above an Elementor Flexbox Container with **2 columns at every breakpoint** (keep Boys/Girls side by side on mobile; hide the description text ≤768px).
    - Two Call-to-Action / Banner containers with background image, gradient overlay, badge heading (`BOYS EDIT • 1Y–10Y`), `Fraunces` title, and button linking to `/product-category/boys/` and `/product-category/girls/`.
-2. **Department Arch Tiles (`.cat-arch-grid`) + Value Propositions Strip (`.value-props-strip`):**
-   - 4-column CSS Grid container for categories + 4-column Icon Box strip below (`100% Soft & Gentle`, `Made to Play`, `Easy 7-Day Exchanges`, `Loved by Mothers`).
-3. **New Season Arrivals (`#home-featured-grid`):**
+2. **Shop by Age Strip (`.age-strip`):**
+   - One rounded container with a Heading and a row of Button widgets (pill style) linking to `/shop/?filter_size=6-12m`, `/shop/?filter_size=2-3y`, etc., plus a Size Guide popup trigger. Make the row horizontally scrollable on mobile (custom CSS `overflow-x: auto`).
+3. **New Season Arrivals (`#homepage-featured-grid`):**
    - Elementor **Loop Grid** widget querying `Products` (6 items, ordered by Date or Featured tag).
-4. **Made for Pakistani Seasons (`.story-split`):**
-   - 2-column Flexbox Container (`--bg-sand` background). Left column: Icon Box list for the 3 fabric pillars. Right column: Single rounded Image widget (`border-radius: 24px`) with bottom text caption overlay.
-5. **Everyday Playwear & Sibling Sets Banner (`.wp-feature-split`):**
-   - 100% standard 2-column Elementor Flexbox Container (`--bg-sand` background, `border-radius: 24px`) with an Image widget in the left column and Heading + Text Editor + Button widgets (`Shop Cozy Sets` + `See What's New`) in the right column—zero custom hotspot JS or complex positioning required.
-6. **Dual Collection Banners & Garment Anatomy Grid:**
-   - Static Elementor Flexbox containers styled with `--bg-card` and `--border-subtle`.
-7. **Fast Age / Size Finder Strip:**
-   - 5-column button grid linking directly to `/shop/?filter_size=6-12m`, `/shop/?filter_size=2-3y`, etc.
+4. **Craft Story (`.craft-story`):**
+   - 2-column Flexbox Container (`--bg-sand`): Image widget left; eyebrow + Heading + Text + Icon List (3 points) + text link right. Stacks at 900px.
+5. **Collection Banners (`.collection-banners`):**
+   - Two cards (image + tinted panel with Heading, Text, Button) using `--bg-sage-tint` and `--bg-ochre-tint`.
+6. **Service Bar (`.service-bar`):** 4 Icon Box widgets (2×2 on tablet/mobile).
 
 ### E. Our Story (`about.html`) & Contact Us (`contact.html`)
-- **Our Story (`about.html`):** Standard Elementor page using a centered Hero container, a 2-column Image + Text container (`.about-story-grid`), a 3-column Icon Box grid (`.about-values-grid`), and a 2-column CTA banner.
-- **Contact & Care (`contact.html`):** Standard Elementor page with 3 stacked Icon/Info cards in the left column, an **Elementor Form** (or Contact Form 7 / WPForms widget) in the right column, and a 2x2 FAQ grid below.
+- **Our Story (`about.html`):** Centered hero; 2-column Image + Text (`.about-story-grid`); "The details you feel" container with one image and a numbered list (`.detail-list`, 01–04); navy CTA card (`.wp-feature-card--navy`) with gold + light-outline buttons.
+- **Contact & Care (`contact.html`):** Compact hero; 3 action cards (WhatsApp `wa.me` link, `mailto:`, Size Guide popup trigger); then 2 columns — **Elementor Form** (or CF7/WPForms) left, Accordion/Toggle FAQ right.
 
 ### C. Shop / Category Page (`shop.html`)
 - Build in **Elementor Theme Builder → Product Archive**.
-- Top horizontal category bar using **Taxonomy Filter** or custom category term links.
-- Left column (240px on desktop, slide-out Off-Canvas widget on mobile): WooCommerce Attribute Filter (`pa_size`) and Category Filter (`product_cat`).
-- Right column: WooCommerce Archive Products Loop Grid + native WooCommerce Sorting dropdown (`orderby`).
+- Header: breadcrumb, title/description (dynamic term name + description), department links with counts.
+- **One horizontal toolbar, no sidebar or off-canvas filter**: a `pa_size` attribute filter rendered as pill links (e.g. WooCommerce "Filter Products by Attribute" in list mode styled as chips, or a filter plugin's horizontal layout), product count, and the native Sorting dropdown (`orderby`). Show active filters (WooCommerce "Active Product Filters" widget) directly beneath.
+- Below: WooCommerce Archive Products Loop Grid (3 columns desktop, 2 tablet/mobile).
 
 ### D. Single Product Page (`product.html`)
 - Build in **Elementor Theme Builder → Single Product**.
@@ -100,7 +97,8 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
   - **Add to Cart Widget:** With *Variation Swatches for WooCommerce* active, WooCommerce automatically renders the colour swatches and size buttons and enforces required size selection before enabling the Add to Cart button.
   - Size Guide Popup trigger button placed right above the `pa_size` selector.
   - Elementor **Accordion** widget populated dynamically via Dynamic Tags (*Garment Details*, *Fabric & Wash Care*, and global *Delivery & Exchange Policy*).
-  - **Related Products** Loop Grid at the bottom (`3 columns`).
+  - **Related Products** Loop Grid at the bottom (4 items; 4 columns desktop, 2 tablet/mobile).
+  - Mobile sticky Add-to-Cart bar: many themes/plugins provide one (e.g. "Sticky Add to Cart"); show it only ≤768px once the main button scrolls out of view.
 
 ---
 
