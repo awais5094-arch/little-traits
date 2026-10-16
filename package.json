@@ -1,0 +1,14 @@
+{
+  "name": "little-traits-kidswear",
+  "version": "1.0.0",
+  "description": "Little Traits — Kidswear Ecommerce Prototype (WordPress / Elementor / WooCommerce Ready)",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "dev": "node scripts/serve.js",
+    "check": "node scripts/verify-build.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details — Little Traits | Kidswear Pakistan</title>
+  <meta name="description" content="Explore garment details, fabric composition, size guide, and PKR pricing from the Little Traits Pakistani kidswear collection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header Mount -->
+  <div id="site-header-mount"></div>
+
+  <main id="main-content">
+    <section class="pdp-section" aria-label="Product Details">
+      <div class="container">
+        <nav class="breadcrumb" id="pdp-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="shop.html">Shop All</a>
+        </nav>
+
+        <!-- Dynamic Product Detail Mount -->
+        <div id="pdp-mount"></div>
+      </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="related-section" aria-labelledby="related-heading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow eyebrow--sage">Complete the Wardrobe</span>
+            <h2 class="heading-lg" id="related-heading">You May Also Love</h2>
+          </div>
+          <a href="shop.html" class="link-arrow">
+            View All 6 Debut Pieces
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="product-grid" id="pdp-related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="site-footer-mount"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>
