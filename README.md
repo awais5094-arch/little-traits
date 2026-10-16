@@ -18,6 +18,8 @@ Starts the local static server at **`http://localhost:4173`**:
 - **Homepage:** `http://localhost:4173/index.html`
 - **Shop / Category Listing:** `http://localhost:4173/shop.html`
 - **Reusable Product Detail Page:** `http://localhost:4173/product.html?id=lt-01` (supports `lt-01` through `lt-06`)
+- **Our Story / About Us:** `http://localhost:4173/about.html`
+- **Contact & Customer Care:** `http://localhost:4173/contact.html`
 
 *(Alternatively, you can serve the root directory with any static server such as `npx serve .` or VS Code Live Server.)*
 
@@ -33,16 +35,18 @@ Runs `scripts/verify-build.js`, which verifies that all required HTML, CSS, JS, 
 
 ```text
 little-traits/
-├── index.html                  # Homepage (10 purposeful sections, split Boys/Girls hero, Shop the Look)
+├── index.html                  # Homepage (Split Boys/Girls hero, Shop by Collection, Value Props, WP-friendly sections)
 ├── shop.html                   # Shop / Category listing page (department + size filters, sorting, empty state)
 ├── product.html                # Single reusable Product Detail Page populated dynamically via URL (?id=lt-01)
+├── about.html                  # Our Story / Brand values page (WordPress-friendly 2-column & 3-column sections)
+├── contact.html                # Contact & Customer Care page (WhatsApp/Email cards, demo contact form & FAQs)
 ├── css/
-│   └── styles.css              # Complete design system, CSS custom properties, component & responsive rules
+│   └── styles.css              # Complete design system, Deep Navy & Golden Honey palette, breathable spacing
 ├── js/
 │   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & size chart data
 │   ├── app.js                  # Shared Header, Footer, Search Drawer, persistent Cart Drawer & Modals
 │   ├── shop.js                 # Category/size filter controller, sorting, URL sync & mobile filter drawer
-│   └── product.js              # Reusable PDP controller, gallery switcher, required size validation & accordions
+│   └── product.js              # Simplified, mother-friendly PDP controller with 1-click size guide & collapsed accordions
 ├── assets/
 │   └── images/                 # 26 locally stored, watermark-free product, editorial & textile photographs
 ├── scripts/
@@ -63,10 +67,10 @@ little-traits/
    - Announcement bar with Size Chart trigger and PKR notice.
    - Sticky header with desktop navigation, mobile navigation drawer, live search drawer, and persistent shopping bag drawer.
    - Split photographic hero featuring **The Boys Collection** and **The Girls Collection** entry points.
-   - Arch-shaped department cards (`Boys`, `Girls`, `Baby & Toddler`, `Co-ords & Knits`).
+   - Arch-shaped department cards (`Boys`, `Girls`, `Baby & Toddler`, `Co-ords & Knits`) + 4-column **Value Propositions Strip** (*100% Soft & Gentle*, *Made to Play*, *Easy 7-Day Exchanges*, *Loved by Mothers*).
    - **New Season Arrivals** 6-product showcase with hover image swap, colour swatches, and size pills.
-   - **Made for Pakistani Seasons** brand & material story with 3 fabric pillars and tactile collage.
-   - **Shop the Look: Courtyard Morning** interactive outfit banner with clickable numbered pins (`1`, `2`, `3`) that highlight the matching product cards.
+   - **Made for Pakistani Seasons** brand & material story with 3 fabric pillars and single Elementor-friendly visual card.
+   - **Built for Every Little Adventure** 2-column WordPress/Elementor-friendly Playwear & Cozy Sets feature banner.
    - Dual image-led collection spotlight banners (*The First Steps & Nursery Edit* and *Two-Piece Co-ord Sets*).
    - **Garment Construction & Details** 4-card breakdown (*French-Finished Seams*, *Soft-Stretch Waistbands*, *Azo-Free Pigments*, *Wide Keyhole Openings*).
    - **Fast Age / Size Finder** strip (`6–12M` to `6–10 Years`) linking directly into pre-filtered shop views.
@@ -79,13 +83,18 @@ little-traits/
    - Active filter chips and a clear empty state with one-click filter reset when a category + size combination has 0 matches.
 
 3. **Reusable Product Detail Page (`product.html`)**:
-   - Single template rendering any of the 6 demo products via `?id=lt-01` .. `?id=lt-06` (plus a top quick-jump bar for rapid portfolio/client review).
+   - Single template rendering any of the 6 demo products via `?id=lt-01` .. `?id=lt-06` with clean, breathable spacing designed for effortless browsing by mothers.
    - 3-image vertical/horizontal thumbnail gallery with colour-linked image switching.
-   - PKR pricing (`Rs.`), colour variation buttons, and **required child size selection** with inline validation warning if "Add to Shopping Bag" is clicked without a size.
-   - Interactive **Size Guide Modal** (measurements in cm for ages `6M–10Y`).
-   - Quantity stepper, Add to Bag action, and **Honest Demo Buy Now** modal explaining the WooCommerce checkout handoff.
-   - Collapsible accordions for *Garment Details*, *Fabric & Wash Care*, and *Delivery & Size Exchange Information* (clearly marked where client policy confirmation is needed).
+   - PKR pricing (`Rs.`), colour variation buttons, and **required child size selection** with 1-click **Size Guide** pill button and inline validation warning.
+   - Quantity stepper, Deep Navy **Add to Shopping Bag** pill button, and Golden Honey **Buy Now with Cash on Delivery (Preview)** button.
+   - Collapsible accordions (collapsed by default to keep the page uncluttered) for *Garment Details & Fit*, *Fabric & Wash Care*, and *Delivery & Size Exchange*.
    - Related products section (*You May Also Love*).
+
+4. **Our Story / About Us (`about.html`)**:
+   - Brand story hero, 2-column origin & craft narrative, 3-column core values grid, and 2-column collection exploration banner.
+
+5. **Contact & Customer Care (`contact.html`)**:
+   - Customer care hero, WhatsApp & Email support cards, interactive Size Chart card, working demo contact inquiry form (`#demo-contact-form`), and 4-card FAQ grid (`#faq-section`).
 
 ---
 

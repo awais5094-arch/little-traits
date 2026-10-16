@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; Customer Care — Little Traits | Kidswear Pakistan</title>
+  <meta name="description" content="Need help choosing a child size or checking delivery across Pakistan? Contact the Little Traits customer care team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header & Announcement Bar Mount -->
+  <div id="site-header-mount"></div>
+
+  <main id="main-content">
+    <!-- ====================================================================
+         PAGE HERO: CONTACT & CUSTOMER CARE
+         ==================================================================== -->
+    <section class="inner-page-hero" aria-labelledby="contact-hero-heading">
+      <div class="container inner-page-hero__inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb" style="justify-content: center;">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Contact &amp; Care</span>
+        </nav>
+        <span class="eyebrow">We’re Here to Help</span>
+        <h1 class="heading-xl" id="contact-hero-heading" style="margin-bottom: 1rem;">
+          Questions about sizing, fabric, or delivery?
+        </h1>
+        <p class="text-lead">
+          Whether you need help picking the right size for your child or arranging a 7-day size exchange, our team is one click away.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 1: CONTACT CARDS & INQUIRY FORM
+         ==================================================================== -->
+    <section class="contact-section" aria-label="Contact Information and Inquiry Form">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Left Column: Direct Support Cards -->
+          <div class="contact-cards-stack">
+            <div class="contact-info-card">
+              <span class="eyebrow" style="margin-bottom: 0.15rem;">Fastest Response</span>
+              <h2 class="heading-sm">WhatsApp &amp; Phone Support</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                Message us directly for quick garment measurements, stock checks, or Cash on Delivery order assistance.
+              </p>
+              <p style="font-weight: 700; color: var(--text-primary); margin-top: 0.35rem;">
+                +92 (300) 000-0000 <span style="font-weight: 400; font-size: 0.8rem; color: var(--text-muted);">(Client Placeholder)</span>
+              </p>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Monday – Saturday, 10:00 AM to 6:00 PM PKT</span>
+            </div>
+
+            <div class="contact-info-card">
+              <span class="eyebrow eyebrow--sage" style="margin-bottom: 0.15rem;">Email &amp; Exchanges</span>
+              <h2 class="heading-sm">Customer Care Desk</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                For size exchange requests, bulk gift orders, or press inquiries, send us an email anytime.
+              </p>
+              <p style="font-weight: 700; color: var(--text-primary); margin-top: 0.35rem;">
+                hello@littletraits.pk <span style="font-weight: 400; font-size: 0.8rem; color: var(--text-muted);">(Client Placeholder)</span>
+              </p>
+            </div>
+
+            <div class="contact-info-card" style="background-color: var(--bg-sand);">
+              <h2 class="heading-sm">Not sure which size to order?</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                Compare your child’s height and chest measurements in centimetres using our interactive chart.
+              </p>
+              <div>
+                <button type="button" class="btn btn-gold" data-open-size-guide>
+                  Open Size Chart (6M – 10Y)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Clean WordPress/WPForms-Friendly Contact Form -->
+          <div class="contact-form-card">
+            <h2 class="heading-md" style="margin-bottom: 0.4rem;">Send Us a Message</h2>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.75rem;">
+              Fill out the form below and we’ll get back to you within 24 hours.
+            </p>
+
+            <form id="demo-contact-form">
+              <div class="form-field">
+                <label for="contact-name" class="form-label">Your Name *</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="e.g., Ayesha Khan" required />
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="form-field">
+                  <label for="contact-phone" class="form-label">Phone / WhatsApp Number *</label>
+                  <input type="tel" id="contact-phone" class="form-input" placeholder="03XX-XXXXXXX" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="contact-email" class="form-label">Email Address</label>
+                  <input type="email" id="contact-email" class="form-input" placeholder="you@example.com" />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="contact-topic" class="form-label">How can we help you?</label>
+                <select id="contact-topic" class="form-select">
+                  <option value="Sizing & Fit Advice">Sizing &amp; Fit Advice</option>
+                  <option value="Delivery & COD Question">Delivery &amp; Cash on Delivery Question</option>
+                  <option value="7-Day Size Exchange">7-Day Size Exchange Request</option>
+                  <option value="General Inquiry">General Brand Inquiry</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="contact-message" class="form-label">Message *</label>
+                <textarea id="contact-message" class="form-textarea" rows="4" placeholder="Tell us your child's age or which outfit you are looking at..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; min-height: 52px;">
+                Send Message
+              </button>
+
+              <div id="contact-form-success" role="status" aria-live="polite" style="display: none; margin-top: 1.25rem; padding: 1rem 1.25rem; background-color: var(--bg-sage-tint); border: 1px solid var(--accent-sage); border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.9rem;">
+                <strong>Thank you! Your demo message has been recorded.</strong><br />
+                In the live WordPress store, this form connects directly to Elementor Forms / WPForms and forwards inquiries to the client’s email &amp; WhatsApp.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 2: FREQUENTLY ASKED QUESTIONS (DELIVERY, EXCHANGES & CARE)
+         ==================================================================== -->
+    <section id="faq-section" style="padding-bottom: var(--section-space);" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Helpful Answers</span>
+            <h2 class="heading-lg" id="faq-heading">Frequently Asked Questions</h2>
+          </div>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">How does nationwide delivery work in Pakistan?</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
+              Orders are dispatched via tracked courier across Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad, and all major cities. Exact flat-rate shipping and free-delivery thresholds will be finalized by the client at launch.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">What if the size doesn’t fit my child?</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
+              Children grow quickly! We offer a simple 7-day size exchange on unworn, unwashed garments with original tags attached. If your child is between sizes, we recommend sizing up.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">Can I pay with Cash on Delivery (COD)?</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
+              Yes. Both Cash on Delivery (COD) in PKR and Direct Bank Transfer are supported natively through WooCommerce checkout upon store launch.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3 class="heading-sm" style="margin-bottom: 0.5rem;">How should I wash Little Traits garments?</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65;">
+              All our combed cottons, muslins, and linen blends are pre-washed to minimize shrinkage. Machine wash cold on a gentle cycle with mild detergent and line dry in the shade.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="site-footer-mount"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("demo-contact-form");
+      const successBox = document.getElementById("contact-form-success");
+      if (form && successBox) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          successBox.style.display = "block";
+          form.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

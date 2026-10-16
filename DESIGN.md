@@ -34,18 +34,18 @@ All colour tokens are defined in `:root` inside `css/styles.css` so they map 1:1
 
 | Token | Hex | Role & Usage |
 | :--- | :--- | :--- |
-| `--bg-linen` | `#FAF7F2` | Primary page background — warm, soft, and easy on the eyes |
-| `--bg-sand` | `#F3EDE2` | Secondary section background, image frames, and filter pills |
-| `--bg-oat` | `#EAE0D0` | Subtle hover surface and active card accents |
+| `--bg-linen` | `#FDFBF7` | Primary page background — crisp, bright warm off-white cream |
+| `--bg-sand` | `#F3EFE6` | Secondary section background, soft oatmeal sand frames, and pills |
+| `--bg-oat` | `#E8E1D3` | Subtle hover surface and active card accents |
 | `--bg-card` | `#FFFFFF` | Product card surface & modal backgrounds for crisp garment contrast |
-| `--text-primary` | `#26221E` | Deep Espresso — primary headings, prices, and body copy (high contrast) |
-| `--text-secondary` | `#5C544B` | Warm Umber — subtitles, fabric notes, and descriptions |
-| `--text-muted` | `#877D72` | Muted Taupe — SKU labels, age badges, and captions |
-| `--accent-terracotta` | `#C86D51` | Primary brand accent — interactive pins, badges, and highlights |
-| `--accent-sage` | `#4A6B5D` | Meadow Sage — Boys collection badge, stock indicators, and botanical accents |
-| `--accent-ochre` | `#D9A441` | Sunlit Ochre — seasonal callouts and warm editorial borders |
-| `--accent-blush` | `#EED8D1` | Soft Clay Blush — Girls collection accents and gentle callout backgrounds |
-| `--border-subtle` | `#E5DEC9` | Hairline structural borders across cards, accordions, and tables |
+| `--text-primary` / `--accent-navy` | `#1A2E4C` | Deep Midnight Navy — announcement bar, primary headings, pill buttons, and prices |
+| `--text-secondary` | `#4A5970` | Slate Navy — subtitles, fabric notes, and descriptions |
+| `--text-muted` | `#748296` | Muted Slate — SKU labels, age badges, and captions |
+| `--accent-gold` | `#E5A83B` | Warm Golden Honey / Ochre — secondary pill buttons, badges, and playful highlights |
+| `--accent-terracotta` | `#C2744B` | Cozy Caramel — warm secondary accent |
+| `--accent-sage` | `#4D6F5E` | Meadow Sage — Boys collection badge, stock indicators, and botanical accents |
+| `--accent-blush` | `#F2DFD7` | Soft Clay Blush — Girls collection accents and gentle callout backgrounds |
+| `--border-subtle` | `#E5DFD3` | Hairline structural borders across cards, accordions, and tables |
 
 ---
 

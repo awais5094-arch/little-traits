@@ -193,11 +193,11 @@
       headerMount.innerHTML = `
         <div class="announcement-bar" role="region" aria-label="Store announcement">
           <div class="announcement-bar__inner">
-            <span>Debut Seasonal Edit — Breathable Cottons &amp; Soft Knits Crafted in Pakistan</span>
+            <span>✨ Debut Seasonal Edit — Breathable Cottons &amp; Soft Playwear Crafted in Pakistan ✨</span>
             <div class="announcement-bar__links">
               <button type="button" data-open-size-guide style="color: inherit; text-decoration: underline; cursor: pointer;">Size Chart (6M–10Y)</button>
               <span>•</span>
-              <a href="shop.html">All Prices in PKR</a>
+              <a href="contact.html">Customer Care</a>
             </div>
           </div>
         </div>
@@ -228,10 +228,7 @@
                 }">Girls</a>
                 <a href="shop.html?category=baby" class="nav-primary__link ${
                   currentCat === "baby" ? "is-active" : ""
-                }">Baby (6M–3Y)</a>
-                <a href="shop.html?category=coords" class="nav-primary__link ${
-                  currentCat === "coords" ? "is-active" : ""
-                }">Sets &amp; Knits</a>
+                }">Baby</a>
               </nav>
             </div>
 
@@ -247,6 +244,14 @@
             </a>
 
             <div class="header-actions">
+              <nav class="nav-primary" aria-label="Brand navigation" style="margin-right: 0.5rem;">
+                <a href="about.html" class="nav-primary__link ${
+                  currentPage === "about.html" ? "is-active" : ""
+                }">Our Story</a>
+                <a href="contact.html" class="nav-primary__link ${
+                  currentPage === "contact.html" ? "is-active" : ""
+                }">Contact</a>
+              </nav>
               <button type="button" class="icon-btn" id="open-search-btn" aria-label="Search catalogue">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <circle cx="11" cy="11" r="7"></circle>
@@ -278,9 +283,9 @@
               <div>
                 <div class="footer-brand__title">Little Traits</div>
                 <p class="footer-brand__desc">
-                  Thoughtfully made children’s clothing for ages 6 months to 10 years. Breathable combed cottons, gentle weaves, and unhurried silhouettes designed in Pakistan.
+                  Thoughtfully made children’s clothing for ages 6 months to 10 years. Breathable combed cottons, gentle weaves, and comfortable silhouettes designed in Pakistan.
                 </p>
-                <div style="margin-top: 1.15rem; font-size: 0.78rem; color: #9E9587;">
+                <div style="margin-top: 1.15rem; font-size: 0.78rem; color: #9EAAB8;">
                   All prices listed in Pakistani Rupees (PKR).
                 </div>
               </div>
@@ -297,22 +302,22 @@
               </div>
 
               <div>
-                <h3 class="footer-col__heading">Customer Care</h3>
+                <h3 class="footer-col__heading">Brand &amp; Care</h3>
                 <ul class="footer-links">
+                  <li><a href="about.html">Our Story &amp; Fabrics</a></li>
+                  <li><a href="contact.html">Contact &amp; Order Help</a></li>
                   <li><button type="button" data-open-size-guide style="color: inherit; text-align: left;">Size &amp; Fit Guide</button></li>
-                  <li><a href="product.html?id=lt-01#care-accordion">Fabric &amp; Wash Care</a></li>
-                  <li><a href="product.html?id=lt-01#delivery-accordion">Delivery &amp; Exchanges</a></li>
-                  <li><button type="button" id="footer-open-bag" style="color: inherit; text-align: left;">View Shopping Bag</button></li>
+                  <li><a href="contact.html#faq-section">Delivery &amp; Exchanges</a></li>
                 </ul>
               </div>
 
               <div>
                 <h3 class="footer-col__heading">Studio &amp; Dispatch</h3>
-                <p style="font-size: 0.85rem; color: #C2B9AA; line-height: 1.6; margin-bottom: 0.85rem;">
-                  Nationwide courier dispatch across Pakistan. Standard cash-on-delivery and bank transfer options will be enabled upon live WooCommerce launch.
+                <p style="font-size: 0.85rem; color: #CBD5E1; line-height: 1.6; margin-bottom: 0.85rem;">
+                  Nationwide courier dispatch across Pakistan. Cash on Delivery (COD) and bank transfer supported.
                 </p>
-                <div style="padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; font-size: 0.76rem; color: #D4CBBF;">
-                  <strong>Client Contact Placeholder:</strong><br/>
+                <div style="padding: 0.85rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; font-size: 0.78rem; color: #E2E8F0;">
+                  <strong>Customer Care (Placeholder):</strong><br/>
                   hello@littletraits.pk • Mon–Sat, 10am–6pm PKT
                 </div>
               </div>
@@ -321,7 +326,9 @@
             <div class="footer-bottom">
               <span>&copy; 2026 Little Traits Pakistan. Prototype built for WordPress / Elementor / WooCommerce implementation.</span>
               <div style="display: flex; gap: 1.25rem;">
-                <a href="shop.html">Catalogue</a>
+                <a href="about.html">Our Story</a>
+                <a href="contact.html">Contact</a>
+                <a href="shop.html">Shop</a>
                 <button type="button" data-open-size-guide>Size Chart</button>
               </div>
             </div>
@@ -343,14 +350,16 @@
           <button type="button" class="icon-btn" data-close-drawers aria-label="Close menu">✕</button>
         </div>
         <div class="drawer__body">
-          <p class="eyebrow" style="margin-bottom: 0.75rem;">Browse by Collection</p>
-          <ul style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem;">
-            <li><a href="index.html" style="display:flex; justify-content:space-between; padding:0.75rem; background:var(--bg-sand); border-radius:4px; font-weight:600;"><span>Home</span><span>→</span></a></li>
-            <li><a href="shop.html" style="display:flex; justify-content:space-between; padding:0.75rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:4px; font-weight:500;"><span>Shop All Pieces</span><span>6</span></a></li>
-            <li><a href="shop.html?category=boys" style="display:flex; justify-content:space-between; padding:0.75rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:4px; font-weight:500;"><span>Boys (1Y–10Y)</span><span>→</span></a></li>
-            <li><a href="shop.html?category=girls" style="display:flex; justify-content:space-between; padding:0.75rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:4px; font-weight:500;"><span>Girls (1Y–10Y)</span><span>→</span></a></li>
-            <li><a href="shop.html?category=baby" style="display:flex; justify-content:space-between; padding:0.75rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:4px; font-weight:500;"><span>Baby &amp; Toddler (6M–3Y)</span><span>→</span></a></li>
-            <li><a href="shop.html?category=coords" style="display:flex; justify-content:space-between; padding:0.75rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:4px; font-weight:500;"><span>Co-ord Sets &amp; Knits</span><span>→</span></a></li>
+          <p class="eyebrow" style="margin-bottom: 0.75rem;">Browse Store</p>
+          <ul style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.75rem;">
+            <li><a href="index.html" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-sand); border-radius:8px; font-weight:600;"><span>Home</span><span>→</span></a></li>
+            <li><a href="shop.html" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; font-weight:500;"><span>Shop All Pieces</span><span>6</span></a></li>
+            <li><a href="shop.html?category=boys" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; font-weight:500;"><span>Boys (1Y–10Y)</span><span>→</span></a></li>
+            <li><a href="shop.html?category=girls" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; font-weight:500;"><span>Girls (1Y–10Y)</span><span>→</span></a></li>
+            <li><a href="shop.html?category=baby" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; font-weight:500;"><span>Baby &amp; Toddler (6M–3Y)</span><span>→</span></a></li>
+            <li><a href="shop.html?category=coords" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; font-weight:500;"><span>Co-ord Sets &amp; Knits</span><span>→</span></a></li>
+            <li><a href="about.html" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; font-weight:500;"><span>Our Story</span><span>→</span></a></li>
+            <li><a href="contact.html" style="display:flex; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; font-weight:500;"><span>Contact &amp; Care</span><span>→</span></a></li>
           </ul>
 
           <p class="eyebrow" style="margin-bottom: 0.75rem;">Quick Jump by Size</p>

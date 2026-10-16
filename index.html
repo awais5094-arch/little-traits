@@ -173,27 +173,49 @@
     </section>
 
     <!-- ====================================================================
-         SECTION 3: NEW ARRIVALS — THE DEBUT CAPSULE (6 PRODUCTS)
+         SECTION 2B: SHOP DIRECTLY BY CHILD'S AGE / SIZE (EASY EARLY NAVIGATION)
          ==================================================================== -->
-    <section class="new-arrivals" style="padding-bottom: var(--section-space);" aria-labelledby="arrivals-heading">
+    <section class="size-finder-strip" aria-labelledby="size-finder-heading">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">First Edition • 6 Signature Styles</span>
-            <h2 class="heading-lg" id="arrivals-heading">New Season Arrivals</h2>
+        <div class="size-finder-card">
+          <div class="size-finder-card__top">
+            <div>
+              <span class="eyebrow">Quick Age Navigation</span>
+              <h2 class="heading-md" id="size-finder-heading">Browse Directly by Your Child’s Age</h2>
+            </div>
+            <button type="button" class="btn btn-outline" data-open-size-guide>
+              View Measurement Chart (cm)
+            </button>
           </div>
-          <a href="shop.html" class="btn btn-outline">
-            Filter &amp; Browse Full Shop
-          </a>
-        </div>
 
-        <!-- Populated dynamically from window.PRODUCTS via js/app.js -->
-        <div class="product-grid" id="homepage-featured-grid"></div>
+          <div class="size-Buttons-row">
+            <a href="shop.html?size=6-12M" class="size-tile-btn">
+              <span class="size-tile-btn__label">6 – 12M</span>
+              <span class="size-tile-btn__sub">Infant &amp; Crawler</span>
+            </a>
+            <a href="shop.html?size=18-24M" class="size-tile-btn">
+              <span class="size-tile-btn__label">18 – 24M</span>
+              <span class="size-tile-btn__sub">First Steps</span>
+            </a>
+            <a href="shop.html?size=2-3Y" class="size-tile-btn">
+              <span class="size-tile-btn__label">2 – 3 Years</span>
+              <span class="size-tile-btn__sub">Toddler Edit</span>
+            </a>
+            <a href="shop.html?size=4-5Y" class="size-tile-btn">
+              <span class="size-tile-btn__label">4 – 5 Years</span>
+              <span class="size-tile-btn__sub">Preschool Play</span>
+            </a>
+            <a href="shop.html?size=6-7Y" class="size-tile-btn">
+              <span class="size-tile-btn__label">6 – 10 Years</span>
+              <span class="size-tile-btn__sub">Junior Sizes</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         SECTION 4: CREATIVE BRAND SECTION — "MADE FOR PAKISTANI SEASONS"
+         SECTION 2C: BRAND & MATERIAL STORY (TEXT + VISUAL MIX EARLY ON PAGE)
          ==================================================================== -->
     <section class="craft-story" aria-labelledby="craft-heading">
       <div class="container">
@@ -246,23 +268,11 @@
             </div>
           </div>
 
-          <div class="craft-collage">
-            <div class="craft-collage__main">
-              <img src="assets/images/editorial-rack.jpg" alt="Curated wooden rack of pastel cotton and pointelle knit baby and toddler garments" loading="lazy" width="600" height="800" />
-              <div style="padding: 0.75rem 0.4rem 0.25rem; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary);">
-                <span>Studio Palette — Warm Oat, Sage &amp; Dusty Rose</span>
-                <strong>01 / 03</strong>
-              </div>
-            </div>
-            <div class="craft-collage__side">
-              <div class="craft-collage__swatch-card">
-                <img src="assets/images/fabric-linen.jpg" alt="Close-up macro texture of woven natural cotton linen" loading="lazy" width="320" height="320" />
-                <div class="craft-collage__caption">Breathable Slub Weave</div>
-              </div>
-              <div class="craft-collage__swatch-card">
-                <img src="assets/images/p2-detail.jpg" alt="Wooden hangers and botanical printed cotton details" loading="lazy" width="320" height="320" />
-                <div class="craft-collage__caption">Botanical Block Prints</div>
-              </div>
+          <div style="background: var(--bg-card); padding: 1.15rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft);">
+            <img src="assets/images/editorial-rack.jpg" alt="Curated wooden rack of pastel cotton and pointelle knit baby and toddler garments" loading="lazy" width="600" height="720" style="width: 100%; aspect-ratio: 4 / 4.4; object-fit: cover; border-radius: var(--radius-md);" />
+            <div style="padding: 1rem 0.5rem 0.25rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem; color: var(--text-secondary);">
+              <span>Natural Cotton, Muslin &amp; Soft Knits</span>
+              <a href="about.html" class="link-arrow" style="font-size: 0.82rem;">Read Our Story →</a>
             </div>
           </div>
         </div>
@@ -270,51 +280,78 @@
     </section>
 
     <!-- ====================================================================
-         SECTION 5: OUTFIT INSPIRATION — "SHOP THE LOOK" (INTERACTIVE)
+         SECTION 3: NEW ARRIVALS — THE DEBUT CAPSULE (6 PRODUCTS)
          ==================================================================== -->
-    <section class="shop-look" aria-labelledby="lookbook-heading">
+    <section class="new-arrivals" style="padding-block: var(--section-space);" aria-labelledby="arrivals-heading">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Sibling &amp; Play Coordinates</span>
-            <h2 class="heading-lg" id="lookbook-heading">Shop the Look: Courtyard Morning</h2>
+            <span class="eyebrow">First Edition • 6 Signature Styles</span>
+            <h2 class="heading-lg" id="arrivals-heading">New Season Arrivals</h2>
           </div>
-          <p style="font-size: 0.88rem; color: var(--text-secondary);">
-            Click the numbered pins on the photograph to highlight each coordinated piece.
-          </p>
+          <a href="shop.html" class="btn btn-outline">
+            Filter &amp; Browse Full Shop
+          </a>
         </div>
 
-        <div class="shop-look__grid">
-          <div class="look-stage">
-            <img
-              src="assets/images/editorial-play.jpg"
-              alt="Young girl and boy sharing a playful secret wearing crisp cotton shirts and vibrant red layers"
-              class="look-stage__img"
-              loading="lazy"
-              width="900"
-              height="720"
-            />
-            <button type="button" class="look-hotspot is-active" data-look-pin="0" style="top: 48%; left: 28%;" aria-label="Highlight Look Item 1: Amara Ruffled Heirloom Frock">1</button>
-            <button type="button" class="look-hotspot" data-look-pin="1" style="top: 44%; left: 68%;" aria-label="Highlight Look Item 2: Zayd Windowpane Linen-Cotton Set">2</button>
-            <button type="button" class="look-hotspot" data-look-pin="2" style="top: 68%; left: 58%;" aria-label="Highlight Look Item 3: Rayan Harbour Stripe Play Set">3</button>
+        <!-- Populated dynamically from window.PRODUCTS via js/app.js -->
+        <div class="product-grid" id="homepage-featured-grid"></div>
+      </div>
+    </section>
 
-            <div class="look-stage__caption">
-              <span>Editorial Lookbook 01 — Coordinated Crimson, Ivory &amp; Harbour Blue</span>
-              <strong>3 Featured Pieces</strong>
+    <!-- ====================================================================
+         SECTION 4: VALUE PROPOSITIONS BAR (TEXT/ICON MIX BETWEEN PHOTO GRIDS)
+         ==================================================================== -->
+    <section class="value-props-strip" aria-label="Why Mothers Choose Little Traits">
+      <div class="container">
+        <div class="value-props-grid">
+          <div class="value-prop-item">
+            <div class="value-prop-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C9.5 6 7 9.5 7 13a5 5 0 0 0 10 0c0-3.5-2.5-7-5-11Z"/><path d="M12 22v-9"/></svg>
+            </div>
+            <div>
+              <div class="value-prop-title">100% Soft &amp; Gentle</div>
+              <div class="value-prop-sub">Breathable Pakistani cottons</div>
             </div>
           </div>
 
-          <div class="look-items" id="lookbook-items-mount">
-            <!-- Populated dynamically in inline script below -->
+          <div class="value-prop-item">
+            <div class="value-prop-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <div>
+              <div class="value-prop-title">Made to Play</div>
+              <div class="value-prop-sub">Relaxed cuts for active little ones</div>
+            </div>
+          </div>
+
+          <div class="value-prop-item">
+            <div class="value-prop-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div>
+              <div class="value-prop-title">Easy 7-Day Exchanges</div>
+              <div class="value-prop-sub">Hassle-free size swaps</div>
+            </div>
+          </div>
+
+          <div class="value-prop-item">
+            <div class="value-prop-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div>
+              <div class="value-prop-title">Loved by Mothers</div>
+              <div class="value-prop-sub">Tagless necklines &amp; easy dressing</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         SECTION 6: IMAGE-LED COLLECTION BANNERS (BABY & CO-ORD SETS)
+         SECTION 5: IMAGE-LED COLLECTION BANNERS (BABY & CO-ORD SETS)
          ==================================================================== -->
-    <section class="collection-banners" aria-label="Featured Collection Spotlights">
+    <section class="collection-banners" style="padding-top: var(--section-space);" aria-label="Featured Collection Spotlights">
       <div class="container">
         <div class="collection-banners__grid">
           <!-- Baby Banner -->
@@ -359,7 +396,7 @@
     </section>
 
     <!-- ====================================================================
-         SECTION 7: GARMENT DETAILS & FINISHING (CREATIVE BRAND DEPTH)
+         SECTION 6: GARMENT DETAILS & FINISHING (CREATIVE BRAND DEPTH)
          ==================================================================== -->
     <section class="garment-anatomy" aria-labelledby="anatomy-heading">
       <div class="container">
@@ -402,49 +439,44 @@
     </section>
 
     <!-- ====================================================================
-         SECTION 8: SHOP BY AGE / SIZE QUICK FINDER
+         SECTION 7: VISUAL CLOSING BANNER RIGHT ABOVE SERVICE BAR & FOOTER
          ==================================================================== -->
-    <section class="size-finder-strip" aria-labelledby="size-finder-heading">
+    <section class="home-closing-cta" style="padding-bottom: var(--section-space);" aria-labelledby="closing-cta-heading">
       <div class="container">
-        <div class="size-finder-card">
-          <div class="size-finder-card__top">
-            <div>
-              <span class="eyebrow">Fast Filtering</span>
-              <h2 class="heading-md" id="size-finder-heading">Browse Directly by Your Child’s Age</h2>
+        <div class="wp-feature-card" style="background-color: var(--bg-navy); color: #FFFFFF; border-color: var(--bg-navy);">
+          <div class="wp-feature-card__body" style="color: #FFFFFF;">
+            <span class="eyebrow" style="color: var(--accent-gold);">Ready for Every Season</span>
+            <h2 class="heading-lg" id="closing-cta-heading" style="color: #FFFFFF;">
+              Dress your little ones in breathable Pakistani cottons.
+            </h2>
+            <p class="text-lead" style="color: #CBD5E1;">
+              Explore our debut capsule for boys, girls, and babies (ages 6 months to 10 years)—with nationwide Cash on Delivery and simple 7-day size exchanges.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 0.65rem;">
+              <a href="shop.html" class="btn btn-gold">
+                Shop the Full Collection
+              </a>
+              <a href="contact.html" class="btn btn-light">
+                Ask About Sizing &amp; Care
+              </a>
             </div>
-            <button type="button" class="btn btn-outline" data-open-size-guide>
-              View Measurement Chart (cm)
-            </button>
           </div>
 
-          <div class="size-Buttons-row">
-            <a href="shop.html?size=6-12M" class="size-tile-btn">
-              <span class="size-tile-btn__label">6 – 12M</span>
-              <span class="size-tile-btn__sub">Infant &amp; Crawler</span>
-            </a>
-            <a href="shop.html?size=18-24M" class="size-tile-btn">
-              <span class="size-tile-btn__label">18 – 24M</span>
-              <span class="size-tile-btn__sub">First Steps</span>
-            </a>
-            <a href="shop.html?size=2-3Y" class="size-tile-btn">
-              <span class="size-tile-btn__label">2 – 3 Years</span>
-              <span class="size-tile-btn__sub">Toddler Edit</span>
-            </a>
-            <a href="shop.html?size=4-5Y" class="size-tile-btn">
-              <span class="size-tile-btn__label">4 – 5 Years</span>
-              <span class="size-tile-btn__sub">Preschool Play</span>
-            </a>
-            <a href="shop.html?size=6-7Y" class="size-tile-btn">
-              <span class="size-tile-btn__label">6 – 10 Years</span>
-              <span class="size-tile-btn__sub">Junior Sizes</span>
-            </a>
+          <div class="wp-feature-card__media">
+            <img
+              src="assets/images/editorial-play.jpg"
+              alt="Brother and sister smiling outdoors in coordinated cotton playwear"
+              loading="lazy"
+              width="800"
+              height="600"
+            />
           </div>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         SECTION 9: USEFUL SERVICE & SHOPPING INFORMATION
+         SECTION 8: USEFUL SERVICE & SHOPPING INFORMATION
          ==================================================================== -->
     <section class="service-bar" aria-label="Store Service Information">
       <div class="container">
@@ -503,58 +535,10 @@
       const products = window.PRODUCTS || [];
       const app = window.LittleTraitsApp;
 
-      // 1. Render Featured 6-Product Grid
+      // Render Featured 6-Product Grid
       const gridEl = document.getElementById("homepage-featured-grid");
       if (gridEl && app) {
         gridEl.innerHTML = products.map((p) => app.renderProductCard(p)).join("");
-      }
-
-      // 2. Render Interactive Shop-the-Look Cards
-      const lookMount = document.getElementById("lookbook-items-mount");
-      const lookIds = ["lt-02", "lt-01", "lt-03"];
-      if (lookMount && app) {
-        const lookProducts = lookIds
-          .map((id) => products.find((p) => p.id === id))
-          .filter(Boolean);
-
-        lookMount.innerHTML = lookProducts
-          .map(
-            (p, idx) => `
-            <div class="look-item-card ${idx === 0 ? "is-highlighted" : ""}" data-look-card="${idx}">
-              <a href="product.html?id=${p.id}">
-                <img src="${p.images[0].src}" alt="${p.name}" class="look-item-card__img" loading="lazy" />
-              </a>
-              <div>
-                <span class="look-item-card__num">Pin 0${idx + 1} • ${p.ageGroup}</span>
-                <h3 class="look-item-card__title">
-                  <a href="product.html?id=${p.id}">${p.name}</a>
-                </h3>
-                <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.25rem;">${p.shortSubtitle}</div>
-                <div class="look-item-card__price">${app.formatPKR(p.price)}</div>
-              </div>
-              <div class="look-item-card__cta">
-                <a href="product.html?id=${p.id}" class="btn btn-outline" style="min-height: 38px; padding: 0.45rem 0.9rem; font-size: 0.78rem;">
-                  View Piece
-                </a>
-              </div>
-            </div>
-          `
-          )
-          .join("");
-
-        // Interactive hotspot pins
-        const pins = document.querySelectorAll("[data-look-pin]");
-        const cards = document.querySelectorAll("[data-look-card]");
-        pins.forEach((pin) => {
-          pin.addEventListener("click", () => {
-            const targetIdx = pin.getAttribute("data-look-pin");
-            pins.forEach((b) => b.classList.toggle("is-active", b === pin));
-            cards.forEach((c) => {
-              const isMatch = c.getAttribute("data-look-card") === targetIdx;
-              c.classList.toggle("is-highlighted", isMatch);
-            });
-          });
-        });
       }
     });
   </script>

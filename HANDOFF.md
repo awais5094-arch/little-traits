@@ -6,10 +6,12 @@ This document provides another developer or AI assistant with everything needed 
 
 ## 1. Completed Features
 
-1. **Three Connected Views (`index.html`, `shop.html`, `product.html`)**:
-   - **Homepage (`index.html`)**: 10 distinct, non-repetitive sections including a split Boys/Girls photographic hero, arched category tiles, 6-piece debut arrival grid, *Made for Pakistani Seasons* textile story, interactive *Shop the Look* hotspot banner, dual collection spotlights, 4-card *Garment Anatomy* grid, *Fast Age/Size Finder* strip, service bar, and complete footer.
+1. **Five Connected Views (`index.html`, `shop.html`, `product.html`, `about.html`, `contact.html`)**:
+   - **Homepage (`index.html`)**: Split Boys/Girls photographic hero, arched category tiles + 4-column Value Propositions strip, 6-piece debut arrival grid, *Made for Pakistani Seasons* textile story, 100% WordPress/Elementor-friendly 2-column *Built for Every Little Adventure* playwear banner, dual collection spotlights, 4-card *Garment Anatomy* grid, *Fast Age/Size Finder* strip, service bar, and complete footer.
    - **Shop / Category Page (`shop.html`)**: Supports URL parameters (`?category=boys`, `?size=2-3Y`, `?sort=price-asc`) and interactive filtering without page reloads. Includes category pill bar, desktop sidebar filters, mobile slide-over filter drawer, live product counter, removable active filter chips, and an empty state when a filter combination yields 0 items.
-   - **Reusable Product Detail Page (`product.html`)**: Single dynamic layout populated from `window.LITTLE_TRAITS_PRODUCTS` in `js/data.js` via `?id=lt-01` .. `lt-06` (or `?slug=...`). Includes a top "Catalogue Jump" bar so reviewers can switch between all 6 products in one click.
+   - **Reusable Product Detail Page (`product.html`)**: Single dynamic layout populated from `window.LITTLE_TRAITS_PRODUCTS` in `js/data.js` via `?id=lt-01` .. `lt-06` (or `?slug=...`). Designed with clean, breathable spacing for mothers shopping kidswear: 1-click Size Guide pill button, high-contrast size pills, Deep Navy + Golden Honey pill CTAs, and collapsed accordions by default.
+   - **Our Story / About Us (`about.html`)**: Dedicated brand origin story, fabric philosophy, and 3-column core values page for client pitch completeness.
+   - **Contact & Customer Care (`contact.html`)**: Dedicated customer support page with WhatsApp/Email cards, Size Guide modal trigger, interactive demo inquiry form (`#demo-contact-form`), and 4-card FAQ grid (`#faq-section`).
 
 2. **Interactive Shopping & Demo Mechanics**:
    - **Required Size Validation**: Clicking *Add to Shopping Bag* or *Buy Now* on `product.html` without selecting a child size blocks submission and displays an accessible inline alert (`#pdp-size-error`).
@@ -61,3 +63,9 @@ The following business details are currently marked as clean placeholders in `js
   - Built connected Homepage (`index.html`), Shop/Category page (`shop.html`), and reusable Product Detail Page (`product.html`).
   - Verified responsive layouts (`1440px`, `1024px`, `768px`, `390px`, `360px`), image loading, filters, required size validation, and persistent cart calculations.
   - Added `README.md`, `DESIGN.md`, `HANDOFF.md`, and `WORDPRESS-MAPPING.md`.
+
+- **`v1.1.0` (Client Pitch Refinement, Palette Update & Inner Pages — Oct 16, 2026)**:
+  - Updated colour system to match the client's reference palette: Deep Midnight Navy (`#1A2E4C`), Warm Golden Honey / Ochre (`#E5A83B`), Crisp Warm Cream (`#FDFBF7`), and Soft Oatmeal Sand (`#F3EFE6`) with pill-shaped buttons (`999px`) and friendly rounded corners.
+  - Replaced the complex numbered-pin hotspot section on `index.html` with a clean, 100% WordPress/Elementor-friendly 2-column Playwear & Sibling Sets banner (`Built for Every Little Adventure.`) and added a 4-column Value Propositions strip below Shop by Collection.
+  - Simplified the Product Detail Page (`product.html` / `js/product.js`): removed the Catalogue Jump bar, increased right-column breathing room (`gap: 1.85rem`), added a 1-click `Size Guide` pill button, simplified the reassurance strip, and collapsed the 3 detail accordions by default for effortless browsing by mothers.
+  - Added complete `about.html` (*Our Story*) and `contact.html` (*Contact & Customer Care* with interactive inquiry form and FAQs) and wired them across Header, Mobile Drawer, and Footer.

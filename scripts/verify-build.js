@@ -35,6 +35,8 @@ const coreFiles = [
   "index.html",
   "shop.html",
   "product.html",
+  "about.html",
+  "contact.html",
   "css/styles.css",
   "js/data.js",
   "js/app.js",
@@ -83,7 +85,7 @@ products.forEach((p) => {
 });
 
 // Check HTML image references
-["index.html", "shop.html", "product.html"].forEach((page) => {
+["index.html", "shop.html", "product.html", "about.html", "contact.html"].forEach((page) => {
   const html = fs.readFileSync(path.join(root, page), "utf8");
   const regex = /src=["'](assets\/images\/[^"']+)["']/g;
   let match;

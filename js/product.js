@@ -127,30 +127,7 @@
       .map((d) => `<li>${d}</li>`)
       .join("");
 
-    // Quick switcher pills so reviewers can also jump between all 6 demo products right from the top
-    const quickProductSwitcher = products
-      .map(
-        (p) => `
-        <a
-          href="product.html?id=${p.id}"
-          style="padding: 0.3rem 0.65rem; font-size: 0.75rem; border-radius: 4px; border: 1px solid ${
-            p.id === currentProduct.id ? "var(--text-primary)" : "var(--border-subtle)"
-          }; background: ${
-            p.id === currentProduct.id ? "var(--bg-sand)" : "var(--bg-card)"
-          }; font-weight: ${p.id === currentProduct.id ? "600" : "400"}; white-space: nowrap;"
-        >
-          ${p.name.split(" ").slice(0, 2).join(" ")}
-        </a>
-      `
-      )
-      .join("");
-
     mount.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 0.5rem; overflow-x: auto; padding-bottom: 1rem; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);">
-        <span style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;">Catalogue Jump:</span>
-        ${quickProductSwitcher}
-      </div>
-
       <div class="pdp-layout">
         <!-- Left Column: Image Gallery -->
         <div class="pdp-gallery">
@@ -179,22 +156,22 @@
           </div>
         </div>
 
-        <!-- Right Column: Product Information & Variation Controls -->
+        <!-- Right Column: Clean, Breathable, Mother-Friendly Product Controls -->
         <div class="pdp-info">
           <div class="pdp-info__top">
-            <div class="pdp-sku-row">
-              <span>SKU: ${currentProduct.sku}</span>
-              <span>Age Range: ${currentProduct.ageGroup}</span>
+            <div class="pdp-age-pill">
+              <span>Ages ${currentProduct.ageGroup}</span>
+              <span>•</span>
+              <span>${currentProduct.fabricSummary}</span>
             </div>
-            <h1 class="heading-lg" style="margin-bottom: 0.25rem;">${currentProduct.name}</h1>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">${currentProduct.shortSubtitle} • ${currentProduct.fabricSummary}</p>
+            <h1 class="heading-lg" style="margin-bottom: 0.35rem;">${currentProduct.name}</h1>
             <div class="pdp-price">
               <span>${app.formatPKR(currentProduct.price)}</span>
-              <span class="pdp-price__tax">Inclusive of all taxes in Pakistan</span>
+              <span class="pdp-price__tax">In Stock • Cash on Delivery Available</span>
             </div>
           </div>
 
-          <p style="font-size: 0.94rem; color: var(--text-secondary); line-height: 1.65;">
+          <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.75;">
             ${currentProduct.shortDescription}
           </p>
 
@@ -213,13 +190,13 @@
             </div>
           </div>
 
-          <!-- Size Selection (Required) -->
+          <!-- Size Selection (Required — 1 Click Away) -->
           <div class="pdp-selector-block">
             <div class="pdp-selector-header">
               <div>
-                <span class="pdp-selector-label">Child Size: <span style="color: var(--accent-berry);">*</span></span>
+                <span class="pdp-selector-label">Select Child Size: <span style="color: var(--accent-berry);">*</span></span>
                 <span class="pdp-selector-value" id="selected-size-label">
-                  ${state.selectedSize ? state.selectedSize : "Please select a size"}
+                  ${state.selectedSize ? state.selectedSize : "Choose size"}
                 </span>
               </div>
               <button type="button" class="size-guide-trigger" data-open-size-guide>
@@ -231,7 +208,7 @@
               ${sizesHtml}
             </div>
             <div class="pdp-validation-msg" id="pdp-size-error" role="alert">
-              Please select a child size above before adding this garment to your bag.
+              Please select your child’s size above before adding to bag.
             </div>
           </div>
 
@@ -251,57 +228,55 @@
               <button type="button" class="qty-btn" id="pdp-qty-inc" aria-label="Increase quantity">+</button>
             </div>
 
-            <button type="button" class="btn btn-primary" id="pdp-add-to-cart-btn" style="min-height: 48px; font-size: 0.92rem;">
+            <button type="button" class="btn btn-primary" id="pdp-add-to-cart-btn" style="min-height: 52px; font-size: 0.94rem;">
               Add to Shopping Bag — ${app.formatPKR(currentProduct.price * state.quantity)}
             </button>
           </div>
 
           <!-- Secondary Honest Demo Buy Now Action -->
-          <button type="button" class="btn btn-outline" id="pdp-buy-now-btn" style="width: 100%; min-height: 44px;">
-            Buy Now (Preview WooCommerce Checkout)
+          <button type="button" class="btn btn-gold" id="pdp-buy-now-btn" style="width: 100%; min-height: 48px;">
+            Buy Now with Cash on Delivery (Preview)
           </button>
 
-          <!-- Selected Variation Summary Pill -->
-          <div style="padding: 0.7rem 0.95rem; background: var(--bg-sand); border: 1px solid var(--border-subtle); border-radius: var(--radius-xs); font-size: 0.8rem; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-            <span id="variation-summary-text">
-              Selected: <strong>${state.selectedColor ? state.selectedColor.name : ""}</strong> • Size: <strong>${
-      state.selectedSize || "Not selected"
-    }</strong>
-            </span>
-            <span style="color: var(--accent-sage); font-weight: 600;">In Stock</span>
+          <!-- Simple One-Glance Reassurance Strip for Mothers -->
+          <div class="pdp-reassurance-list">
+            <span class="pdp-reassurance-item">✓ Gentle on Sensitive Skin</span>
+            <span class="pdp-reassurance-item">✓ 7-Day Easy Size Exchange</span>
+            <span class="pdp-reassurance-item">✓ All-Pakistan Dispatch</span>
           </div>
 
-          <!-- Product Details, Fabric & Care, and Delivery Accordions -->
+          <!-- Clean Collapsible Accordions (Closed by Default to Avoid Visual Clutter) -->
           <div class="pdp-accordions">
             <div class="accordion-item">
-              <button type="button" class="accordion-trigger" data-accordion-toggle="details-panel" aria-expanded="true">
-                <span>Garment Details &amp; Construction</span>
-                <span aria-hidden="true">−</span>
+              <button type="button" class="accordion-trigger" data-accordion-toggle="details-panel" aria-expanded="false">
+                <span>Garment Details &amp; Fit</span>
+                <span aria-hidden="true">+</span>
               </button>
-              <div class="accordion-content" id="details-panel">
+              <div class="accordion-content" id="details-panel" style="display: none;">
                 <ul>
                   ${detailsListHtml}
                 </ul>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">SKU: ${currentProduct.sku}</p>
               </div>
             </div>
 
             <div class="accordion-item" id="care-accordion">
-              <button type="button" class="accordion-trigger" data-accordion-toggle="care-panel" aria-expanded="true">
-                <span>Fabric Composition &amp; Wash Care</span>
-                <span aria-hidden="true">−</span>
+              <button type="button" class="accordion-trigger" data-accordion-toggle="care-panel" aria-expanded="false">
+                <span>Fabric &amp; Wash Care</span>
+                <span aria-hidden="true">+</span>
               </button>
-              <div class="accordion-content" id="care-panel">
+              <div class="accordion-content" id="care-panel" style="display: none;">
                 <p><strong>Material:</strong> ${currentProduct.fabricSummary}</p>
                 <p style="margin-top: 0.35rem;">${currentProduct.fabricCare}</p>
               </div>
             </div>
 
             <div class="accordion-item" id="delivery-accordion">
-              <button type="button" class="accordion-trigger" data-accordion-toggle="delivery-panel" aria-expanded="true">
-                <span>Delivery &amp; Size Exchange Information</span>
-                <span aria-hidden="true">−</span>
+              <button type="button" class="accordion-trigger" data-accordion-toggle="delivery-panel" aria-expanded="false">
+                <span>Delivery &amp; Size Exchange</span>
+                <span aria-hidden="true">+</span>
               </button>
-              <div class="accordion-content" id="delivery-panel">
+              <div class="accordion-content" id="delivery-panel" style="display: none;">
                 <p><strong>Delivery:</strong> ${config.shippingNote}</p>
                 <p style="margin-top: 0.35rem;"><strong>Exchanges:</strong> ${config.exchangeNote}</p>
               </div>

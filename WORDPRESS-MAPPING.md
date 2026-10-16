@@ -21,12 +21,13 @@ This prototype was specifically architected so every visual section, CSS token, 
 Copy the `:root` variables from `css/styles.css` directly into **Elementor → Site Settings → Global Colors & Global Fonts**:
 
 - **Global Colors:**
-  - Primary Text: `#26221E` (`--text-primary`)
-  - Secondary Text: `#5C544B` (`--text-secondary`)
-  - Accent / Primary Brand: `#C86D51` (`--accent-terracotta`)
-  - Secondary Accent: `#4A6B5D` (`--accent-sage`)
-  - Background Primary: `#FAF7F2` (`--bg-linen`)
-  - Background Secondary: `#F3EDE2` (`--bg-sand`)
+  - Primary Brand Dark / Headings / Primary Buttons: `#1A2E4C` (`--text-primary` / `--accent-navy`)
+  - Secondary Brand Accent / Badges / Secondary Buttons: `#E5A83B` (`--accent-gold`)
+  - Secondary Text: `#4A5970` (`--text-secondary`)
+  - Warm Caramel Accent: `#C2744B` (`--accent-terracotta`)
+  - Meadow Sage Accent: `#4D6F5E` (`--accent-sage`)
+  - Background Primary (Clean Cream): `#FDFBF7` (`--bg-linen`)
+  - Background Secondary (Soft Oatmeal Sand): `#F3EFE6` (`--bg-sand`)
 - **Global Fonts:**
   - Primary Heading: `Fraunces` (600 weight, line-height `1.15`)
   - Body & UI: `Plus Jakarta Sans` (400/500/600 weight, line-height `1.6`)
@@ -66,18 +67,22 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 1. **Split Boys / Girls Hero (`section.hero`):**
    - Elementor Flexbox Container (`2 columns` on desktop, `1 column` stacked on mobile).
    - Two Call-to-Action / Banner containers with background image, gradient overlay, badge heading (`BOYS EDIT • 1Y–10Y`), `Fraunces` title, and button linking to `/product-category/boys/` and `/product-category/girls/`.
-2. **Department Arch Tiles (`.cat-arch-grid`):**
-   - 4-column CSS Grid container. Set image wrapper border radius to `140px 140px 12px 12px` in Elementor Advanced → Border settings.
+2. **Department Arch Tiles (`.cat-arch-grid`) + Value Propositions Strip (`.value-props-strip`):**
+   - 4-column CSS Grid container for categories + 4-column Icon Box strip below (`100% Soft & Gentle`, `Made to Play`, `Easy 7-Day Exchanges`, `Loved by Mothers`).
 3. **New Season Arrivals (`#home-featured-grid`):**
    - Elementor **Loop Grid** widget querying `Products` (6 items, ordered by Date or Featured tag).
 4. **Made for Pakistani Seasons (`.story-split`):**
-   - 2-column Flexbox Container (`--bg-sand` background). Left column: Icon Box list for the 3 fabric pillars. Right column: 3-image overlapping collage using absolute/relative positioning or CSS classes from `css/styles.css`.
-5. **Interactive Shop the Look (`#shop-the-look`):**
-   - Elementor **Image Hotspot** widget (built into Elementor Pro) placed on the courtyard lifestyle photograph, paired with a 3-item Product Loop list in the right column.
+   - 2-column Flexbox Container (`--bg-sand` background). Left column: Icon Box list for the 3 fabric pillars. Right column: Single rounded Image widget (`border-radius: 24px`) with bottom text caption overlay.
+5. **Everyday Playwear & Sibling Sets Banner (`.wp-feature-split`):**
+   - 100% standard 2-column Elementor Flexbox Container (`--bg-sand` background, `border-radius: 24px`) with an Image widget in the left column and Heading + Text Editor + Button widgets (`Shop Cozy Sets` + `See What's New`) in the right column—zero custom hotspot JS or complex positioning required.
 6. **Dual Collection Banners & Garment Anatomy Grid:**
    - Static Elementor Flexbox containers styled with `--bg-card` and `--border-subtle`.
 7. **Fast Age / Size Finder Strip:**
    - 5-column button grid linking directly to `/shop/?filter_size=6-12m`, `/shop/?filter_size=2-3y`, etc.
+
+### E. Our Story (`about.html`) & Contact Us (`contact.html`)
+- **Our Story (`about.html`):** Standard Elementor page using a centered Hero container, a 2-column Image + Text container (`.about-story-grid`), a 3-column Icon Box grid (`.about-values-grid`), and a 2-column CTA banner.
+- **Contact & Care (`contact.html`):** Standard Elementor page with 3 stacked Icon/Info cards in the left column, an **Elementor Form** (or Contact Form 7 / WPForms widget) in the right column, and a 2x2 FAQ grid below.
 
 ### C. Shop / Category Page (`shop.html`)
 - Build in **Elementor Theme Builder → Product Archive**.
