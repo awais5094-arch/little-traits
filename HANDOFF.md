@@ -11,7 +11,7 @@ This document provides another developer or AI assistant with everything needed 
    - **Shop / Category Page (`shop.html`)** — URL-synced filters (`?category=boys&size=2-3Y&sort=price-asc`). Department tabs with counts in the header; one horizontal toolbar (size chips + result count + sort); applied-filter tags underneath; helpful empty state. **No sidebar and no filter drawer** (removed on purpose, see `DESIGN.md`).
    - **Product Detail Page (`product.html`)** — rendered from `window.PRODUCTS` (`js/data.js`) via `?id=lt-01` … `lt-06` or `?slug=`. Current v1.3 order: title → short `purchaseSummary` → unit price → named colour buttons → size/Size Guide → quantity + navy Add to Bag → outline Buy now → quiet COD note → three closed accordions. The full description, age range, fabric, SKU and policies sit in those accordions. No duplicated colour label, price in the main button, age badge or reassurance strip. Mobile sticky bar (`#pdp-sticky-bar`, appended to `body`) shows total price and size/quantity. Accordions keep their open state across re-renders.
    - **Our Story (`about.html`)** — story, "The details you feel" numbered list (the depth that used to crowd the homepage), navy CTA card.
-   - **Contact (`contact.html`)** — three tappable action cards (WhatsApp `wa.me` link, `mailto:`, size guide), then demo form (`#demo-contact-form`) beside a `<details>` FAQ (`#faq-section`).
+   - **Contact (`contact.html`)** — three action cards (WhatsApp and Email preview buttons, working size guide), then demo form (`#demo-contact-form`) beside a `<details>` FAQ (`#faq-section`). Unconfirmed contact addresses are not active links; the form states explicitly that it sends no message.
 
 2. **Interactive Shopping & Demo Mechanics**:
    - **Required size validation**: Add to Bag / Buy now / sticky bar without a size shows an inline alert, scrolls to the size block and focuses the first size.
@@ -19,7 +19,7 @@ This document provides another developer or AI assistant with everything needed 
    - **Cart drawer (`localStorage` key `little_traits_demo_cart_v1`)**: merges identical `productId + size + colour`, PKR subtotal, +/- (focus stays on the pressed button), remove, empty state. Header bag badge shows the count and the button's `aria-label` includes it. PDP Add to Bag opens the drawer (`addToCart({ silent: true })` skips the toast).
    - **Search drawer**: live filter over the 6 products; the query is HTML-escaped before rendering.
    - **Size & Fit Guide modal**: announcement bar, mobile menu, homepage age strip, PDP, About, Contact and footer all open it (`[data-open-size-guide]`).
-   - **Overlays**: one manager (`openOverlay` / `closeAllOverlays` in `js/app.js`) handles focus in/out, `inert` on the page behind, Escape and backdrop close.
+   - **Overlays**: one manager (`openOverlay` / `closeAllOverlays` in `js/app.js`) handles focus in/out, forward/reverse Tab wrapping, `inert` on the page behind, Escape and backdrop close. Drawers carry modal dialog semantics.
    - **Shared helpers**: `LittleTraitsApp.formatPKR()` and `LittleTraitsApp.formatSize()` (renders `8-10Y` as `8–10Y`; data keeps the hyphen).
 
 3. **Responsive Verification (v1.2, headless Chrome)**:
@@ -97,3 +97,15 @@ The following business details are currently marked as clean placeholders in `js
 - **v1.3 visual follow-up:** check the revised purchase panel on desktop, 768px, 390px and 320px, plus real iOS Safari. The previous v1.2 browser results are not a fresh visual verification of v1.3.
 - **Photography**: the craft section and banners reuse product photos; when the client shoots real fabric/detail images, swap `p4-detail.jpg` (craft) and the banner images first.
 - **Copy** is placeholder throughout (claims, contact numbers, delivery promises) and was intentionally not audited.
+
+## 7. Client Preview Check — Oct 17, 2026 (v1.4)
+
+Confirmed issues fixed:
+- Shop department changes now update desktop/mobile header active links. Filter rendering preserves keyboard focus and chip scroll position; removing an applied filter or recovering an empty result moves focus to the surviving filter control.
+- Header navigation collapses at **1180px**, before its two desktop link groups crowd the centered logo. Header grid tracks can shrink. Contact form columns can shrink below 200px and all text inputs/selects use 16px text.
+- Open dialogs wrap Tab/Shift+Tab through visible controls; search, cart and mobile navigation have dialog semantics.
+- WhatsApp/email actions preview the intended channels without opening invented contacts. Removed dummy contact details; local form feedback explicitly says no message was sent. Footer identifies the site as a design preview.
+
+Checks completed: JavaScript syntax, `npm run check`, `git diff --check`; local link/asset targets and duplicate IDs across all five pages; all-six-product controller/cart regression checks; shop filtering, counts, empty recovery, sorting, URL/header state, focus and scroll checks; dialog keyboard and search-escaping checks; local contact-preview behavior. Controller tests use Node VM DOM adapters, not a layout engine.
+
+**Visual limit:** a fresh cloud-browser review was attempted but the browser session timed out before any page snapshot or screenshot returned. No new breakpoint screenshots, viewport-overflow measurements, or real-device checks were obtained. Do not describe this pass as visually verified or as a production-ready store. Checkout and contact submission remain explicit demos; client business details and final photography still need confirmation before production.

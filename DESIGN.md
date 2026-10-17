@@ -162,3 +162,9 @@ The purchase panel should help a parent choose and buy with little reading. Use 
 - Quantity changes update the existing controls, preserving click targets and focus. Never rebuild the whole product panel when the quantity input blurs.
 
 Verification limits for this pass are recorded in `HANDOFF.md`; the previous pass's browser measurements are historical.
+
+## 9. Client Preview Polish (v1.4)
+
+Keep the approved page structure and visual identity. The header switches to menu navigation at 1180px so the centered logo is not squeezed by both desktop link groups. Contact form columns shrink below 200px; field text is 16px. Shop filters retain keyboard focus and chip position, update the active header department, and dialogs contain keyboard navigation. Unconfirmed WhatsApp/email channels use preview buttons rather than working links to invented contact details. The footer uses the short label **Design preview**.
+
+This pass completed source/controller checks; fresh browser visual signoff could not be completed because the browser timed out. See `HANDOFF.md` §7 for the exact scope.

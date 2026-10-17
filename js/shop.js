@@ -205,10 +205,30 @@
   }
 
   function updateAll() {
+    const focused = document.activeElement;
+    const focusAttr = focused && ["data-set-category", "data-set-size"].find((attr) => focused.hasAttribute(attr));
+    const focusGroup = focused && focused.closest("#shop-category-tabs, #shop-size-chips");
+    const focusValue = focusAttr ? focused.getAttribute(focusAttr) : null;
+    const restoreToolbarFocus = focused && focused.closest("#active-filters-bar, #shop-empty-state");
+    const scrollPositions = ["shop-category-tabs", "shop-size-chips"].map((id) => {
+      const element = document.getElementById(id);
+      return [element, element ? element.scrollLeft : 0];
+    });
     syncUrlParams();
     renderHeader();
     renderSizeChips();
     renderCatalogueGrid();
+    const app = window.LittleTraitsApp;
+    if (app && app.updateShopNavigation) app.updateShopNavigation(state.category);
+    scrollPositions.forEach(([element, left]) => { if (element) element.scrollLeft = left; });
+    if (focusGroup && focusAttr) {
+      const replacement = focusGroup.querySelector(`[${focusAttr}="${focusValue}"]`);
+      if (replacement) replacement.focus({ preventScroll: true });
+    } else if (restoreToolbarFocus) {
+      const group = document.getElementById(focusAttr === "data-set-category" ? "shop-category-tabs" : "shop-size-chips");
+      const active = group && group.querySelector('[aria-pressed="true"]');
+      if (active) active.focus({ preventScroll: true });
+    }
   }
 
   function initShopEvents() {

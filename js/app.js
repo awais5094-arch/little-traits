@@ -21,6 +21,17 @@
     return String(size || "").replace("-", "–");
   }
 
+  function updateShopNavigation(category) {
+    document.querySelectorAll(".nav-primary__link, .mnav-link").forEach((link) => {
+      const url = new URL(link.getAttribute("href"), window.location.href);
+      if (!url.pathname.endsWith("/shop.html")) return;
+      const active = (url.searchParams.get("category") || "all") === category;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
   // Cart State Management
   function getCart() {
     try {
@@ -318,14 +329,14 @@
 
               <div class="footer-care">
                 <h3 class="footer-col__heading">Customer Care</h3>
-                <p>hello@littletraits.pk<br />Mon–Sat, 10am–6pm PKT</p>
+                <p><a href="contact.html">Contact &amp; care</a><br />Mon–Sat, 10am–6pm PKT</p>
                 <p class="footer-care__note">Cash on Delivery &amp; bank transfer • Prices in PKR</p>
               </div>
             </div>
 
             <div class="footer-bottom">
               <span>&copy; 2026 Little Traits Pakistan</span>
-              <span>Design prototype • placeholder content</span>
+              <span>Design preview</span>
             </div>
           </div>
         </footer>
@@ -339,7 +350,7 @@
       <div class="backdrop" id="global-backdrop" aria-hidden="true"></div>
 
       <!-- Mobile Navigation Drawer -->
-      <aside class="drawer drawer--left" id="mobile-nav-drawer" aria-label="Mobile Navigation" aria-hidden="true">
+      <aside class="drawer drawer--left" id="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation" aria-hidden="true">
         <div class="drawer__header">
           <span class="drawer__title">Little Traits</span>
           <button type="button" class="icon-btn" data-close-drawers aria-label="Close menu">✕</button>
@@ -373,7 +384,7 @@
       </aside>
 
       <!-- Search Drawer -->
-      <aside class="drawer" id="search-drawer" aria-label="Search Catalogue" aria-hidden="true">
+      <aside class="drawer" id="search-drawer" role="dialog" aria-modal="true" aria-label="Search Catalogue" aria-hidden="true">
         <div class="drawer__header">
           <span class="drawer__title">Search Catalogue</span>
           <button type="button" class="icon-btn" data-close-drawers aria-label="Close search">✕</button>
@@ -391,7 +402,7 @@
       </aside>
 
       <!-- Shopping Bag / Cart Drawer -->
-      <aside class="drawer" id="cart-drawer" aria-label="Shopping Bag" aria-hidden="true">
+      <aside class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping Bag" aria-hidden="true">
         <div class="drawer__header">
           <span class="drawer__title">Your Shopping Bag (<span id="drawer-cart-count">0</span>)</span>
           <button type="button" class="icon-btn" data-close-drawers aria-label="Close shopping bag">✕</button>
@@ -783,10 +794,27 @@
       }
     });
 
-    // Escape key closes drawers/modals
+    // Keep keyboard navigation within the active dialog; Escape closes it.
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         closeAllOverlays();
+        return;
+      }
+      if (e.key === "Tab") {
+        const overlay = document.querySelector(".drawer.is-open, .modal-wrap.is-open");
+        if (!overlay) return;
+        const controls = Array.from(overlay.querySelectorAll('a[href], button, input, select, textarea, [tabindex]'))
+          .filter((el) => !el.disabled && el.tabIndex >= 0 && el.getClientRects().length);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (!first) return;
+        if (e.shiftKey && (document.activeElement === first || !overlay.contains(document.activeElement))) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && (document.activeElement === last || !overlay.contains(document.activeElement))) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     });
 
@@ -803,6 +831,7 @@
   window.LittleTraitsApp = {
     formatPKR,
     formatSize,
+    updateShopNavigation,
     getCart,
     addToCart,
     updateCartItemQty,

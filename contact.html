@@ -43,9 +43,9 @@
             <div class="contact-action__body">
               <h2 class="heading-sm">WhatsApp</h2>
               <p>Fastest for measurements, stock checks, and Cash on Delivery orders.</p>
-              <p class="contact-action__detail">+92 300 000 0000 <span>(placeholder)</span></p>
+              <p class="contact-action__detail">Business number to be confirmed</p>
             </div>
-            <a href="https://wa.me/923000000000" class="btn btn-primary btn-block" target="_blank" rel="noopener">Chat on WhatsApp</a>
+            <button type="button" class="btn btn-primary btn-block" data-preview-contact="WhatsApp">Preview WhatsApp</button>
           </article>
 
           <article class="contact-action">
@@ -55,9 +55,9 @@
             <div class="contact-action__body">
               <h2 class="heading-sm">Email</h2>
               <p>For size exchanges, gift orders, and press enquiries.</p>
-              <p class="contact-action__detail">hello@littletraits.pk <span>(placeholder)</span></p>
+              <p class="contact-action__detail">Support email to be confirmed</p>
             </div>
-            <a href="mailto:hello@littletraits.pk" class="btn btn-outline btn-block">Send an email</a>
+            <button type="button" class="btn btn-outline btn-block" data-preview-contact="Email">Preview email</button>
           </article>
 
           <article class="contact-action">
@@ -81,7 +81,7 @@
         <div class="contact-grid">
           <div class="contact-form-card">
             <h2 class="heading-md">Send us a message</h2>
-            <p class="contact-form-card__intro">We reply within one working day.</p>
+            <p class="contact-form-card__intro">Try the form below. Messages are not sent in this design preview.</p>
 
             <form id="demo-contact-form">
               <div class="form-field">
@@ -115,10 +115,10 @@
                 <textarea id="contact-message" class="form-textarea" rows="4" placeholder="Tell us your child's age or which outfit you're looking at…" required></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-block btn-lg">Send message</button>
+              <button type="submit" class="btn btn-primary btn-block btn-lg">Preview message</button>
 
               <div id="contact-form-success" class="notice-box notice-box--success" role="status" aria-live="polite" hidden>
-                <strong>Thank you — message received.</strong> In the live store this form forwards to the client’s email and WhatsApp.
+                <strong>Preview complete — no message was sent.</strong> The live store will connect this form to customer care.
               </div>
             </form>
           </div>
@@ -160,6 +160,11 @@
     document.addEventListener("DOMContentLoaded", function () {
       const form = document.getElementById("demo-contact-form");
       const successBox = document.getElementById("contact-form-success");
+      document.querySelectorAll("[data-preview-contact]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          window.LittleTraitsApp.showToast(button.getAttribute("data-preview-contact") + " will be connected to customer care in the live store.");
+        });
+      });
       if (form && successBox) {
         form.addEventListener("submit", function (e) {
           e.preventDefault();

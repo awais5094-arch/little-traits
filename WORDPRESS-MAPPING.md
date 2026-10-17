@@ -80,7 +80,7 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 
 ### E. Our Story (`about.html`) & Contact Us (`contact.html`)
 - **Our Story (`about.html`):** Centered hero; 2-column Image + Text (`.about-story-grid`); "The details you feel" container with one image and a numbered list (`.detail-list`, 01–04); navy CTA card (`.wp-feature-card--navy`) with gold + light-outline buttons.
-- **Contact & Care (`contact.html`):** Compact hero; 3 action cards (WhatsApp `wa.me` link, `mailto:`, Size Guide popup trigger); then 2 columns — **Elementor Form** (or CF7/WPForms) left, Accordion/Toggle FAQ right.
+- **Contact & Care (`contact.html`):** Compact hero; 3 action cards (WhatsApp, Email, Size Guide popup trigger); then 2 columns — **Elementor Form** (or CF7/WPForms) left, Accordion/Toggle FAQ right. The prototype's first two actions show preview feedback; connect real `wa.me`/`mailto:` targets only after the client confirms them. Replace demo form submission with an actual form handler, then update its button/feedback copy.
 
 ### C. Shop / Category Page (`shop.html`)
 - Build in **Elementor Theme Builder → Product Archive**.

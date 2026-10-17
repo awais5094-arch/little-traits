@@ -85,7 +85,9 @@ little-traits/
 
 4. **Our Story (`about.html`)**: story, "The details you feel" numbered list, navy CTA card.
 
-5. **Contact (`contact.html`)**: WhatsApp / Email / Size-help action cards, demo form (`#demo-contact-form`), FAQ (`#faq-section`).
+5. **Contact (`contact.html`)**: WhatsApp / Email preview buttons (no outbound placeholder contacts), working Size Guide, local demo form (`#demo-contact-form`) with explicit no-message-sent feedback, FAQ (`#faq-section`).
+
+Client preview refinements: navigation collapses at 1180px, shop filter changes preserve focus/scroll position and update the header, dialogs trap keyboard focus, and contact fields use 16px text and shrink safely on narrow screens. See `HANDOFF.md` for verification scope; fresh browser screenshots could not be completed in the final pass.
 
 ---
 
