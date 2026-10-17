@@ -103,6 +103,7 @@ Baymard's guidance for catalogues with few filter types is a horizontal toolbar 
 - Empty state offers "Show all sizes in X" and "Reset filters".
 
 ### PDP: purchase controls first
+This describes the v1.2 pass; the current purchase panel is specified in §8 below.
 - Info column order: age pill → title → fabric → price + "In stock • Cash on Delivery" → description → colour → size (with Size Guide) → Add to Bag (with live price) → outline "Buy now — Cash on Delivery" → 3 reassurance ticks → accordions.
 - Mobile (≤768): single column, image capped at `min(72vh, 640px)`, and a **sticky bottom bar** (name, price/size, Add to Bag or "Choose size") appears once the main button scrolls out of view.
 - Size validation scrolls to the size block and focuses the first size. Add to Bag opens the cart drawer instead of a toast that covered the drawer's CTA.
@@ -148,3 +149,16 @@ All 26 photographs in `assets/images/` are stored locally (zero external image h
 | `fabric-fold.jpg` | Auxiliary Textile Detail | `https://images.unsplash.com/photo-1620799140408-edc6dcb6d633` |
 
 *(Note: When the client photographs their actual 10–15 garments, replacing these files in `assets/images/` or uploading them to the WordPress Media Library with a `4:5` portrait crop will preserve the exact visual balance of the layout.)*
+
+## 8. v1.3 Product Purchase Panel — Current Direction
+
+The purchase panel should help a parent choose and buy with little reading. Use this order: **title → one short sentence → price → colour → size → quantity + Add to Bag → Buy now**. Add one subdued COD note underneath. Keep the existing cream/navy/gold identity and type families.
+
+- Remove the age badge, separate fabric summary, repeated colour/size values, price inside the primary button, and reassurance strip. The selected buttons already communicate the chosen options.
+- Use `purchaseSummary` (about 8–11 words) for the panel. Preserve the full description, age range, garment/fit details and SKU in **Product details**. Fabric/care and delivery/exchanges stay in two more accordions, all closed initially.
+- Keep the title fluid at 25.6–32px, with about 20–24px between the major control groups. Space should separate decisions without requiring long instructions or decorative panels.
+- On phones ≤480px, show two named colour choices per row and four sizes per row; all options remain visible without horizontal scrolling. Quantity +/- targets are 44px wide, with a 16px input. Flexible grid tracks use `minmax(0, …)` so long titles/labels can wrap.
+- The mobile shortcut appears only after the main purchase controls leave view. It shows the selected quantity's total and size/quantity, with Add to Bag or Choose size; hidden controls leave the accessibility tree/tab order. Main Add to Bag and Buy now remain visually distinct.
+- Quantity changes update the existing controls, preserving click targets and focus. Never rebuild the whole product panel when the quantity input blurs.
+
+Verification limits for this pass are recorded in `HANDOFF.md`; the previous pass's browser measurements are historical.

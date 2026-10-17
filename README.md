@@ -78,8 +78,10 @@ little-traits/
 
 3. **Product Detail Page (`product.html`)**:
    - One template for `?id=lt-01` … `lt-06`; thumbnails with colour-linked image switching.
-   - Price, colour, **required size** (with Size Guide), quantity + navy **Add to Bag**, outline **Buy now — Cash on Delivery**, reassurance ticks, three accordions.
-   - Mobile sticky Add-to-Bag bar; four related products.
+   - Title, one-sentence purchase summary, price, named colour choices, **required size** (with Size Guide), quantity + navy **Add to Bag**, outline **Buy now**, and one quiet COD note.
+   - Full description, age range, fabric, care, SKU and delivery/exchange information stay in three closed accordions below the buying controls.
+   - Mobile: two colour columns and four size columns at ≤480px; sticky total + size/quantity + Add-to-Bag shortcut after the main button scrolls away; four related products.
+   - Quantity changes update controls in place, so typing a number and immediately pressing Add to Bag or Buy now works on the first click.
 
 4. **Our Story (`about.html`)**: story, "The details you feel" numbered list, navy CTA card.
 

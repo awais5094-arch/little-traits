@@ -9,7 +9,7 @@ This document provides another developer or AI assistant with everything needed 
 1. **Five Connected Views (`index.html`, `shop.html`, `product.html`, `about.html`, `contact.html`)**:
    - **Homepage (`index.html`)** — v1.2 order: split hero (H1 + two Boys/Girls photo panels, 2-up on mobile) → Shop by age chip strip → New Season Arrivals (6) → merged craft story → Baby & Co-ords editorial banners → service bar → footer. See `DESIGN.md` §6 for the reasoning.
    - **Shop / Category Page (`shop.html`)** — URL-synced filters (`?category=boys&size=2-3Y&sort=price-asc`). Department tabs with counts in the header; one horizontal toolbar (size chips + result count + sort); applied-filter tags underneath; helpful empty state. **No sidebar and no filter drawer** (removed on purpose, see `DESIGN.md`).
-   - **Product Detail Page (`product.html`)** — rendered from `window.PRODUCTS` (`js/data.js`) via `?id=lt-01` … `lt-06` or `?slug=`. Purchase controls sit directly under price/description; navy Add to Bag (with live price) is the one primary action, "Buy now — Cash on Delivery" is outline. Mobile sticky Add-to-Bag bar (`#pdp-sticky-bar`, appended to `body`). Accordions keep their open state across re-renders.
+   - **Product Detail Page (`product.html`)** — rendered from `window.PRODUCTS` (`js/data.js`) via `?id=lt-01` … `lt-06` or `?slug=`. Current v1.3 order: title → short `purchaseSummary` → unit price → named colour buttons → size/Size Guide → quantity + navy Add to Bag → outline Buy now → quiet COD note → three closed accordions. The full description, age range, fabric, SKU and policies sit in those accordions. No duplicated colour label, price in the main button, age badge or reassurance strip. Mobile sticky bar (`#pdp-sticky-bar`, appended to `body`) shows total price and size/quantity. Accordions keep their open state across re-renders.
    - **Our Story (`about.html`)** — story, "The details you feel" numbered list (the depth that used to crowd the homepage), navy CTA card.
    - **Contact (`contact.html`)** — three tappable action cards (WhatsApp `wa.me` link, `mailto:`, size guide), then demo form (`#demo-contact-form`) beside a `<details>` FAQ (`#faq-section`).
 
@@ -23,7 +23,7 @@ This document provides another developer or AI assistant with everything needed 
    - **Shared helpers**: `LittleTraitsApp.formatPKR()` and `LittleTraitsApp.formatSize()` (renders `8-10Y` as `8–10Y`; data keeps the hyphen).
 
 3. **Responsive Verification (v1.2, headless Chrome)**:
-   - Zero horizontal overflow on Home, Shop (default + filtered), PDP (`lt-01`, `lt-06`), About and Contact at **1440, 1280, 1180, 1100, 1025, 1024, 900, 820, 768, 600, 480, 390, 360, 320px**.
+   - **v1.2 historical browser checks (Oct 16):** zero horizontal overflow on Home, Shop (default + filtered), PDP (`lt-01`, `lt-06`), About and Contact at **1440, 1280, 1180, 1100, 1025, 1024, 900, 820, 768, 600, 480, 390, 360, 320px**. These checks predate the v1.3 purchase-panel changes; see the v1.3 verification note below.
    - `npm run check` passes (core files, 6 products, all image references).
 
 ---
@@ -31,7 +31,7 @@ This document provides another developer or AI assistant with everything needed 
 ## 2. Simulated Behaviours vs. Production Scope
 
 To keep the prototype honest and aligned with the brief:
-- **Checkout (`#demo-checkout-modal`)**: Clicking *"Buy now — Cash on Delivery"* on the PDP or *"Checkout"* inside the Shopping Bag opens a transparent Demo Checkout Modal. It displays the exact items and PKR subtotal from the user's bag and explains that live order placement, Cash on Delivery (COD), and courier dispatch will be handled by native WooCommerce checkout in production. It never pretends an order has been placed.
+- **Checkout (`#demo-checkout-modal`)**: Clicking *"Buy now"* on the PDP or *"Checkout"* inside the Shopping Bag opens a transparent Demo Checkout Modal. It displays the exact items and PKR subtotal from the user's bag and explains that live order placement, Cash on Delivery (COD), and courier dispatch will be handled by native WooCommerce checkout in production. It never pretends an order has been placed.
 - **No Fabricated Social Proof**: We did not invent star ratings, customer reviews, fake discounts, certifications, or delivery guarantees.
 
 ---
@@ -83,9 +83,17 @@ The following business details are currently marked as clean placeholders in `js
 
 ---
 
+- **`v1.3.0` (Focused purchase-panel cleanup — Oct 17, 2026)**:
+  - Removed the age badge, separate fabric line, repeated selected-colour text, size instruction, repeated button price and reassurance strip from the buying area. Added a one-sentence `purchaseSummary` for all six products; kept the original detailed copy inside Product details.
+  - Kept Add to Bag primary and shortened the secondary action to Buy now; one COD note sits below. Size Guide is a quiet text link with a 44px touch height.
+  - Smaller fluid title, consistent spacing, shrinkable grid tracks, two colour columns and four size columns on phones ≤480px. Quantity +/- targets are 44px wide; input text is 16px to avoid iOS input zoom.
+  - Fixed the first-click purchase bug after manual quantity entry: the input and main buttons are no longer replaced on `change`. Quantity clamps to 1–15 and the boundary buttons disable. Purchase reads the current input value.
+  - Sticky mobile bar now shows the quantity-adjusted total and selected size/quantity, keeps its button node stable, and toggles `aria-hidden`/tab order with visibility and the mobile breakpoint.
+  - **Verification:** `npm run check`, JavaScript syntax and diff checks passed. A temporary Node VM controller regression harness exercised all six products with the actual shared cart API: required size, selected colour/image, typed quantity + first Add to Bag, quantity limits, Buy now, exact cart totals, accordion persistence, and sticky controls. This uses a minimal DOM adapter, not a browser layout engine. **No new browser/device screenshots or viewport-overflow measurements were available in this environment.**
+
 ## 6. Open Items for the Next Pass
 
 - **Not tested in real devices or Safari/Firefox** — verification used headless Chrome device emulation only. `inert` and `:has()` need Safari ≥15.5/17.4 for full effect (fallbacks degrade gracefully).
-- **Sticky PDP bar button** is `tabindex="-1"` inside an `aria-hidden` bar (duplicate of the in-page Add to Bag for touch users). If the client wants it keyboard reachable, remove both attributes and toggle `aria-hidden` with visibility.
+- **v1.3 visual follow-up:** check the revised purchase panel on desktop, 768px, 390px and 320px, plus real iOS Safari. The previous v1.2 browser results are not a fresh visual verification of v1.3.
 - **Photography**: the craft section and banners reuse product photos; when the client shoots real fabric/detail images, swap `p4-detail.jpg` (craft) and the banner images first.
 - **Copy** is placeholder throughout (claims, contact numbers, delivery promises) and was intentionally not audited.

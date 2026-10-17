@@ -42,14 +42,15 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 | :--- | :--- |
 | `id` / `sku` (`LT-SS26-01`) | Product SKU (`_sku`) |
 | `name` | Product Title (`post_title`) |
-| `shortSubtitle` + `fabricSummary` | Custom Field (ACF / Meta Box) or Product Short Description (`post_excerpt`) |
+| `purchaseSummary` | Product Short Description (`post_excerpt`): one brief sentence above the purchase controls |
+| `shortSubtitle` + `fabricSummary` | Optional custom fields for cards and the Fabric & Care accordion |
 | `price` (`4250`) | Regular Price (`_regular_price` in PKR) |
 | `category` + `secondaryCategories` | Product Categories (`product_cat`: `boys`, `girls`, `baby`, `coords`) |
 | `badge` (`New Arrival`, `Bestseller`) | Product Tag (`product_tag`) or custom meta field rendered as card badge |
 | `colors` (`[{ name, hex, imageIndex }]`) | Global Product Attribute `pa_colour` (Color Swatch type, linked to variation image) |
 | `sizes` (`["2-3Y", "3-4Y", ...]`) | Global Product Attribute `pa_size` (Button/Label Swatch type, **Used for variations**) |
 | `images` (3 photos per product) | Featured Image (`_thumbnail_id`) + Product Gallery (`_product_image_gallery`) |
-| `details` & `fabricCare` | Product Description (`post_content`) or custom WooCommerce Tabs / Accordions |
+| `shortDescription`, `ageGroup`, `details` & `fabricCare` | Product Description (`post_content`) or custom WooCommerce Tabs / Accordions below the purchase controls |
 
 ---
 
@@ -91,14 +92,14 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 - Build in **Elementor Theme Builder → Single Product**.
 - **Left Column:** WooCommerce Product Images widget (configured with left vertical thumbnails on desktop and bottom horizontal thumbnails on mobile).
 - **Right Column:**
-  - Product SKU + Age Range meta.
-  - Product Title (`Fraunces`) + Product Price (`Rs.`).
-  - Product Short Description.
+  - Product Title (`Fraunces`), one-sentence Product Short Description (`purchaseSummary`), then Product Price (`Rs.`).
   - **Add to Cart Widget:** With *Variation Swatches for WooCommerce* active, WooCommerce automatically renders the colour swatches and size buttons and enforces required size selection before enabling the Add to Cart button.
   - Size Guide Popup trigger button placed right above the `pa_size` selector.
-  - Elementor **Accordion** widget populated dynamically via Dynamic Tags (*Garment Details*, *Fabric & Wash Care*, and global *Delivery & Exchange Policy*).
+  - Quantity next to navy **Add to Bag**; outline **Buy now** beneath; one quiet Cash on Delivery note. Do not repeat the unit price in the primary button or add a reassurance strip here.
+  - On phones ≤480px, use two columns of named colour buttons and four columns of sizes, with ≥44px touch targets and 16px quantity input text.
+  - Elementor **Accordion** widget, all items closed initially, populated dynamically via Dynamic Tags: *Product details* (full description, age range, fit, SKU), *Fabric & care*, and *Delivery & exchanges*.
   - **Related Products** Loop Grid at the bottom (4 items; 4 columns desktop, 2 tablet/mobile).
-  - Mobile sticky Add-to-Cart bar: many themes/plugins provide one (e.g. "Sticky Add to Cart"); show it only ≤768px once the main button scrolls out of view.
+  - Mobile sticky Add-to-Cart bar: many themes/plugins provide one (e.g. "Sticky Add to Cart"); show it only ≤768px once the main button scrolls out of view. Display the selected quantity's total and size/quantity; keep hidden controls outside the tab order.
 
 ---
 

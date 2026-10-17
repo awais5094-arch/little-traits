@@ -170,28 +170,17 @@
         <!-- Right Column: Product information & purchase controls -->
         <div class="pdp-info">
           <div class="pdp-info__top">
-            <span class="pdp-age-pill">Ages ${currentProduct.ageGroup}</span>
             <h1 class="pdp-title">${currentProduct.name}</h1>
-            <p class="pdp-fabric">${currentProduct.fabricSummary}</p>
+            <p class="pdp-description">${currentProduct.purchaseSummary || currentProduct.shortSubtitle}</p>
             <div class="pdp-price">
               <span>${app.formatPKR(currentProduct.price)}</span>
-              <span class="pdp-price__tax">In stock • Cash on Delivery</span>
             </div>
           </div>
-
-          <p class="pdp-description">
-            ${currentProduct.shortDescription}
-          </p>
 
           <!-- Colour Selection -->
           <div class="pdp-selector-block">
             <div class="pdp-selector-header">
-              <div>
-                <span class="pdp-selector-label">Colour</span>
-                <span class="pdp-selector-value" id="selected-color-label">${
-                  state.selectedColor ? state.selectedColor.name : ""
-                }</span>
-              </div>
+              <span class="pdp-selector-label">Colour</span>
             </div>
             <div class="color-options-row" role="group" aria-label="Select colour">
               ${colorsHtml}
@@ -201,14 +190,8 @@
           <!-- Size Selection (Required) -->
           <div class="pdp-selector-block" id="pdp-size-block">
             <div class="pdp-selector-header">
-              <div>
-                <span class="pdp-selector-label">Size</span>
-                <span class="pdp-selector-value ${state.selectedSize ? "" : "is-placeholder"}" id="selected-size-label">
-                  ${state.selectedSize ? state.selectedSize.replace("-", "–") : "Select your child’s size"}
-                </span>
-              </div>
+              <span class="pdp-selector-label">Size</span>
               <button type="button" class="size-guide-trigger" data-open-size-guide>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="1"/><line x1="6" y1="7" x2="6" y2="11"/><line x1="10" y1="7" x2="10" y2="13"/><line x1="14" y1="7" x2="14" y2="11"/><line x1="18" y1="7" x2="18" y2="13"/></svg>
                 Size Guide
               </button>
             </div>
@@ -224,7 +207,7 @@
           <div class="pdp-purchase">
             <div class="pdp-purchase-row" id="pdp-purchase-row">
               <div class="qty-control" role="group" aria-label="Quantity">
-                <button type="button" class="qty-btn" id="pdp-qty-dec" aria-label="Decrease quantity">−</button>
+                <button type="button" class="qty-btn" id="pdp-qty-dec" aria-label="Decrease quantity" ${state.quantity === 1 ? "disabled" : ""}>−</button>
                 <input
                   type="number"
                   id="pdp-qty-input"
@@ -232,38 +215,37 @@
                   value="${state.quantity}"
                   min="1"
                   max="15"
+                  step="1"
+                  inputmode="numeric"
                   aria-label="Quantity"
                 />
-                <button type="button" class="qty-btn" id="pdp-qty-inc" aria-label="Increase quantity">+</button>
+                <button type="button" class="qty-btn" id="pdp-qty-inc" aria-label="Increase quantity" ${state.quantity === 15 ? "disabled" : ""}>+</button>
               </div>
 
               <button type="button" class="btn btn-primary btn-lg" id="pdp-add-to-cart-btn">
-                Add to Bag <span class="btn__divider" aria-hidden="true"></span> <span class="btn__price">${app.formatPKR(currentProduct.price * state.quantity)}</span>
+                Add to Bag
               </button>
             </div>
 
             <button type="button" class="btn btn-outline btn-block" id="pdp-buy-now-btn">
-              Buy now — Cash on Delivery
+              Buy now
             </button>
+            <p class="pdp-payment-note">Cash on Delivery available</p>
           </div>
-
-          <ul class="pdp-reassurance-list">
-            <li class="pdp-reassurance-item">Gentle on sensitive skin</li>
-            <li class="pdp-reassurance-item">7-day size exchange</li>
-            <li class="pdp-reassurance-item">Delivery across Pakistan</li>
-          </ul>
 
           <!-- Collapsible details (closed by default) -->
           <div class="pdp-accordions">
-            ${accordionHtml("details-panel", "Garment details &amp; fit", `
+            ${accordionHtml("details-panel", "Product details", `
+              <p>${currentProduct.shortDescription}</p>
+              <p><strong>Ages:</strong> ${currentProduct.ageGroup}</p>
               <ul>${detailsListHtml}</ul>
               <p class="accordion-meta">SKU: ${currentProduct.sku}</p>
             `)}
-            ${accordionHtml("care-panel", "Fabric &amp; wash care", `
+            ${accordionHtml("care-panel", "Fabric &amp; care", `
               <p><strong>Material:</strong> ${currentProduct.fabricSummary}</p>
               <p>${currentProduct.fabricCare}</p>
             `)}
-            ${accordionHtml("delivery-panel", "Delivery &amp; size exchange", `
+            ${accordionHtml("delivery-panel", "Delivery &amp; exchanges", `
               <p><strong>Delivery:</strong> ${config.shippingNote}</p>
               <p><strong>Exchanges:</strong> ${config.exchangeNote}</p>
             `)}
@@ -295,7 +277,7 @@
     `;
   }
 
-  // Mobile-only bar that keeps price + Add to Bag reachable once the main button scrolls away
+  // Mobile-only shortcut once the main purchase controls scroll away.
   function renderStickyBar() {
     const app = window.LittleTraitsApp;
     let bar = document.getElementById("pdp-sticky-bar");
@@ -304,35 +286,36 @@
       bar.id = "pdp-sticky-bar";
       bar.className = "pdp-sticky-bar";
       bar.setAttribute("aria-hidden", "true");
+      bar.innerHTML = `
+        <div class="pdp-sticky-bar__info">
+          <span class="pdp-sticky-bar__price"></span>
+          <span class="pdp-sticky-bar__meta"></span>
+        </div>
+        <button type="button" class="btn btn-primary" data-sticky-add tabindex="-1"></button>
+      `;
       document.body.appendChild(bar);
       observePurchaseRow(bar);
     }
-    bar.innerHTML = `
-      <div class="pdp-sticky-bar__info">
-        <span class="pdp-sticky-bar__name">${currentProduct.name}</span>
-        <span class="pdp-sticky-bar__meta">${app.formatPKR(currentProduct.price)}${
-          state.selectedSize ? ` • ${app.formatSize(state.selectedSize)}` : ""
-        }</span>
-      </div>
-      <button type="button" class="btn btn-primary" data-sticky-add tabindex="-1">
-        ${state.selectedSize ? "Add to Bag" : "Choose size"}
-      </button>
-    `;
+    bar.querySelector(".pdp-sticky-bar__price").textContent = app.formatPKR(currentProduct.price * state.quantity);
+    bar.querySelector(".pdp-sticky-bar__meta").textContent = state.selectedSize ? `${app.formatSize(state.selectedSize)} · Qty ${state.quantity}` : "Select a size";
+    bar.querySelector("[data-sticky-add]").textContent = state.selectedSize ? "Add to Bag" : "Choose size";
+    updateStickyBarVisibility(bar);
+  }
+
+  function updateStickyBarVisibility(bar) {
+    const row = document.getElementById("pdp-purchase-row");
+    const visible = !!row && window.matchMedia("(max-width: 768px)").matches && row.getBoundingClientRect().bottom < 0;
+    bar.classList.toggle("is-visible", visible);
+    bar.setAttribute("aria-hidden", String(!visible));
+    const button = bar.querySelector("[data-sticky-add]");
+    if (button) button.tabIndex = visible ? 0 : -1;
+    document.body.classList.toggle("has-sticky-bar", visible);
   }
 
   function observePurchaseRow(bar) {
     if (!("IntersectionObserver" in window)) return;
     const io = new IntersectionObserver(
-      (entries) => {
-        const row = document.getElementById("pdp-purchase-row");
-        if (!row) return;
-        const rect = row.getBoundingClientRect();
-        const scrolledPast = rect.bottom < 0;
-        entries.forEach(() => {
-          bar.classList.toggle("is-visible", scrolledPast);
-          document.body.classList.toggle("has-sticky-bar", scrolledPast);
-        });
-      },
+      () => updateStickyBarVisibility(bar),
       { threshold: [0, 1] }
     );
     const attach = () => {
@@ -345,6 +328,7 @@
       io.disconnect();
       attach();
     }).observe(document.getElementById("pdp-mount"), { childList: true });
+    window.matchMedia("(max-width: 768px)").addEventListener("change", () => updateStickyBarVisibility(bar));
   }
 
   function renderRelatedProducts() {
@@ -386,6 +370,8 @@
   function addSelectionToBag() {
     const app = window.LittleTraitsApp;
     if (!app || !currentProduct) return false;
+    const input = document.getElementById("pdp-qty-input");
+    updateQuantity(input ? input.value : state.quantity);
     return app.addToCart({
       productId: currentProduct.id,
       size: state.selectedSize,
@@ -393,6 +379,20 @@
       quantity: state.quantity,
       silent: true
     });
+  }
+
+  // Update the existing controls in place. Replacing the PDP on input blur
+  // removes a pressed purchase button before its click event can fire.
+  function updateQuantity(value) {
+    const parsed = parseInt(value, 10);
+    state.quantity = Number.isNaN(parsed) ? 1 : Math.max(1, Math.min(15, parsed));
+    const input = document.getElementById("pdp-qty-input");
+    const decrease = document.getElementById("pdp-qty-dec");
+    const increase = document.getElementById("pdp-qty-inc");
+    if (input) input.value = state.quantity;
+    if (decrease) decrease.disabled = state.quantity === 1;
+    if (increase) increase.disabled = state.quantity === 15;
+    renderStickyBar();
   }
 
   function bindProductEvents() {
@@ -429,14 +429,12 @@
       }
 
       if (target.closest("#pdp-qty-dec")) {
-        state.quantity = Math.max(1, state.quantity - 1);
-        renderProductView();
+        updateQuantity(Number(document.getElementById("pdp-qty-input").value) - 1);
         return;
       }
 
       if (target.closest("#pdp-qty-inc")) {
-        state.quantity = Math.min(15, state.quantity + 1);
-        renderProductView();
+        updateQuantity(Number(document.getElementById("pdp-qty-input").value) + 1);
         return;
       }
 
@@ -468,9 +466,7 @@
 
     document.addEventListener("change", (e) => {
       if (e.target && e.target.id === "pdp-qty-input") {
-        const val = parseInt(e.target.value, 10);
-        state.quantity = isNaN(val) ? 1 : Math.max(1, Math.min(15, val));
-        renderProductView();
+        updateQuantity(e.target.value);
       }
     });
   }
