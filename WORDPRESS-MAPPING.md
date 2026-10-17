@@ -65,9 +65,10 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
    - Build as an **Elementor Popup** containing the HTML table from `js/app.js` (`window.SIZE_GUIDE_DATA`). Triggered by a class `.open-size-guide` on both the Header and Single Product template.
 
 ### B. Homepage (`index.html`)
-1. **Split Boys / Girls Hero (`section.hero`):**
-   - Heading row (H1 + age badge + "Shop all" link) above an Elementor Flexbox Container with **2 columns at every breakpoint** (keep Boys/Girls side by side on mobile; hide the description text ≤768px).
-   - Two Call-to-Action / Banner containers with background image, gradient overlay, badge heading (`BOYS EDIT • 1Y–10Y`), `Fraunces` title, and button linking to `/product-category/boys/` and `/product-category/girls/`.
+1. **Campaign Banners (`.campaign-hero`) + Boys / Girls (`.shop-departments`):**
+   - Elementor Nested Carousel with two slides, **autoplay off**, arrows/dots, keyboard navigation, and only the active slide in the tab order. Each slide uses two flex children: short eyebrow/title/Shop CTA on the left and an Image on the right. At ≤768px stack the image above compact copy, hide the extra description and keep controls at least 44px.
+   - Keep one stable store H1 using the `.sr-only` class, with H2 campaign headlines. No separate oversized intro above the banner.
+   - After a responsive **32–48px gap**, add a two-column Flexbox Container for Boys/Girls at **every breakpoint**. Each entire tile links to its category, with a photo, light bottom gradient, title and visual Shop CTA; no nested links or descriptive paragraphs. Mobile tile ratio is 4:5.
 2. **Shop by Age Strip (`.age-strip`):**
    - One rounded container with a Heading and a row of Button widgets (pill style) linking to `/shop/?filter_size=6-12m`, `/shop/?filter_size=2-3y`, etc., plus a Size Guide popup trigger. Make the row horizontally scrollable on mobile (custom CSS `overflow-x: auto`).
 3. **New Season Arrivals (`#homepage-featured-grid`):**

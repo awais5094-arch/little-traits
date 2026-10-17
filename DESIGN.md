@@ -119,7 +119,7 @@ This describes the v1.2 pass; the current purchase panel is specified in §8 bel
 
 ## 7. Photographic Asset Sources & Licensing
 
-All 26 photographs in `assets/images/` are stored locally (zero external image hotlinks) and sourced from **Unsplash** under the [Unsplash License](https://unsplash.com/license) (free for commercial and non-commercial use, no watermark, attribution appreciated).
+The original 26 photographs in `assets/images/` are stored locally (zero external image hotlinks) and sourced from **Unsplash** under the [Unsplash License](https://unsplash.com/license) (free for commercial and non-commercial use, no watermark, attribution appreciated). The two v1.5 campaign WebP assets were generated separately; see §10 for provenance and prompts.
 
 | Local Filename | Usage in Prototype | Unsplash Photo ID / Source URL |
 | :--- | :--- | :--- |
@@ -168,3 +168,24 @@ Verification limits for this pass are recorded in `HANDOFF.md`; the previous pas
 Keep the approved page structure and visual identity. The header switches to menu navigation at 1180px so the centered logo is not squeezed by both desktop link groups. Contact form columns shrink below 200px; field text is 16px. Shop filters retain keyboard focus and chip position, update the active header department, and dialogs contain keyboard navigation. Unconfirmed WhatsApp/email channels use preview buttons rather than working links to invented contact details. The footer uses the short label **Design preview**.
 
 This pass completed source/controller checks; fresh browser visual signoff could not be completed because the browser timed out. See `HANDOFF.md` §7 for the exact scope.
+
+## 10. Campaign-First Homepage (Client Revision, v1.5)
+
+The client approved the design but felt that the standalone long heading made the opening resemble an article. The new opening is **campaign banner → 32–48px breathing room → Boys/Girls tiles → age strip → products**. The campaign uses a short two-line shopping headline and one Shop CTA. Two campaigns can be selected manually; no autoplay, fake sale, discount badge or extra introductory copy.
+
+Desktop: navy copy on sand/cream beside a campaign photograph, approximately 380–480px high. Mobile ≤768px: 3:2 photo above a compact headline/CTA, with the supporting paragraph hidden. The banner retains the existing rounded corners, Fraunces and Plus Jakarta Sans. Boys/Girls tiles remain side by side, with only the title and visual CTA, and the full tile is one link.
+
+### Generated campaign assets
+
+Both assets use **built-in imagegen**, not CLI/API fallback. Originals were generated as 1536×1024 PNGs; project copies use WebP quality 84 without cropping. They are campaign concepts, not photographs of confirmed client inventory. Existing product/category images and the logo were preserved.
+
+- `assets/images/campaign-season.webp` — New Season campaign, approximately 165KB.
+- `assets/images/campaign-baby.webp` — Baby & Toddler campaign, approximately 203KB.
+
+Final prompt — New Season:
+
+> Use case: ads-marketing. Asset type: real photographic imagery for a premium Pakistani children's clothing ecommerce homepage banner, image only, no typography. Create a polished natural fashion campaign photograph, wide landscape 3:2 composition. Two Pakistani/South Asian children about 5 and 7 years old, a boy and a girl, standing next to each other in a relaxed playful candid pose. Full garments clearly visible, heads and shoes safely within frame with generous breathing room. Boy wears a cream cotton grandad collar shirt and warm honey ochre relaxed chinos; girl wears a navy blue cotton tiered dress with understated ruffled trim, ivory socks and simple shoes. Tasteful everyday kidswear, age appropriate. Warm cream textured studio wall and soft sand floor, natural afternoon light with subtle shadows, an understated honey-gold arch painted on the wall, no unrelated props. Children centered as a group within central 65% of image, so the image can be cropped to a square. Natural skin texture, authentic cotton fabric texture, warm candid expressions, premium catalog photography, not glossy plastic, no cartoon rendering. No logos, no text, no watermarks, no frames, no embedded UI. Palette cream #FDFBF7, navy #1A2E4C and muted honey #E5A83B.
+
+Final prompt — Baby & Toddler:
+
+> Use case: ads-marketing. Asset type: real photographic imagery for a premium Pakistani baby and toddler clothing ecommerce campaign banner, image only, no typography. Wide landscape 3:2 fashion campaign photograph. Two Pakistani/South Asian toddlers around 2 and 3 years old, seated side by side on a low broad cream upholstered bench, naturally playing together with one small plain wooden stacking toy. One wears an oatmeal cotton-lined sherpa hooded jacket and warm ochre striped bloomer shorts with cream socks; the other wears a soft ivory hooded one-piece romper with tiny bear ears. Full outfits and both faces remain safely inside frame. Warm cream studio wall, sand floor, muted honey-gold curtain edge in far background, soft diffused window daylight, cozy but clean premium ecommerce catalog styling. Subjects as a centered group within the middle 65% so square mobile crops preserve them. Authentic cotton and sherpa texture, natural expressions and realistic small hands, premium candid photography, not cartoon, no plastic skin. No text, no logos, no watermarks, no embedded UI, no borders. Consistent soft cream #FDFBF7, sand #F3EFE6, muted honey accents #E5A83B with tiny navy clothing details.

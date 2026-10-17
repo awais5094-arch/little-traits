@@ -40,6 +40,7 @@ const coreFiles = [
   "css/styles.css",
   "js/data.js",
   "js/app.js",
+  "js/home.js",
   "js/shop.js",
   "js/product.js",
   "README.md",

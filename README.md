@@ -27,7 +27,7 @@ Starts the local static server at **`http://localhost:4173`**:
 ```bash
 npm run check
 ```
-Runs `scripts/verify-build.js`, which verifies that all required HTML, CSS, JS, documentation files, catalogue product fields, and all 26 local photographic assets in `assets/images/` exist and are non-empty.
+Runs `scripts/verify-build.js`, which verifies that all required HTML, CSS, JS, documentation files, catalogue product fields, and referenced local photographic assets in `assets/images/` exist and are non-empty.
 
 ---
 
@@ -35,7 +35,7 @@ Runs `scripts/verify-build.js`, which verifies that all required HTML, CSS, JS, 
 
 ```text
 little-traits/
-├── index.html                  # Homepage (split hero, shop by age, arrivals, craft story, banners)
+├── index.html                  # Homepage (campaign banners, Boys/Girls, age strip, arrivals, craft story)
 ├── shop.html                   # Shop / Category listing page (department + size filters, sorting, empty state)
 ├── product.html                # Single reusable Product Detail Page populated dynamically via URL (?id=lt-01)
 ├── about.html                  # Our Story (story, garment details list, CTA)
@@ -45,10 +45,11 @@ little-traits/
 ├── js/
 │   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & size chart data
 │   ├── app.js                  # Shared Header, Footer, Search Drawer, persistent Cart Drawer & Modals
+│   ├── home.js                 # Accessible manual campaign banner switching, with no autoplay
 │   ├── shop.js                 # Department/size filter toolbar, sorting, URL sync, empty state
 │   └── product.js              # PDP controller: variants, size validation, sticky mobile bar, accordions
 ├── assets/
-│   └── images/                 # 26 locally stored, watermark-free product, editorial & textile photographs
+│   └── images/                 # 26 original photos + 2 optimized campaign WebP assets
 ├── scripts/
 │   ├── serve.js                # Zero-dependency Node HTTP server (port 4173)
 │   └── verify-build.js         # Automated build, catalogue & local asset integrity checker
@@ -65,7 +66,8 @@ little-traits/
 
 1. **Homepage (`index.html`)**:
    - Announcement bar (short COD/exchange line on mobile), sticky header (shop links left, logo centre, Our Story/Contact/Search/Bag right), mobile menu, search drawer, cart drawer.
-   - Split hero: headline + two Boys/Girls photo panels (side by side on mobile).
+   - Two manually switched **campaign banners** (New Season and Baby/Toddler): short headline + Shop CTA beside photography on desktop; image above compact copy on mobile. No autoplay. First slide remains usable without JavaScript.
+   - A 32–48px pause, then **Boys/Girls collection tiles**, side by side on mobile and clickable across the entire card. The old long introductory headline and tile descriptions are removed.
    - **Shop by age** chip strip linking to pre-filtered shop views + size chart.
    - **New Season Arrivals** — all 6 pieces.
    - **Craft story** — one image + three fabric/finishing points.

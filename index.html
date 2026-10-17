@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=1.5" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -17,80 +17,80 @@
   <div id="site-header-mount"></div>
 
   <main id="main-content">
-    <!-- ====================================================================
-         SECTION 1: SPLIT EDITORIAL HERO (BOYS & GIRLS ENTRY POINTS)
-         ==================================================================== -->
-    <section class="hero-split" aria-labelledby="hero-heading">
+    <!-- Campaign banners lead directly into shopping. No automatic slide changes. -->
+    <section class="campaign-hero" aria-labelledby="hero-heading">
       <div class="container">
-        <div class="hero-split__header">
-          <div class="hero-split__intro">
-            <span class="eyebrow">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-              Season Edit ’26 • Crafted in Pakistan
-            </span>
-            <h1 class="heading-xl" id="hero-heading">
-              Soft cottons &amp; <span class="text-italic-accent">unhurried</span> silhouettes for little explorers.
-            </h1>
+        <h1 class="sr-only" id="hero-heading">Little Traits kidswear for boys, girls and babies</h1>
+        <div class="campaign-banner" id="campaign-banner" role="region" aria-roledescription="carousel" aria-label="Seasonal collections">
+          <div class="campaign-slide" id="campaign-season" data-campaign-slide role="group" aria-roledescription="slide" aria-label="New season, 1 of 2">
+            <div class="campaign-slide__body">
+              <span class="campaign-slide__eyebrow">The new season edit</span>
+              <h2 class="campaign-slide__title">Little outfits.<br />Big adventures.</h2>
+              <p class="campaign-slide__description">Soft cottons. Easy days. Ages 6M–10Y.</p>
+              <a href="shop.html" class="btn btn-primary campaign-slide__cta">Shop the new edit
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+            <div class="campaign-slide__media">
+              <img src="assets/images/campaign-season.webp" alt="Two children in cream, honey and navy cotton outfits against a warm studio backdrop" width="1536" height="1024" fetchpriority="high" />
+            </div>
           </div>
-          <div class="hero-split__meta">
-            <span class="hero-split__badge">Ages 6M – 10Y</span>
-            <a href="shop.html" class="link-arrow">
-              Shop all 6 pieces
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+
+          <div class="campaign-slide campaign-slide--baby" id="campaign-baby" data-campaign-slide role="group" aria-roledescription="slide" aria-label="Baby and toddler, 2 of 2" hidden>
+            <div class="campaign-slide__body">
+              <span class="campaign-slide__eyebrow">The little ones edit</span>
+              <h2 class="campaign-slide__title">Small steps.<br />Soft beginnings.</h2>
+              <p class="campaign-slide__description">Cosy rompers and soft layers for baby &amp; toddler.</p>
+              <a href="shop.html?category=baby" class="btn btn-primary campaign-slide__cta">Shop Baby &amp; Toddler
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+            <div class="campaign-slide__media">
+              <img src="assets/images/campaign-baby.webp" alt="Two toddlers playing together in soft oatmeal and ivory layers" width="1536" height="1024" loading="lazy" />
+            </div>
           </div>
+
+          <div class="campaign-controls" aria-label="Banner controls" hidden>
+            <button type="button" class="campaign-arrow" data-campaign-step="-1" aria-label="Previous banner">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+            </button>
+            <div class="campaign-dots" role="group" aria-label="Choose a banner">
+              <button type="button" class="campaign-dot is-active" data-campaign-index="0" aria-label="Show new season banner" aria-controls="campaign-season" aria-pressed="true"><span></span></button>
+              <button type="button" class="campaign-dot" data-campaign-index="1" aria-label="Show baby and toddler banner" aria-controls="campaign-baby" aria-pressed="false"><span></span></button>
+            </div>
+            <button type="button" class="campaign-arrow" data-campaign-step="1" aria-label="Next banner">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </button>
+          </div>
+          <p class="sr-only" id="campaign-status" aria-live="polite" aria-atomic="true"></p>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-split__grid">
-          <article class="hero-panel">
-            <a href="shop.html?category=boys" class="hero-panel__media" aria-label="Shop Boys Collection" tabindex="-1">
-              <img
-                src="assets/images/hero-boys.jpg"
-                alt="Young boy standing on a garden lawn wearing the Zayd Windowpane Linen-Cotton Shirt and Ochre Chinos"
-                class="hero-panel__img"
-                width="900"
-                height="1125"
-                fetchpriority="high"
-              />
-              <div class="hero-panel__overlay"></div>
-            </a>
-            <div class="hero-panel__content">
-              <span class="hero-panel__tag">1Y – 10Y</span>
-              <h2 class="hero-panel__title">Boys</h2>
-              <p class="hero-panel__desc">
-                Mandarin-collar linen blends, yarn-dyed tees, and pull-on twill chinos built for climbing and play.
-              </p>
-              <a href="shop.html?category=boys" class="btn btn-light hero-panel__btn">
-                Shop Boys
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+    <!-- A short pause, then direct Boys / Girls collection links on every screen. -->
+    <section class="shop-departments" aria-label="Shop Boys and Girls">
+      <div class="container">
+        <div class="department-grid">
+          <a href="shop.html?category=boys" class="department-card" aria-label="Shop Boys collection">
+            <img src="assets/images/hero-boys.jpg" alt="Boy wearing a blue cotton shirt and ochre trousers" class="department-card__img" width="900" height="1125" loading="lazy" />
+            <div class="department-card__overlay" aria-hidden="true"></div>
+            <div class="department-card__content">
+              <h2 class="department-card__title">Boys</h2>
+              <span class="btn btn-light department-card__cta" aria-hidden="true">Shop Boys
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </div>
-          </article>
-
-          <article class="hero-panel">
-            <a href="shop.html?category=girls" class="hero-panel__media" aria-label="Shop Girls Collection" tabindex="-1">
-              <img
-                src="assets/images/hero-girls.jpg"
-                alt="Smiling young girl outdoors wearing the Amara Ruffled Heirloom Frock in Pomegranate Red"
-                class="hero-panel__img"
-                width="900"
-                height="1125"
-                fetchpriority="high"
-              />
-              <div class="hero-panel__overlay"></div>
-            </a>
-            <div class="hero-panel__content">
-              <span class="hero-panel__tag">1Y – 10Y</span>
-              <h2 class="hero-panel__title">Girls</h2>
-              <p class="hero-panel__desc">
-                Gathered combed-cotton frocks, pie-crust collars, and airy double-gauze muslin smock sets.
-              </p>
-              <a href="shop.html?category=girls" class="btn btn-light hero-panel__btn">
-                Shop Girls
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+          </a>
+          <a href="shop.html?category=girls" class="department-card" aria-label="Shop Girls collection">
+            <img src="assets/images/hero-girls.jpg" alt="Girl wearing a red ruffled cotton frock" class="department-card__img" width="900" height="1125" loading="lazy" />
+            <div class="department-card__overlay" aria-hidden="true"></div>
+            <div class="department-card__content">
+              <h2 class="department-card__title">Girls</h2>
+              <span class="btn btn-light department-card__cta" aria-hidden="true">Shop Girls
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </div>
-          </article>
+          </a>
         </div>
       </div>
     </section>
@@ -262,6 +262,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const products = window.PRODUCTS || [];
