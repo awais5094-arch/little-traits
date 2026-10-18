@@ -66,7 +66,8 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 
 ### B. Homepage (`index.html`)
 1. **Campaign Banners (`.campaign-hero`) + Boys / Girls (`.shop-departments`):**
-   - Elementor Nested Carousel with two slides, **autoplay off**, arrows/dots, keyboard navigation, and only the active slide in the tab order. Each slide uses two flex children: short eyebrow/title/Shop CTA on the left and an Image on the right. At ≤768px stack the image above compact copy, hide the extra description and keep controls at least 44px.
+   - Elementor Nested Carousel with two slides, **6000ms autoplay**, Pause/Play, pause on hover/focus, arrows/dots, keyboard navigation, and only the active slide in the tab order. Respect reduced-motion preference and pause when offscreen or behind a modal. Each slide uses two children: copy left and a real stock photo right.
+   - Use identical copy Grid rows for eyebrow, two-line title, description and CTA; reserve at least two description lines on every slide. At ≤768px stack the 3:2 image above a shared 312px copy/control area; center the text, CTA and navigation and keep controls at least 44px. Do not let content-dependent centering move the heading/button when one description wraps.
    - Keep one stable store H1 using the `.sr-only` class, with H2 campaign headlines. No separate oversized intro above the banner.
    - After a responsive **32–48px gap**, add a two-column Flexbox Container for Boys/Girls at **every breakpoint**. Each entire tile links to its category, with a photo, light bottom gradient, title and visual Shop CTA; no nested links or descriptive paragraphs. Mobile tile ratio is 4:5.
 2. **Shop by Age Strip (`.age-strip`):**

@@ -171,6 +171,8 @@ This pass completed source/controller checks; fresh browser visual signoff could
 
 ## 10. Campaign-First Homepage (Client Revision, v1.5)
 
+Historical first banner pass; the current layout, rotation and photo sources are in §11.
+
 The client approved the design but felt that the standalone long heading made the opening resemble an article. The new opening is **campaign banner → 32–48px breathing room → Boys/Girls tiles → age strip → products**. The campaign uses a short two-line shopping headline and one Shop CTA. Two campaigns can be selected manually; no autoplay, fake sale, discount badge or extra introductory copy.
 
 Desktop: navy copy on sand/cream beside a campaign photograph, approximately 380–480px high. Mobile ≤768px: 3:2 photo above a compact headline/CTA, with the supporting paragraph hidden. The banner retains the existing rounded corners, Fraunces and Plus Jakarta Sans. Boys/Girls tiles remain side by side, with only the title and visual CTA, and the full tile is one link.
@@ -189,3 +191,18 @@ Final prompt — New Season:
 Final prompt — Baby & Toddler:
 
 > Use case: ads-marketing. Asset type: real photographic imagery for a premium Pakistani baby and toddler clothing ecommerce campaign banner, image only, no typography. Wide landscape 3:2 fashion campaign photograph. Two Pakistani/South Asian toddlers around 2 and 3 years old, seated side by side on a low broad cream upholstered bench, naturally playing together with one small plain wooden stacking toy. One wears an oatmeal cotton-lined sherpa hooded jacket and warm ochre striped bloomer shorts with cream socks; the other wears a soft ivory hooded one-piece romper with tiny bear ears. Full outfits and both faces remain safely inside frame. Warm cream studio wall, sand floor, muted honey-gold curtain edge in far background, soft diffused window daylight, cozy but clean premium ecommerce catalog styling. Subjects as a centered group within the middle 65% so square mobile crops preserve them. Authentic cotton and sherpa texture, natural expressions and realistic small hands, premium candid photography, not cartoon, no plastic skin. No text, no logos, no watermarks, no embedded UI, no borders. Consistent soft cream #FDFBF7, sand #F3EFE6, muted honey accents #E5A83B with tiny navy clothing details.
+
+## 11. Stable Campaign Grid & Real Stock Photos — v1.6
+
+Slide copy uses equal CSS Grid rows, not vertical centering based on the varying total text height: eyebrow, a two-line title slot, a two-line description slot and a fixed-height CTA. Desktop slide height is `clamp(420px, 36vw, 480px)`; mobile has a 3:2 image above an identical 312px body with centered copy, CTA and controls. Keep the reserved rows if copy changes. Do not hide overflow or truncate the description to simulate alignment.
+
+The slider rotates every 6 seconds with a short opacity transition. Pause/Play is always available; hover, keyboard focus, hidden tab, offscreen state and overlays suspend rotation. Reduced-motion users start paused. Auto-rotation never moves focus or announces every slide.
+
+### Current photo provenance (verified October 18, 2026)
+
+| Local asset | Photographer | Photo page | Downloaded source |
+| --- | --- | --- | --- |
+| `assets/images/campaign-season-real.webp` | Vika Glitter | [Three children wearing white shirts](https://www.pexels.com/photo/three-children-wearing-white-shirts-while-sitting-on-white-surface-14571366/) | https://images.pexels.com/photos/14571366/pexels-photo-14571366.jpeg?auto=compress&cs=tinysrgb&w=1600 |
+| `assets/images/campaign-baby-real.webp` | Matilda Wormwood | [A person holding baby clothes](https://www.pexels.com/photo/a-person-holding-baby-clothes-7484842/) | https://images.pexels.com/photos/7484842/pexels-photo-7484842.jpeg?auto=compress&cs=tinysrgb&w=1600 |
+
+Both photo pages identify the images as free stock and link to the [Pexels License](https://www.pexels.com/license/), which was read directly. It permits website and promotional use subject to its restrictions, including no implied endorsement. These are illustrative stock assets for the design preview, not proof of the client's actual inventory. Attribution is recorded here even though Pexels does not require it. Files were encoded as WebP quality 86 with their original downloaded framing; no generated replacement or semantic photo editing was applied. Combined size is approximately 126KB.

@@ -45,11 +45,11 @@ little-traits/
 ├── js/
 │   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & size chart data
 │   ├── app.js                  # Shared Header, Footer, Search Drawer, persistent Cart Drawer & Modals
-│   ├── home.js                 # Accessible manual campaign banner switching, with no autoplay
+│   ├── home.js                 # Pausable six-second campaign rotation and manual/keyboard controls
 │   ├── shop.js                 # Department/size filter toolbar, sorting, URL sync, empty state
 │   └── product.js              # PDP controller: variants, size validation, sticky mobile bar, accordions
 ├── assets/
-│   └── images/                 # 26 original photos + 2 optimized campaign WebP assets
+│   └── images/                 # 26 original photos + 2 archived concept images + 2 real campaign photos
 ├── scripts/
 │   ├── serve.js                # Zero-dependency Node HTTP server (port 4173)
 │   └── verify-build.js         # Automated build, catalogue & local asset integrity checker
@@ -66,7 +66,8 @@ little-traits/
 
 1. **Homepage (`index.html`)**:
    - Announcement bar (short COD/exchange line on mobile), sticky header (shop links left, logo centre, Our Story/Contact/Search/Bag right), mobile menu, search drawer, cart drawer.
-   - Two manually switched **campaign banners** (New Season and Baby/Toddler): short headline + Shop CTA beside photography on desktop; image above compact copy on mobile. No autoplay. First slide remains usable without JavaScript.
+   - Two **campaign banners** (New Season and Baby/Toddler) using real Pexels photos: desktop copy left/photo right; mobile image above centered copy and controls. Equal heading/description/button slots keep positions steady when copy wraps.
+   - Six-second autoplay, Pause/Play, arrows/dots and keyboard controls. Rotation pauses for mouse hover, keyboard focus, open overlays, hidden tabs and an offscreen banner; reduced-motion users start paused. First slide remains usable without JavaScript.
    - A 32–48px pause, then **Boys/Girls collection tiles**, side by side on mobile and clickable across the entire card. The old long introductory headline and tile descriptions are removed.
    - **Shop by age** chip strip linking to pre-filtered shop views + size chart.
    - **New Season Arrivals** — all 6 pieces.
