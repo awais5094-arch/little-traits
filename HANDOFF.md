@@ -7,7 +7,7 @@ This document provides another developer or AI assistant with everything needed 
 ## 1. Completed Features
 
 1. **Five Connected Views (`index.html`, `shop.html`, `product.html`, `about.html`, `contact.html`)**:
-   - **Homepage (`index.html`)** — current v1.8.1 order: New Season / Baby & Toddler campaign banners (4.5-second crossfading autoplay + bottom dots/manual controls via `js/home.js`) → 32–48px pause → Boys/Girls photo tiles (2-up on mobile) → Shop by age → New Season Arrivals (6) → merged craft story → Baby & Co-ords editorial banners → service bar → footer. Banners retain the existing real Pexels photos, equal content rows and wider two-line mobile headlines, short descriptions and bottom-right dots beside the CTA. The old article-like introductory heading and category paragraphs are removed. See `DESIGN.md` §13.
+   - **Homepage (`index.html`)** — current v1.9 order: New Season / Baby & Toddler campaign banners (4.5-second crossfading autoplay + bottom dots/manual controls via `js/home.js`) → 32–48px pause → Boys/Girls photo tiles (2-up on mobile) → New Season Arrivals (6) → merged craft story → Baby & Co-ords editorial banners → service bar → footer. Banners retain the existing real Pexels photos, equal content rows and wider two-line mobile headlines, short descriptions and bottom-right dots beside the CTA. The old article-like introductory heading and category paragraphs are removed. See `DESIGN.md` §13.
    - **Shop / Category Page (`shop.html`)** — URL-synced filters (`?category=boys&size=2-3Y&sort=price-asc`). Department tabs with counts in the header; one horizontal toolbar (size chips + result count + sort); applied-filter tags underneath; helpful empty state. **No sidebar and no filter drawer** (removed on purpose, see `DESIGN.md`).
    - **Product Detail Page (`product.html`)** — rendered from `window.PRODUCTS` (`js/data.js`) via `?id=lt-01` … `lt-06` or `?slug=`. Current v1.3 order: title → short `purchaseSummary` → unit price → named colour buttons → size/Size Guide → quantity + navy Add to Bag → outline Buy now → quiet COD note → three closed accordions. The full description, age range, fabric, SKU and policies sit in those accordions. No duplicated colour label, price in the main button, age badge or reassurance strip. Mobile sticky bar (`#pdp-sticky-bar`, appended to `body`) shows total price and size/quantity. Accordions keep their open state across re-renders.
    - **Our Story (`about.html`)** — story, "The details you feel" numbered list (the depth that used to crowd the homepage), navy CTA card.
@@ -18,7 +18,7 @@ This document provides another developer or AI assistant with everything needed 
    - **Colour-linked gallery**: choosing a colour swaps the main image to that colourway.
    - **Cart drawer (`localStorage` key `little_traits_demo_cart_v1`)**: merges identical `productId + size + colour`, PKR subtotal, +/- (focus stays on the pressed button), remove, empty state. Header bag badge shows the count and the button's `aria-label` includes it. PDP Add to Bag opens the drawer (`addToCart({ silent: true })` skips the toast).
    - **Search drawer**: live filter over the 6 products; the query is HTML-escaped before rendering.
-   - **Size & Fit Guide modal**: announcement bar, mobile menu, homepage age strip, PDP, About, Contact and footer all open it (`[data-open-size-guide]`).
+   - **Size & Fit Guide modal**: announcement bar, mobile menu, PDP, About, Contact and footer all open it (`[data-open-size-guide]`).
    - **Overlays**: one manager (`openOverlay` / `closeAllOverlays` in `js/app.js`) handles focus in/out, forward/reverse Tab wrapping, `inert` on the page behind, Escape and backdrop close. Drawers carry modal dialog semantics.
    - **Shared helpers**: `LittleTraitsApp.formatPKR()` and `LittleTraitsApp.formatSize()` (renders `8-10Y` as `8–10Y`; data keeps the hyphen).
 
@@ -150,3 +150,12 @@ The client approved the direction but requested a more recognizable ecommerce op
 ## 12. Description Readability & CTA Spacing — v1.8.1
 
 Increased both campaign descriptions from 13px to 14.4px on phones and from 14.4px to 16px on tablet/desktop; weight is now 500 with line-height 1.6. Copy-row gaps are 12px and the CTA row adds 8px of breathing room above the button (about 20px from the description box). Narrow split layouts reserve two lines so larger text does not collide with the CTA. Both slides retain identical rows and bottom-dot alignment.
+
+## 13. Unisex Department & Homepage Cleanup — v1.9 (Oct 18, 2026)
+
+- Added Unisex (`?category=unisex`) to the category data, desktop/mobile navigation and footer. The existing shop controller generates its tab, count, heading and breadcrumb; size filters and sorting work through the same path as other departments.
+- Assigned Rayan (`lt-03`), Milo (`lt-05`) and Safa (`lt-06`) to the demo Unisex edit. Safa uses Unisex as its primary breadcrumb category while retaining its existing Co-ords, Baby, Boys and Girls memberships. Other department counts are preserved. Search now includes secondary category names.
+- Removed the homepage Shop by age section, its initializer and its unused CSS. Arrivals now follow the Boys/Girls tiles directly. Shop size filters and the shared Size Guide remain available.
+- Versioned shared CSS/catalogue/app URLs at `v=1.9` across all five pages so returning preview visitors receive the updated navigation and catalogue together.
+- Verification: `npm run check`, JavaScript syntax and `git diff --check` passed. Existing shop, search/dialog, campaign and all-six-product/cart controller checks passed. Focused Unisex checks passed for direct URL entry, heading/breadcrumb, three-product count, size filters, sorting, active navigation, empty recovery and primary/secondary category search; prior category counts are unchanged. All-page local links/assets and unique IDs passed.
+- Visual limit: no new browser screenshots or physical-device checks in this pass; the changes were verified through source and actual-controller checks.

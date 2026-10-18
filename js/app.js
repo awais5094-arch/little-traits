@@ -198,6 +198,7 @@
       { href: "shop.html", label: "Shop All", page: "shop.html", cat: "" },
       { href: "shop.html?category=boys", label: "Boys", page: "shop.html", cat: "boys" },
       { href: "shop.html?category=girls", label: "Girls", page: "shop.html", cat: "girls" },
+      { href: "shop.html?category=unisex", label: "Unisex", page: "shop.html", cat: "unisex" },
       { href: "shop.html?category=baby", label: "Baby", page: "shop.html", cat: "baby" },
       { href: "shop.html?category=coords", label: "Co-ords", page: "shop.html", cat: "coords" }
     ];
@@ -312,6 +313,7 @@
                   <li><a href="shop.html">All Pieces</a></li>
                   <li><a href="shop.html?category=boys">Boys</a></li>
                   <li><a href="shop.html?category=girls">Girls</a></li>
+                  <li><a href="shop.html?category=unisex">Unisex</a></li>
                   <li><a href="shop.html?category=baby">Baby &amp; Toddler</a></li>
                   <li><a href="shop.html?category=coords">Co-ords &amp; Sets</a></li>
                 </ul>
@@ -688,7 +690,7 @@
     const filtered = !q
       ? allProducts
       : allProducts.filter((p) => {
-          const hay = `${p.name} ${p.shortSubtitle} ${p.category} ${p.fabricSummary} ${p.shortDescription} ${p.colors
+          const hay = `${p.name} ${p.shortSubtitle} ${p.category} ${(p.secondaryCategories || []).join(" ")} ${p.fabricSummary} ${p.shortDescription} ${p.colors
             .map((c) => c.name)
             .join(" ")}`.toLowerCase();
           return hay.includes(q);

@@ -35,7 +35,7 @@ Runs `scripts/verify-build.js`, which verifies that all required HTML, CSS, JS, 
 
 ```text
 little-traits/
-├── index.html                  # Homepage (campaign banners, Boys/Girls, age strip, arrivals, craft story)
+├── index.html                  # Homepage (campaign banners, Boys/Girls, arrivals, craft story)
 ├── shop.html                   # Shop / Category listing page (department + size filters, sorting, empty state)
 ├── product.html                # Single reusable Product Detail Page populated dynamically via URL (?id=lt-01)
 ├── about.html                  # Our Story (story, garment details list, CTA)
@@ -69,13 +69,13 @@ little-traits/
    - Two **campaign banners** (New Season and Baby/Toddler) using real Pexels photos: desktop copy left/photo right; mobile image above compact, left-aligned copy. Tablets (601–768px) keep a compact 360px split banner. Longer, responsive two-line headlines use more of the available width, with a short supporting line and tighter spacing. Shared slide frames and equal copy rows keep heading/button positions steady.
    - 4.5-second autoplay with a 500ms crossfade and subtle copy motion; dots and keyboard controls remain, with arrows on tablet/desktop. Phones place two compact dots beside the CTA at the bottom right. No Pause/Play button or photo overlay controls. Rotation pauses for mouse hover, keyboard focus, open overlays, hidden tabs and an offscreen banner; reduced-motion users use manual controls. First slide remains usable without JavaScript.
    - A 32–48px pause, then **Boys/Girls collection tiles**, side by side on mobile and clickable across the entire card. The old long introductory headline and tile descriptions are removed.
-   - **Shop by age** chip strip linking to pre-filtered shop views + size chart.
    - **New Season Arrivals** — all 6 pieces.
    - **Craft story** — one image + three fabric/finishing points.
    - Baby and Co-ords editorial banners, service bar, compact footer.
 
 2. **Shop / Category Page (`shop.html`)**:
-   - Heading, description and breadcrumb update with the department (`All`, `Boys`, `Girls`, `Baby & Toddler`, `Co-ords & Sets`).
+   - Heading, description and breadcrumb update with the department (`All`, `Boys`, `Girls`, `Unisex`, `Baby & Toddler`, `Co-ords & Sets`).
+   - Unisex is linked from desktop/mobile navigation and the footer; its three demo pieces also remain in their existing departments. Search includes secondary categories.
    - Department tabs with counts; one horizontal toolbar with size chips (`6–12M` to `8–10Y`), result count and sort.
    - Applied-filter tags and an empty state with "Show all sizes" / "Reset filters".
 

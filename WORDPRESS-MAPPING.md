@@ -45,7 +45,7 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 | `purchaseSummary` | Product Short Description (`post_excerpt`): one brief sentence above the purchase controls |
 | `shortSubtitle` + `fabricSummary` | Optional custom fields for cards and the Fabric & Care accordion |
 | `price` (`4250`) | Regular Price (`_regular_price` in PKR) |
-| `category` + `secondaryCategories` | Product Categories (`product_cat`: `boys`, `girls`, `baby`, `coords`) |
+| `category` + `secondaryCategories` | Product Categories (`product_cat`: `boys`, `girls`, `unisex`, `baby`, `coords`) |
 | `badge` (`New Arrival`, `Bestseller`) | Product Tag (`product_tag`) or custom meta field rendered as card badge |
 | `colors` (`[{ name, hex, imageIndex }]`) | Global Product Attribute `pa_colour` (Color Swatch type, linked to variation image) |
 | `sizes` (`["2-3Y", "3-4Y", ...]`) | Global Product Attribute `pa_size` (Button/Label Swatch type, **Used for variations**) |
@@ -70,15 +70,13 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
    - Use identical copy Grid rows for eyebrow, two-line title, description and CTA; use one short description line on phones and two-line capacity on the narrower tablet copy column. Stack the carousel slides in a shared frame for the crossfade; inactive slides must be inert and aria-hidden. At ≤600px stack the 3:2 image above compact left-aligned copy with 16px vertical padding, a responsive two-line headline (line-height 1.12) and one short supporting line. Place two 28px dot targets at the copy panel’s bottom right beside the CTA; hide desktop arrows and omit Pause/Play and photo-overlay controls. At 601–768px use a 360px-tall split banner (45% copy / 55% photo), a 22–29px title, compact CTA and 44px controls under the copy. Do not let content-dependent centering move the heading/button when one description wraps.
    - Keep one stable store H1 using the `.sr-only` class, with H2 campaign headlines. No separate oversized intro above the banner.
    - After a responsive **32–48px gap**, add a two-column Flexbox Container for Boys/Girls at **every breakpoint**. Each entire tile links to its category, with a photo, light bottom gradient, title and visual Shop CTA; no nested links or descriptive paragraphs. Mobile tile ratio is 4:5.
-2. **Shop by Age Strip (`.age-strip`):**
-   - One rounded container with a Heading and a row of Button widgets (pill style) linking to `/shop/?filter_size=6-12m`, `/shop/?filter_size=2-3y`, etc., plus a Size Guide popup trigger. Make the row horizontally scrollable on mobile (custom CSS `overflow-x: auto`).
-3. **New Season Arrivals (`#homepage-featured-grid`):**
+2. **New Season Arrivals (`#homepage-featured-grid`):**
    - Elementor **Loop Grid** widget querying `Products` (6 items, ordered by Date or Featured tag).
-4. **Craft Story (`.craft-story`):**
+3. **Craft Story (`.craft-story`):**
    - 2-column Flexbox Container (`--bg-sand`): Image widget left; eyebrow + Heading + Text + Icon List (3 points) + text link right. Stacks at 900px.
-5. **Collection Banners (`.collection-banners`):**
+4. **Collection Banners (`.collection-banners`):**
    - Two cards (image + tinted panel with Heading, Text, Button) using `--bg-sage-tint` and `--bg-ochre-tint`.
-6. **Service Bar (`.service-bar`):** 4 Icon Box widgets (2×2 on tablet/mobile).
+5. **Service Bar (`.service-bar`):** 4 Icon Box widgets (2×2 on tablet/mobile).
 
 ### E. Our Story (`about.html`) & Contact Us (`contact.html`)
 - **Our Story (`about.html`):** Centered hero; 2-column Image + Text (`.about-story-grid`); "The details you feel" container with one image and a numbered list (`.detail-list`, 01–04); navy CTA card (`.wp-feature-card--navy`) with gold + light-outline buttons.
@@ -86,7 +84,9 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 
 ### C. Shop / Category Page (`shop.html`)
 - Build in **Elementor Theme Builder → Product Archive**.
-- Header: breadcrumb, title/description (dynamic term name + description), department links with counts.
+- Header: breadcrumb, title/description (dynamic term name + description), department links with counts. Include Unisex in the archive tabs, desktop/mobile menus and footer.
+- Assign the `unisex` product category alongside any relevant Boys/Girls/Baby/Co-ords terms. Demo references: Rayan (`lt-03`), Milo (`lt-05`) and Safa (`lt-06`); final product assignments should follow the client catalogue.
+- The homepage age strip was removed at client request. Retain size filtering in the shop and the Size Guide in the header, mobile menu, product pages and footer.
 - **One horizontal toolbar, no sidebar or off-canvas filter**: a `pa_size` attribute filter rendered as pill links (e.g. WooCommerce "Filter Products by Attribute" in list mode styled as chips, or a filter plugin's horizontal layout), product count, and the native Sorting dropdown (`orderby`). Show active filters (WooCommerce "Active Product Filters" widget) directly beneath.
 - Below: WooCommerce Archive Products Loop Grid (3 columns desktop, 2 tablet/mobile).
 

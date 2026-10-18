@@ -386,7 +386,7 @@ ul, ol {
   gap: 0.65rem;
 }
 
-/* Shared pill chips (age strip, shop size filter, mobile menu) */
+/* Shared pill chips (shop size filter, mobile menu) */
 .chip-scroller {
   display: flex;
   gap: 0.5rem;
@@ -861,51 +861,6 @@ ul, ol {
 .department-card__cta {
   min-height: 44px;
   font-size: 0.85rem;
-}
-
-/* ==========================================================================
-   5. HOMEPAGE — SHOP BY AGE STRIP
-   ========================================================================== */
-.age-strip {
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-.age-strip__card {
-  display: flex;
-  align-items: center;
-  gap: 1rem 1.5rem;
-  padding: 0.85rem 0.85rem 0.85rem 1.5rem;
-  background-color: var(--bg-blush-tint);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
-}
-
-.age-strip__title {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.age-strip .chip-scroller {
-  flex: 1;
-}
-
-.age-strip__guide {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-height: 40px;
-  padding: 0.4rem 1rem;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  border-radius: var(--radius-pill);
-  transition: background-color 0.2s var(--ease-out);
-}
-.age-strip__guide:hover {
-  background-color: var(--bg-card);
 }
 
 /* ==========================================================================
@@ -3007,21 +2962,6 @@ ul, ol {
     padding: 0.5rem 0.8rem;
     font-size: 0.76rem;
     gap: 0.4rem;
-  }
-
-  /* Age strip: chips scroll under the title */
-  .age-strip__card {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    padding: 1rem 0 1rem 1.1rem;
-    border-radius: var(--radius-md);
-    gap: 0.6rem 0.75rem;
-  }
-  .age-strip__guide {
-    margin-right: 0.6rem;
-  }
-  .age-strip .chip-scroller {
-    grid-column: 1 / -1;
   }
 
   /* Spacer so the last chip can scroll clear of the edge fade */
