@@ -3064,7 +3064,7 @@ ul, ol {
 .product-card__media { border-radius: var(--radius-xs); }
 .product-card__title { overflow-wrap: anywhere; }
 .product-card__price { font-size: 0.94rem; font-weight: 600; }
-.product-card__price-row { margin-top: 0; padding-top: 0.15rem; }
+.product-card__price-row { margin-top: auto; padding-top: 0.15rem; }
 .product-card__body { padding: 0.9rem 0 0; }
 .product-card__meta-row { font-size: 0.75rem; }
 .product-card__img { object-position: center 32%; }
