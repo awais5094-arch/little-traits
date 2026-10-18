@@ -192,11 +192,11 @@ Final prompt — Baby & Toddler:
 
 > Use case: ads-marketing. Asset type: real photographic imagery for a premium Pakistani baby and toddler clothing ecommerce campaign banner, image only, no typography. Wide landscape 3:2 fashion campaign photograph. Two Pakistani/South Asian toddlers around 2 and 3 years old, seated side by side on a low broad cream upholstered bench, naturally playing together with one small plain wooden stacking toy. One wears an oatmeal cotton-lined sherpa hooded jacket and warm ochre striped bloomer shorts with cream socks; the other wears a soft ivory hooded one-piece romper with tiny bear ears. Full outfits and both faces remain safely inside frame. Warm cream studio wall, sand floor, muted honey-gold curtain edge in far background, soft diffused window daylight, cozy but clean premium ecommerce catalog styling. Subjects as a centered group within the middle 65% so square mobile crops preserve them. Authentic cotton and sherpa texture, natural expressions and realistic small hands, premium candid photography, not cartoon, no plastic skin. No text, no logos, no watermarks, no embedded UI, no borders. Consistent soft cream #FDFBF7, sand #F3EFE6, muted honey accents #E5A83B with tiny navy clothing details.
 
-## 11. Campaign Grid & Real Stock Photo Provenance — v1.6 / v1.7
+## 11. Campaign Grid & Real Stock Photo Provenance — v1.6–v1.8
 
-Slide copy uses equal CSS Grid rows, not vertical centering based on the varying total text height: eyebrow, a two-line title slot, a two-line description slot and a fixed-height CTA. Current v1.7 desktop slide height is `clamp(380px, 33vw, 440px)`; phones ≤600px have a 3:2 image above compact left-aligned copy. Tablets 601–768px use a 360px-tall split frame. Dots/Pause overlay the upper left of the photo, so the CTA needs no separate control footer. Keep the reserved rows if copy changes. Do not hide overflow or truncate the description to simulate alignment.
+Current v1.8 copy uses equal rows for eyebrow, a two-line headline and CTA, plus one short description line on phones (two-line capacity in the narrower tablet copy column). Both slides remain rendered in a shared Grid cell for a 500ms opacity crossfade and subtle 8px copy motion; inactive slides are inert and aria-hidden. Desktop height remains `clamp(380px, 33vw, 440px)`; tablets 601–768px use a 360px split frame, while phones ≤600px put the 3:2 image above compact left-aligned copy. Phone dots sit at the bottom right beside the CTA, with no image overlay or Pause/Play control.
 
-The slider rotates every 6 seconds with a short opacity transition. Pause/Play is always available; hover, keyboard focus, hidden tab, offscreen state and overlays suspend rotation. Reduced-motion users start paused. Auto-rotation never moves focus or announces every slide.
+The slider rotates every 4.5 seconds. Hover, keyboard focus, hidden tab, offscreen state and overlays suspend rotation. Reduced-motion users use manual controls. Automatic changes never move focus or announce every slide.
 
 ### Current photo provenance (verified October 18, 2026)
 
@@ -225,3 +225,12 @@ The design inference is to give the existing photo, a concise headline and one s
 - Tablets (601–768px) keep a 360px split frame, a 28–32px title, compact CTA and controls beneath the copy; the large stacked photo is reserved for phones.
 - Phone dots and Pause/Play sit in a compact light pill over the photograph; each control keeps its 44px target. Desktop arrows remain. Autoplay, reduced-motion behavior and keyboard controls are unchanged.
 - Copy: **Everyday favourites / Made for play. Loved all day. / Feel-good cottons for every little adventure. / Shop new arrivals.** Second campaign: **Baby & toddler / Small outfits. Big cuddles. / Soft, easy layers for their first adventures. / Shop Baby & Toddler.**
+
+## 13. Full-Width Copy Hierarchy & Bottom Navigation — v1.8
+
+The supplied screenshots identified two specific problems: a large pill on the photo and short compressed headings beside longer descriptions. The image files remain unchanged.
+
+- Headlines gain a few purposeful words: **Made for little ones. / Loved every day.** and **Soft little outfits. / Great big cuddles.** On phones, `clamp(1.65rem, 8.4vw, 3.25rem)` lets the heading fill more horizontal space as the viewport grows. Fraunces remains at weight 600, with line-height 1.12 and letter-spacing −0.025em.
+- Supporting lines are shorter: **Everyday cottons, made to move.** and **Soft layers for their first days.** At 13px on phones, they sit clearly beneath the headline. Shared rows and 7.2px gaps keep both settled slide layouts aligned; vertical padding is 16px.
+- Phone CTA and two dots share the bottom action row. Dot targets are 28px, with an active pill indicator; no controls cover the photos. Baby CTA is **Shop babywear**, leaving room for navigation at the narrowest supported width. Desktop/tablet retain arrows, with 44px targets.
+- Autoplay changes after 4500ms; the outgoing and incoming slides overlap for a 500ms crossfade. Inactive content is inert/aria-hidden immediately, while its visual opacity can finish transitioning. Reduced motion disables autoplay and reduces transition duration. There is no Pause/Play button.
