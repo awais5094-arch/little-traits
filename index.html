@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=1.7.1" />
+  <link rel="stylesheet" href="css/styles.css?v=1.8" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -17,16 +17,16 @@
   <div id="site-header-mount"></div>
 
   <main id="main-content">
-    <!-- Campaign banners: equal content slots, with pausable automatic rotation. -->
+    <!-- Campaign banners: stable copy rows and a gentle automatic crossfade. -->
     <section class="campaign-hero" aria-labelledby="hero-heading">
       <div class="container">
         <h1 class="sr-only" id="hero-heading">Little Traits kidswear for boys, girls and babies</h1>
         <div class="campaign-banner" id="campaign-banner" role="region" aria-roledescription="carousel" aria-label="Seasonal collections">
-          <div class="campaign-slide" id="campaign-season" data-campaign-slide role="group" aria-roledescription="slide" aria-label="New season, 1 of 2">
+          <div class="campaign-slide is-active" id="campaign-season" data-campaign-slide role="group" aria-roledescription="slide" aria-label="New season, 1 of 2">
             <div class="campaign-slide__body">
               <span class="campaign-slide__eyebrow">Everyday favourites</span>
-              <h2 class="campaign-slide__title">Made for play.<br />Loved all day.</h2>
-              <p class="campaign-slide__description">Feel-good cottons for every little adventure.</p>
+              <h2 class="campaign-slide__title">Made for little ones.<br />Loved every day.</h2>
+              <p class="campaign-slide__description">Everyday cottons, made to move.</p>
               <a href="shop.html" class="btn btn-primary campaign-slide__cta">Shop new arrivals
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
@@ -39,9 +39,9 @@
           <div class="campaign-slide campaign-slide--baby" id="campaign-baby" data-campaign-slide role="group" aria-roledescription="slide" aria-label="Baby and toddler, 2 of 2" hidden>
             <div class="campaign-slide__body">
               <span class="campaign-slide__eyebrow">Baby &amp; toddler</span>
-              <h2 class="campaign-slide__title">Small outfits.<br />Big cuddles.</h2>
-              <p class="campaign-slide__description">Soft, easy layers for their first adventures.</p>
-              <a href="shop.html?category=baby" class="btn btn-primary campaign-slide__cta">Shop Baby &amp; Toddler
+              <h2 class="campaign-slide__title">Soft little outfits.<br />Great big cuddles.</h2>
+              <p class="campaign-slide__description">Soft layers for their first days.</p>
+              <a href="shop.html?category=baby" class="btn btn-primary campaign-slide__cta">Shop babywear
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
@@ -60,10 +60,6 @@
             </div>
             <button type="button" class="campaign-arrow" data-campaign-step="1" aria-label="Next banner">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-            </button>
-            <button type="button" class="campaign-play-toggle" data-campaign-rotation aria-label="Pause slideshow" aria-pressed="false">
-              <svg data-campaign-pause-icon width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
-              <svg data-campaign-play-icon width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="m7 3 15 9-15 9z"/></svg>
             </button>
           </div>
           <p class="sr-only" id="campaign-status" aria-live="polite" aria-atomic="true"></p>
@@ -266,7 +262,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/home.js?v=1.6"></script>
+  <script src="js/home.js?v=1.8"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const products = window.PRODUCTS || [];

@@ -1,4 +1,4 @@
-/** Campaign carousel: stable slides, six-second rotation and explicit pause. */
+/** Campaign carousel: stable crossfades and 4.5-second automatic rotation. */
 (function () {
   document.addEventListener("DOMContentLoaded", function () {
     const banner = document.getElementById("campaign-banner");
@@ -6,32 +6,24 @@
     const slides = Array.from(banner.querySelectorAll("[data-campaign-slide]"));
     const dots = Array.from(banner.querySelectorAll("[data-campaign-index]"));
     const controls = banner.querySelector(".campaign-controls");
-    const rotation = banner.querySelector("[data-campaign-rotation]");
-    const pauseIcon = banner.querySelector("[data-campaign-pause-icon]");
-    const playIcon = banner.querySelector("[data-campaign-play-icon]");
     const status = document.getElementById("campaign-status");
-    if (slides.length < 2 || !controls || !rotation) return;
+    if (slides.length < 2 || !controls) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let current = 0;
-    let paused = reducedMotion.matches;
     let hovered = false;
     let focusPaused = false;
     let inView = true;
     let timer = null;
-    const delay = 6000;
+    const delay = 4500;
+    banner.classList.add("is-ready");
+    slides.forEach((slide) => { slide.hidden = false; });
+    selectSlide(0, false);
     controls.hidden = false;
 
     function canRotate() {
-      return !paused && !hovered && !focusPaused && inView &&
+      return !reducedMotion.matches && !hovered && !focusPaused && inView &&
         !document.hidden && !document.body.classList.contains("drawer-open");
-    }
-
-    function updateRotationControl() {
-      rotation.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
-      rotation.setAttribute("aria-pressed", String(paused));
-      if (pauseIcon) pauseIcon.hidden = paused;
-      if (playIcon) playIcon.hidden = !paused;
     }
 
     function scheduleRotation() {
@@ -47,7 +39,12 @@
 
     function selectSlide(index, announce) {
       current = (index + slides.length) % slides.length;
-      slides.forEach((slide, position) => { slide.hidden = position !== current; });
+      slides.forEach((slide, position) => {
+        const active = position === current;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", String(!active));
+        slide.inert = !active;
+      });
       dots.forEach((dot, position) => {
         dot.classList.toggle("is-active", position === current);
         dot.setAttribute("aria-pressed", String(position === current));
@@ -59,11 +56,7 @@
     controls.addEventListener("click", function (event) {
       const dot = event.target.closest("[data-campaign-index]");
       const arrow = event.target.closest("[data-campaign-step]");
-      if (event.target.closest("[data-campaign-rotation]")) {
-        paused = !paused;
-        if (!paused) focusPaused = false; // Explicit Play can start while this control has focus.
-        updateRotationControl();
-      } else if (dot) selectSlide(Number(dot.getAttribute("data-campaign-index")), true);
+      if (dot) selectSlide(Number(dot.getAttribute("data-campaign-index")), true);
       else if (arrow) selectSlide(current + Number(arrow.getAttribute("data-campaign-step")), true);
       scheduleRotation();
     });
@@ -95,11 +88,7 @@
       scheduleRotation();
     });
     document.addEventListener("visibilitychange", scheduleRotation);
-    reducedMotion.addEventListener("change", function (event) {
-      if (event.matches) paused = true;
-      updateRotationControl();
-      scheduleRotation();
-    });
+    reducedMotion.addEventListener("change", scheduleRotation);
 
     if ("IntersectionObserver" in window) {
       inView = false;
@@ -120,7 +109,6 @@
     });
     window.addEventListener("pageshow", scheduleRotation);
 
-    updateRotationControl();
     scheduleRotation();
   });
 })();
