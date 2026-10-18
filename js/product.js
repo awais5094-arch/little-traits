@@ -111,7 +111,7 @@
             data-select-color="${col.name}"
             aria-pressed="${isSelected}"
           >
-            <span class="color-choice-swatch" style="background: ${col.secondaryHex ? `linear-gradient(90deg, ${col.hex} 50%, ${col.secondaryHex} 50%)` : col.hex};" aria-hidden="true"></span>
+            <span class="color-choice-swatch" style="background-color: ${col.hex};" aria-hidden="true"></span>
             <span>${col.name}</span>
           </button>
         `;
@@ -141,8 +141,8 @@
     mount.innerHTML = `
       <div class="pdp-layout">
         <!-- Left Column: Image Gallery -->
-        <div class="pdp-gallery ${currentProduct.images.length < 2 ? "pdp-gallery--single" : ""}">
-          <div class="pdp-thumbs" role="group" aria-label="Product thumbnails" ${currentProduct.images.length < 2 ? "hidden" : ""}>
+        <div class="pdp-gallery">
+          <div class="pdp-thumbs" role="group" aria-label="Product thumbnails">
             ${thumbsHtml}
           </div>
           <div class="pdp-stage">
@@ -160,6 +160,9 @@
                 width="800"
                 height="960"
               />
+            </div>
+            <div class="pdp-stage__caption" id="pdp-main-caption">
+              ${activeImg.caption || activeImg.alt}
             </div>
           </div>
         </div>
@@ -195,7 +198,6 @@
             <div class="size-options-grid" role="group" aria-label="Select size">
               ${sizesHtml}
             </div>
-            <p class="pdp-size-hint">Compare height, chest and waist in the size guide.</p>
             <div class="pdp-validation-msg ${state.showSizeError ? "is-visible" : ""}" id="pdp-size-error" role="alert">
               ${state.showSizeError ? "Please choose a size first." : ""}
             </div>
@@ -234,13 +236,13 @@
           <!-- Collapsible details (closed by default) -->
           <div class="pdp-accordions">
             ${accordionHtml("details-panel", "Product details", `
-
+              <p>${currentProduct.shortDescription}</p>
               <p><strong>Ages:</strong> ${currentProduct.ageGroup}</p>
               <ul>${detailsListHtml}</ul>
               <p class="accordion-meta">SKU: ${currentProduct.sku}</p>
             `)}
             ${accordionHtml("care-panel", "Fabric &amp; care", `
-
+              <p><strong>Material:</strong> ${currentProduct.fabricSummary}</p>
               <p>${currentProduct.fabricCare}</p>
             `)}
             ${accordionHtml("delivery-panel", "Delivery &amp; exchanges", `

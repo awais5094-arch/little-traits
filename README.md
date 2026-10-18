@@ -1,38 +1,103 @@
-# Little Traits
+# Little Traits — Kidswear Ecommerce Prototype (Pakistan)
 
-A static kidswear store preview for a Pakistani clothing brand. Five connected pages use HTML, CSS and vanilla JavaScript. The source is a reference for the eventual WordPress and WooCommerce build; ordering and contact submission are demos.
+A complete, responsive kidswear ecommerce storefront prototype designed and built for a new Pakistani children's clothing brand (**ages 6 months – 10 years**). Built as a clean, zero-framework frontend reference ready for direct implementation in **WordPress + Elementor + WooCommerce** and suitable as a portfolio showcase.
 
-## Run and check
+---
 
-Node.js 18 or later is required. No dependency installation is needed.
+## 1. Quick Start & Commands
 
-```sh
+### Prerequisites
+- **Node.js** (v16+ recommended) — used only for the lightweight local HTTP server and verification script. No `npm install` or external runtime dependencies are required.
+- Any modern web browser.
+
+### Run Locally
+```bash
 npm start
+```
+Starts the local static server at **`http://localhost:4173`**:
+- **Homepage:** `http://localhost:4173/index.html`
+- **Shop / Category Listing:** `http://localhost:4173/shop.html`
+- **Reusable Product Detail Page:** `http://localhost:4173/product.html?id=lt-01` (supports `lt-01` through `lt-06`)
+- **Our Story / About Us:** `http://localhost:4173/about.html`
+- **Contact & Customer Care:** `http://localhost:4173/contact.html`
+
+*(Alternatively, you can serve the root directory with any static server such as `npx serve .` or VS Code Live Server.)*
+
+### Run Integrity & Asset Verification
+```bash
 npm run check
 ```
+Runs `scripts/verify-build.js`, which verifies that all required HTML, CSS, JS, documentation files, catalogue product fields, and referenced local photographic assets in `assets/images/` exist and are non-empty.
 
-The local server uses port 4173. `npm run check` verifies required files, all six products, sizes, colours and local image references.
+---
 
-## Current design v2.0
+## 2. Project Structure
 
-- Cream, navy and gold remain the brand palette. Fraunces is reserved for the wordmark and large editorial/page titles; smaller headings and product names use Plus Jakarta Sans.
-- The header has a solid background and a text wordmark. Primary shopping buttons are rounded rectangles; the hero keeps a pill CTA.
-- Homepage: two manually controlled photo campaigns → Boys/Girls category links → four featured outfits → one editorial image and a short introduction → footer. The age strip, duplicate collection banners and icon-based craft/service modules are removed.
-- The campaign uses arrows, dots, arrow keys and horizontal touch swipes. Slides crossfade; there is no timer or autoplay. Inactive content is inert and aria-hidden. Reduced motion also resets delays.
-- Product cards use flat photo-led layouts, short names, prices and accurate single/two-tone colour swatches. There are no decorative size buttons, demo badges, card lifts or image zooms. A second image swaps on hover only when supplied; otherwise the first image remains.
-- Shop departments are underlined text tabs. Size chips and sorting remain available. Featured sorting puts the four selected pieces first.
-- About and Contact have shorter, practical copy. Contact has a working size guide, FAQs and a local-only form; invented contact details, dead channel buttons and unsupported production claims are removed.
+```text
+little-traits/
+├── index.html                  # Homepage (campaign banners, Boys/Girls, arrivals, craft story)
+├── shop.html                   # Shop / Category listing page (department + size filters, sorting, empty state)
+├── product.html                # Single reusable Product Detail Page populated dynamically via URL (?id=lt-01)
+├── about.html                  # Our Story (story, garment details list, CTA)
+├── contact.html                # Contact & Customer Care page (WhatsApp/Email cards, demo contact form & FAQs)
+├── css/
+│   └── styles.css              # Complete design system, Deep Navy & Golden Honey palette, breathable spacing
+├── js/
+│   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & size chart data
+│   ├── app.js                  # Shared Header, Footer, Search Drawer, persistent Cart Drawer & Modals
+│   ├── home.js                 # Smooth 4.5-second campaign crossfades and manual/keyboard controls
+│   ├── shop.js                 # Department/size filter toolbar, sorting, URL sync, empty state
+│   └── product.js              # PDP controller: variants, size validation, sticky mobile bar, accordions
+├── assets/
+│   └── images/                 # 26 original photos + 2 archived concept images + 2 real campaign photos
+├── scripts/
+│   ├── serve.js                # Zero-dependency Node HTTP server (port 4173)
+│   └── verify-build.js         # Automated build, catalogue & local asset integrity checker
+├── README.md                   # Setup, commands, structure & technology overview
+├── DESIGN.md                   # Research synthesis, creative direction, typography, palette & asset attribution
+├── HANDOFF.md                  # Completed features, simulated states, missing client info & changelog
+├── WORDPRESS-MAPPING.md        # Step-by-step mapping to WordPress, Elementor & WooCommerce
+└── package.json                # Scripts and project metadata
+```
 
-## Catalogue and interactions
+---
 
-`js/data.js` owns store configuration, categories, sizes, the size guide and six demo products. IDs, slugs, prices, size ranges and category memberships remain stable. Unisex contains Rayan, Milo and Safa. Each product currently has one photographed colourway; only Amara and Rayan have a second verified view of the same outfit. Other products use one photo until genuine alternate views are available.
+## 3. Scope & Connected Views
 
-`js/app.js` owns the shared shell, search, size guide, demo checkout, product cards and persistent bag. Existing bags are reconciled against the current catalogue so old names and removed colourways do not survive the correction. `js/shop.js`, `js/product.js` and `js/home.js` own their respective views.
+1. **Homepage (`index.html`)**:
+   - Announcement bar (short COD/exchange line on mobile), sticky header (shop links left, logo centre, Our Story/Contact/Search/Bag right), mobile menu, search drawer, cart drawer.
+   - Two **campaign banners** (New Season and Baby/Toddler) using real Pexels photos: desktop copy left/photo right; mobile image above compact, left-aligned copy. Tablets (601–768px) keep a compact 360px split banner. Longer, responsive two-line headlines use more of the available width, with a short supporting line and tighter spacing. Shared slide frames and equal copy rows keep heading/button positions steady.
+   - 4.5-second autoplay with a 500ms crossfade and subtle copy motion; dots and keyboard controls remain, with arrows on tablet/desktop. Phones place two compact dots beside the CTA at the bottom right. No Pause/Play button or photo overlay controls. Rotation pauses for mouse hover, keyboard focus, open overlays, hidden tabs and an offscreen banner; reduced-motion users use manual controls. First slide remains usable without JavaScript.
+   - A 32–48px pause, then **Boys/Girls collection tiles**, side by side on mobile and clickable across the entire card. The old long introductory headline and tile descriptions are removed.
+   - **New Season Arrivals** — all 6 pieces.
+   - **Craft story** — one image + three fabric/finishing points.
+   - Baby and Co-ords editorial banners, service bar, compact footer.
 
-The bag, search, filters, quantity controls, size validation, Buy now and local checkout preview are interactive. No real order is placed and no contact message is sent. Stock photos are illustrative; client photography, actual product specifications, business contacts and confirmed delivery/exchange terms are still needed for production.
+2. **Shop / Category Page (`shop.html`)**:
+   - Heading, description and breadcrumb update with the department (`All`, `Boys`, `Girls`, `Unisex`, `Baby & Toddler`, `Co-ords & Sets`).
+   - Unisex is linked from desktop/mobile navigation and the footer; its three demo pieces also remain in their existing departments. Search includes secondary categories.
+   - Department tabs with counts; one horizontal toolbar with size chips (`6–12M` to `8–10Y`), result count and sort.
+   - Applied-filter tags and an empty state with "Show all sizes" / "Reset filters".
 
-## Documentation
+3. **Product Detail Page (`product.html`)**:
+   - One template for `?id=lt-01` … `lt-06`; thumbnails with colour-linked image switching.
+   - Title, one-sentence purchase summary, price, named colour choices, **required size** (with Size Guide), quantity + navy **Add to Bag**, outline **Buy now**, and one quiet COD note.
+   - Full description, age range, fabric, care, SKU and delivery/exchange information stay in three closed accordions below the buying controls.
+   - Mobile: two colour columns and four size columns at ≤480px; sticky total + size/quantity + Add-to-Bag shortcut after the main button scrolls away; four related products.
+   - Quantity changes update controls in place, so typing a number and immediately pressing Add to Bag or Buy now works on the first click.
 
-- `HANDOFF.md`: current structure, behaviour, checks and production dependencies.
-- `DESIGN.md`: visual decisions and the v2.0 refinement; earlier sections are historical.
-- `WORDPRESS-MAPPING.md`: translation to WooCommerce and Elementor.
+4. **Our Story (`about.html`)**: story, "The details you feel" numbered list, navy CTA card.
+
+5. **Contact (`contact.html`)**: WhatsApp / Email preview buttons (no outbound placeholder contacts), working Size Guide, local demo form (`#demo-contact-form`) with explicit no-message-sent feedback, FAQ (`#faq-section`).
+
+Client preview refinements: navigation collapses at 1180px, shop filter changes preserve focus/scroll position and update the header, dialogs trap keyboard focus, and contact fields use 16px text and shrink safely on narrow screens. See `HANDOFF.md` for verification scope; fresh browser screenshots could not be completed in the final pass.
+
+---
+
+## 4. Technology Stack & Environment
+
+- **Languages:** Semantic HTML5, modern CSS3 (Custom Properties, CSS Grid, Flexbox, `clamp()` fluid typography), Vanilla ES6+ JavaScript.
+- **Fonts:** Google Fonts (`Fraunces` variable optical serif + `Plus Jakarta Sans`).
+- **Storage:** `localStorage` (`little_traits_demo_cart_v1`) for persistent demo cart state across page reloads.
+- **Target Production Platform:** WordPress 6.x + WooCommerce + Elementor (see `WORDPRESS-MAPPING.md`).
+- **AI Assistant / Model Used:** Built in Cursor using `gemini-4-argon` (as exposed by the Cursor runtime environment).

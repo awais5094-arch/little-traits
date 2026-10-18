@@ -1,56 +1,116 @@
-# Little Traits WordPress mapping
+# WordPress, Elementor & WooCommerce Implementation Mapping (`WORDPRESS-MAPPING.md`)
 
-This repository is a static reference for a WordPress, Elementor and WooCommerce build. v2.0 is the current visual direction. Ordering and contact submission in the preview are local demos.
+This prototype was specifically architected so every visual section, CSS token, product card, and shopping interaction translates cleanly into **WordPress + Elementor (Pro or Free + Woolementor/ShopEngine) + WooCommerce** without custom commerce hacks.
 
-## Product data
+---
 
-| Prototype field | WooCommerce equivalent |
-| --- | --- |
-| id / sku | Product SKU; preserve stable identity |
-| name | Product title |
-| purchaseSummary | Short description |
-| category and secondaryCategories | product_cat: boys, girls, unisex, baby, coords |
-| price | Regular price in PKR |
-| sizes | pa_size; required variation attribute |
-| colors | pa_colour, using only confirmed photographed colourways |
-| images | Featured image and real product gallery |
-| featured | Featured product flag |
-| details / fabricCare | Description and product tabs, populated from verified client details |
+## 1. Recommended Theme & Plugin Stack
 
-Current preview: six products, four featured; Unisex includes Rayan, Milo and Safa. Multiple category membership is deliberate. Incorrect alternate outfits and unverified material claims were removed. Keep existing slugs or provide redirects when changing them.
+- **Base Theme:** `Hello Elementor` (lightweight, zero bloat) or `Astra` / `Kadence` with a child theme containing the custom properties from `css/styles.css`.
+- **Page Builder:** `Elementor` + `Elementor Pro` (for Theme Builder Header, Footer, Archive Product template, and Single Product template).
+- **Commerce Engine:** `WooCommerce` (configured with Currency: **Pakistani Rupee (`PKR` / `Rs.`)**, thousand separator `,`, decimals `0`).
+- **Recommended Lightweight Plugins:**
+  - *Variation Swatches for WooCommerce* (converts standard WooCommerce dropdown attributes `pa_colour` and `pa_size` into the exact circular colour swatches and rectangular size pills shown in `product.html`).
+  - *FIBOSearch (Ajax Search for WooCommerce)* (reproduces the live header search drawer `#search-drawer`).
+  - *Husky / WOOF or Elementor Taxonomy Filter* (reproduces the horizontal size-chip toolbar on `shop.html`; use a horizontal layout, not a sidebar).
 
-## Shared shell
+---
 
-Elementor Theme Builder header: solid cream background, text wordmark, shopping navigation including Unisex, search and bag. Collapse navigation before it crowds the logo. Announcement is one short useful line. Footer contains shop/help links, contact and a size-guide trigger. Keep the actual customer-care channels only when supplied by the client.
+## 2. Design Tokens → Elementor Global Settings
 
-Build the size guide as an accessible popup with size, height (cm), chest (cm), waist (cm) and clear measurement guidance. Replace the reference measurements with the client’s actual garment chart before launch.
+Copy the `:root` variables from `css/styles.css` directly into **Elementor → Site Settings → Global Colors & Global Fonts**:
 
-## Homepage
+- **Global Colors:**
+  - Primary Brand Dark / Headings / Primary Buttons: `#1A2E4C` (`--text-primary` / `--accent-navy`)
+  - Secondary Brand Accent / Badges / Secondary Buttons: `#E5A83B` (`--accent-gold`)
+  - Secondary Text: `#4A5970` (`--text-secondary`)
+  - Warm Caramel Accent: `#C2744B` (`--accent-terracotta`)
+  - Meadow Sage Accent: `#4D6F5E` (`--accent-sage`)
+  - Background Primary (Clean Cream): `#FDFBF7` (`--bg-linen`)
+  - Background Secondary (Soft Oatmeal Sand): `#F3EFE6` (`--bg-sand`)
+- **Global Fonts:**
+  - Primary Heading: `Fraunces` (600 weight, line-height `1.15`)
+  - Body & UI: `Plus Jakarta Sans` (400/500/600 weight, line-height `1.6`)
 
-1. Two campaign slides using existing photography, one heading and CTA each. Manual arrows/dots, keyboard selection and swipe, a gentle crossfade and reduced-motion handling. No autoplay. On phones, image above copy; tablet/desktop use a split layout. Copy rows must expand intrinsically.
-2. Two Boys/Girls photo links. Portrait proportions, text outside each photo, no overlaid pill buttons. Retain two columns on phones.
-3. Four featured products in an Elementor Loop Grid: four columns on wide screens, two on mobile. Plain photo/name/price layouts with accurate colour swatches. One full-card link; no fake quick-add button or elevated card effect.
-4. One editorial photograph with a short store introduction and About link.
-5. Shared footer. Do not restore Shop by age, duplicate collection banners, craft icon bullets or service-card modules.
+---
 
-## Shop
+## 3. WooCommerce Data Model Mapping (`js/data.js` → WooCommerce)
 
-Use a WooCommerce Product Archive with title/description and underlined department links. Keep the size filter, result count, native sorting and active-filter removal in one toolbar. No sidebar or filter drawer. Show a helpful empty state. Featured sorting should put the selected products first. Counts represent category memberships, so they do not sum to total stock.
+Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variable Product**:
 
-## Single product
+| Prototype Field (`js/data.js`) | WooCommerce Field / Taxonomy |
+| :--- | :--- |
+| `id` / `sku` (`LT-SS26-01`) | Product SKU (`_sku`) |
+| `name` | Product Title (`post_title`) |
+| `purchaseSummary` | Product Short Description (`post_excerpt`): one brief sentence above the purchase controls |
+| `shortSubtitle` + `fabricSummary` | Optional custom fields for cards and the Fabric & Care accordion |
+| `price` (`4250`) | Regular Price (`_regular_price` in PKR) |
+| `category` + `secondaryCategories` | Product Categories (`product_cat`: `boys`, `girls`, `unisex`, `baby`, `coords`) |
+| `badge` (`New Arrival`, `Bestseller`) | Product Tag (`product_tag`) or custom meta field rendered as card badge |
+| `colors` (`[{ name, hex, imageIndex }]`) | Global Product Attribute `pa_colour` (Color Swatch type, linked to variation image) |
+| `sizes` (`["2-3Y", "3-4Y", ...]`) | Global Product Attribute `pa_size` (Button/Label Swatch type, **Used for variations**) |
+| `images` (3 photos per product) | Featured Image (`_thumbnail_id`) + Product Gallery (`_product_image_gallery`) |
+| `shortDescription`, `ageGroup`, `details` & `fabricCare` | Product Description (`post_content`) or custom WooCommerce Tabs / Accordions below the purchase controls |
 
-Use the real gallery at left; hide a thumbnail rail when only one photo exists. At right: title, one-sentence summary, price, colour, required size/guide, quantity plus primary Add to Bag, outline Buy now and one payment note. Three closed panels contain details, verified fabric/care information, delivery/exchanges. Do not repeat the summary in gallery captions and accordions. Related products have one heading.
+---
 
-Use native WooCommerce variation validation and cart/checkout. Keep the mobile sticky purchase control clear of the footer and respect safe-area insets. Never present a different garment as a colour variation.
+## 4. Section-by-Section Elementor Mapping
 
-## About and Contact
+### A. Global Elements (`js/app.js`)
+1. **Announcement Bar + Sticky Header:**
+   - Build in **Elementor Theme Builder → Header**.
+   - Top container (`#26221E`) with text + Popup trigger button for the **Size Guide Elementor Popup**.
+   - Main sticky container (`position: sticky; top: 0`) with Nav Menu widget, centered SVG/text logo, Search Popup trigger, and **Elementor Menu Cart** widget (configured as a slide-out side cart drawer).
+2. **Size Guide Modal (`#size-guide-modal`):**
+   - Build as an **Elementor Popup** containing the HTML table from `js/app.js` (`window.SIZE_GUIDE_DATA`). Triggered by a class `.open-size-guide` on both the Header and Single Product template.
 
-About: a short real introduction, one photograph and practical sizing/care guidance. Replace the preview story with client facts when available; do not invent founder/manufacturing/certification claims.
+### B. Homepage (`index.html`)
+1. **Campaign Banners (`.campaign-hero`) + Boys / Girls (`.shop-departments`):**
+   - Elementor Nested Carousel with two slides, **4500ms autoplay**, a 500ms crossfade, pause on hover/focus, arrows/dots, keyboard navigation, and only the active slide in the tab order. Respect reduced-motion preference and pause when offscreen or behind a modal. Each slide uses two children: copy left and a real stock photo right.
+   - Use identical copy Grid rows for eyebrow, two-line title, description and CTA; use one short description line on phones and two-line capacity on the narrower tablet copy column. Stack the carousel slides in a shared frame for the crossfade; inactive slides must be inert and aria-hidden. At ≤600px stack the 3:2 image above compact left-aligned copy with 16px vertical padding, a responsive two-line headline (line-height 1.12) and one short supporting line. Place two 28px dot targets at the copy panel’s bottom right beside the CTA; hide desktop arrows and omit Pause/Play and photo-overlay controls. At 601–768px use a 360px-tall split banner (45% copy / 55% photo), a 22–29px title, compact CTA and 44px controls under the copy. Do not let content-dependent centering move the heading/button when one description wraps.
+   - Keep one stable store H1 using the `.sr-only` class, with H2 campaign headlines. No separate oversized intro above the banner.
+   - After a responsive **32–48px gap**, add a two-column Flexbox Container for Boys/Girls at **every breakpoint**. Each entire tile links to its category, with a photo, light bottom gradient, title and visual Shop CTA; no nested links or descriptive paragraphs. Mobile tile ratio is 4:5.
+2. **New Season Arrivals (`#homepage-featured-grid`):**
+   - Elementor **Loop Grid** widget querying `Products` (6 items, ordered by Date or Featured tag).
+3. **Craft Story (`.craft-story`):**
+   - 2-column Flexbox Container (`--bg-sand`): Image widget left; eyebrow + Heading + Text + Icon List (3 points) + text link right. Stacks at 900px.
+4. **Collection Banners (`.collection-banners`):**
+   - Two cards (image + tinted panel with Heading, Text, Button) using `--bg-sage-tint` and `--bg-ochre-tint`.
+5. **Service Bar (`.service-bar`):** 4 Icon Box widgets (2×2 on tablet/mobile).
 
-Contact: working size guide, FAQs before the form in reading order and actual verified customer-care channels. Replace the local demo form with a real form handler before changing the preview messaging. Remove demo labels only when the associated operation actually works.
+### E. Our Story (`about.html`) & Contact Us (`contact.html`)
+- **Our Story (`about.html`):** Centered hero; 2-column Image + Text (`.about-story-grid`); "The details you feel" container with one image and a numbered list (`.detail-list`, 01–04); navy CTA card (`.wp-feature-card--navy`) with gold + light-outline buttons.
+- **Contact & Care (`contact.html`):** Compact hero; 3 action cards (WhatsApp, Email, Size Guide popup trigger); then 2 columns — **Elementor Form** (or CF7/WPForms) left, Accordion/Toggle FAQ right. The prototype's first two actions show preview feedback; connect real `wa.me`/`mailto:` targets only after the client confirms them. Replace demo form submission with an actual form handler, then update its button/feedback copy.
 
-## Style and accessibility
+### C. Shop / Category Page (`shop.html`)
+- Build in **Elementor Theme Builder → Product Archive**.
+- Header: breadcrumb, title/description (dynamic term name + description), department links with counts. Include Unisex in the archive tabs, desktop/mobile menus and footer.
+- Assign the `unisex` product category alongside any relevant Boys/Girls/Baby/Co-ords terms. Demo references: Rayan (`lt-03`), Milo (`lt-05`) and Safa (`lt-06`); final product assignments should follow the client catalogue.
+- The homepage age strip was removed at client request. Retain size filtering in the shop and the Size Guide in the header, mobile menu, product pages and footer.
+- **One horizontal toolbar, no sidebar or off-canvas filter**: a `pa_size` attribute filter rendered as pill links (e.g. WooCommerce "Filter Products by Attribute" in list mode styled as chips, or a filter plugin's horizontal layout), product count, and the native Sorting dropdown (`orderby`). Show active filters (WooCommerce "Active Product Filters" widget) directly beneath.
+- Below: WooCommerce Archive Products Loop Grid (3 columns desktop, 2 tablet/mobile).
 
-Retain cream/navy/gold; use serif on the wordmark and large editorial titles, sans-serif on smaller headings and product titles. Primary buttons use modest corners, with the hero CTA retaining its pill shape. Product cards are flat and photo-led. Avoid repeating label + serif heading + pill + icon in every section.
+### D. Single Product Page (`product.html`)
+- Build in **Elementor Theme Builder → Single Product**.
+- **Left Column:** WooCommerce Product Images widget (configured with left vertical thumbnails on desktop and bottom horizontal thumbnails on mobile).
+- **Right Column:**
+  - Product Title (`Fraunces`), one-sentence Product Short Description (`purchaseSummary`), then Product Price (`Rs.`).
+  - **Add to Cart Widget:** With *Variation Swatches for WooCommerce* active, WooCommerce automatically renders the colour swatches and size buttons and enforces required size selection before enabling the Add to Cart button.
+  - Size Guide Popup trigger button placed right above the `pa_size` selector.
+  - Quantity next to navy **Add to Bag**; outline **Buy now** beneath; one quiet Cash on Delivery note. Do not repeat the unit price in the primary button or add a reassurance strip here.
+  - On phones ≤480px, use two columns of named colour buttons and four columns of sizes, with ≥44px touch targets and 16px quantity input text.
+  - Elementor **Accordion** widget, all items closed initially, populated dynamically via Dynamic Tags: *Product details* (full description, age range, fit, SKU), *Fabric & care*, and *Delivery & exchanges*.
+  - **Related Products** Loop Grid at the bottom (4 items; 4 columns desktop, 2 tablet/mobile).
+  - Mobile sticky Add-to-Cart bar: many themes/plugins provide one (e.g. "Sticky Add to Cart"); show it only ≤768px once the main button scrolls out of view. Display the selected quantity's total and size/quantity; keep hidden controls outside the tab order.
 
-Audited touch controls need 44px targets; chip/thumbnail focus rings need 6px clearance. Muted text uses #5B6574. Use shrinkable grid tracks, cm in table headers and reduced-motion rules that reset delays. Test browser layouts and real mobile devices separately from source integrity checks.
+---
+
+## 5. Pakistan-Specific WooCommerce Checkout Setup
+
+Once moved to WordPress, configure these native WooCommerce settings:
+1. **Shipping Zones:** Create a **Pakistan** zone with either a Flat Rate (e.g., `Rs. 250`) and/or Free Shipping above a minimum order amount.
+2. **Payment Gateways:**
+   - Enable **Cash on Delivery (COD)** (primary payment method for Pakistani ecommerce).
+   - Enable **Direct Bank Transfer (BACS)** with the client's local bank / IBAN details.
+   - Optional card gateway integration (PayFast Pakistan, Safepay, or JazzCash/Easypaisa WooCommerce plugin).
+3. **Courier Integration:** Connect Leopard Courier, TCS, CallCourier, or PostEx WooCommerce plugin for automated airway bill generation and tracking SMS.

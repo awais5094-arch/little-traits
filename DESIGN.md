@@ -1,7 +1,5 @@
 # Design System & Creative Direction (`DESIGN.md`)
 
-**Current direction is v2.0 in §15. Earlier sections record the design history and are superseded where they conflict.**
-
 ## 1. Brand Positioning & "Middle Ground" Strategy
 
 The client is launching a kidswear brand in Pakistan with an initial debut capsule of 10–15 pieces (represented in this prototype by 6 cohesive garments).
@@ -240,16 +238,3 @@ The supplied screenshots identified two specific problems: a large pill on the p
 ## 14. Unisex Department & Shorter Homepage — v1.9
 
 The client requested an Unisex product category and removal of the homepage Shop by age strip. Unisex joins Boys/Girls in navigation, shop tabs and the footer; three existing demo pieces populate the edit. Keep the established two-column Boys/Girls photo tiles, followed directly by New Season Arrivals. Shop size chips, the mobile menu's age links and the shared Size Guide still support fit selection. No replacement strip or extra homepage section is added.
-
-## 15. Retail refinement after independent audit — v2.0
-
-The user’s primary goal was to reduce the repeated AI-template styling. Preserve the approved cream/navy/gold palette and existing hero photos; change the repetition and hierarchy rather than inventing a new brand.
-
-- Restrict expressive serif type to the wordmark and large editorial/page titles. Use sans-serif section headings and shorter product names. Remove the generic teardrop logo mark, glass header, repeated uppercase eyebrows, redundant descriptive lines and unnecessary CTA arrows/containers.
-- Keep one hero heading and button per slide. Retain the two photos and crossfade, using explicit manual selection and touch swipes instead of unpausable autoplay. Intrinsic copy rows tolerate text changes.
-- Let category photos keep their portrait proportions with text outside the image. Product cards are flat, with plain names/prices and accurate colour swatches. Keep only the hover photo swap; no lift, zoom or decorative Choose size pseudo-button.
-- Homepage order: hero, two department links, four featured outfits, one editorial image/paragraph, footer. Remove duplicated Baby/Co-ords banners, craft icon bullets, service icon cards and their repeated stock images. The client-requested age-strip removal remains.
-- Shop departments become underlined navigation rather than another row of pills. Maintain Unisex, useful size filtering and category memberships.
-- About uses a short store introduction and practical sizing/care guidance. Contact prioritizes help and an honest demo form. No invented founder, factory story, reviews or contacts.
-- Catalogue photos were inspected as a contact sheet. Wrong outfits and unverified alternate colours are removed, including Safa’s unrelated navy cardigan. Only verified second views remain. Fabric/certification claims await real client specifications.
-- Darker muted text, 44px targets for the audited controls, focus padding, cm units, shrinkable grids and reduced-motion delay resets accompany the visual work.
