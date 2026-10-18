@@ -57,7 +57,8 @@
     const list = products.filter(
       (p) => matchesCategory(p, state.category) && matchesSize(p, state.size)
     );
-    if (state.sort === "price-asc") list.sort((a, b) => a.price - b.price);
+    if (state.sort === "featured") list.sort((a, b) => Number(b.featured) - Number(a.featured));
+    else if (state.sort === "price-asc") list.sort((a, b) => a.price - b.price);
     else if (state.sort === "price-desc") list.sort((a, b) => b.price - a.price);
     else if (state.sort === "name-asc") list.sort((a, b) => a.name.localeCompare(b.name));
     return list;
@@ -77,7 +78,7 @@
 
     if (titleEl) titleEl.textContent = activeCat.name;
     if (descEl) descEl.textContent = activeCat.description;
-    if (eyebrowEl) eyebrowEl.textContent = `Debut Capsule • Ages ${activeCat.ageSpan}`;
+    if (eyebrowEl) eyebrowEl.textContent = `Sizes ${activeCat.ageSpan}`;
     if (breadcrumbEl) breadcrumbEl.textContent = activeCat.name;
     document.title = `${activeCat.id === "all" ? "Shop All" : activeCat.name} — Little Traits | Kidswear Pakistan`;
 

@@ -38,7 +38,27 @@
       const raw = localStorage.getItem(CART_STORAGE_KEY);
       if (!raw) return [];
       const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
+      if (!Array.isArray(parsed)) return [];
+      // Keep existing demo bags in step with corrected product names and colourways.
+      const items = new Map();
+      parsed.forEach((item) => {
+        if (!item) return;
+        const product = (window.PRODUCTS || []).find((p) => p.id === item.productId);
+        if (!product || !product.sizes.includes(item.size)) return;
+        const colour = product.colors.find((c) => c.name === item.color) || product.colors[0];
+        const key = `${product.id}__${item.size}__${colour.name}`;
+        const quantity = Math.min(20, Math.max(1, parseInt(item.quantity, 10) || 1));
+        if (items.has(key)) {
+          items.get(key).quantity = Math.min(20, items.get(key).quantity + quantity);
+          return;
+        }
+        items.set(key, {
+          key, productId: product.id, slug: product.slug, name: product.name,
+          price: product.price, size: item.size, color: colour.name, colorHex: colour.hex,
+          image: (product.images[colour.imageIndex] || product.images[0]).src, quantity
+        });
+      });
+      return Array.from(items.values());
     } catch (e) {
       return [];
     }
@@ -135,7 +155,7 @@
     const swatchesHtml = product.colors
       .map(
         (c) =>
-          `<span class="swatch-dot" style="background-color: ${c.hex};" title="${c.name}"></span>`
+          `<span class="swatch-dot" style="background: ${c.secondaryHex ? `linear-gradient(90deg, ${c.hex} 50%, ${c.secondaryHex} 50%)` : c.hex};" title="${c.name}"></span>`
       )
       .join("");
     const colourNames = product.colors.map((c) => c.name).join(", ");
@@ -168,20 +188,15 @@
         <div class="product-card__body">
           <div class="product-card__meta-row">
             <span>Ages ${product.ageGroup}</span>
-            <div class="product-card__swatches" role="img" aria-label="${product.colors.length} colours: ${colourNames}">
+            <div class="product-card__swatches" role="img" aria-label="${product.colors.length} ${product.colors.length === 1 ? "colour" : "colours"}: ${colourNames}">
               ${swatchesHtml}
             </div>
           </div>
           <h3 class="product-card__title">
             <a href="product.html?id=${product.id}" class="product-card__link">${product.name}</a>
           </h3>
-          <p class="product-card__subtitle">${product.shortSubtitle}</p>
           <div class="product-card__price-row">
             <span class="product-card__price">${formatPKR(product.price)}</span>
-            <span class="product-card__cta" aria-hidden="true">
-              <span class="product-card__cta-text">Choose size</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
           </div>
         </div>
       </article>
@@ -217,8 +232,8 @@
       headerMount.innerHTML = `
         <div class="announcement-bar" role="region" aria-label="Store announcement">
           <div class="announcement-bar__inner">
-            <span class="announcement-bar__long">Debut Season Edit — breathable cottons &amp; soft playwear, crafted in Pakistan</span>
-            <span class="announcement-bar__short">Cash on Delivery nationwide • 7-day size exchange</span>
+            <span class="announcement-bar__long">Cash on Delivery · Sizes 6 months–10 years</span>
+            <span class="announcement-bar__short">Cash on Delivery · Sizes 6M–10Y</span>
             <div class="announcement-bar__links">
               <button type="button" data-open-size-guide>Size Chart</button>
               <span aria-hidden="true">•</span>
@@ -250,10 +265,6 @@
 
             <a href="index.html" class="brand-logo" aria-label="Little Traits Home">
               <span class="brand-logo__title">
-                <svg class="brand-logo__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                  <path d="M12 2C9.5 6 7 9.5 7 13a5 5 0 0 0 10 0c0-3.5-2.5-7-5-11Z"/>
-                  <path d="M12 22v-9"/>
-                </svg>
                 Little Traits
               </span>
               <span class="brand-logo__sub">Pakistan</span>
@@ -303,7 +314,7 @@
               <div class="footer-brand">
                 <div class="footer-brand__title">Little Traits</div>
                 <p class="footer-brand__desc">
-                  Breathable cottons and gentle weaves for ages 6 months to 10 years, designed in Pakistan.
+                  Clothes for growing up. Boys, girls, baby and unisex, from 6 months to 10 years.
                 </p>
               </div>
 
@@ -331,14 +342,14 @@
 
               <div class="footer-care">
                 <h3 class="footer-col__heading">Customer Care</h3>
-                <p><a href="contact.html">Contact &amp; care</a><br />Mon–Sat, 10am–6pm PKT</p>
+                <p><a href="contact.html">Sizing, delivery &amp; order questions</a></p>
                 <p class="footer-care__note">Cash on Delivery &amp; bank transfer • Prices in PKR</p>
               </div>
             </div>
 
             <div class="footer-bottom">
               <span>&copy; 2026 Little Traits Pakistan</span>
-              <span>Design preview</span>
+              <span>Design preview · Illustrative products and delivery details</span>
             </div>
           </div>
         </footer>
@@ -397,7 +408,7 @@
             type="search"
             id="global-search-input"
             class="form-input search-input"
-            placeholder="Try 'linen', 'frock', 'boys', 'romper'..."
+            placeholder="Try 'shirt', 'frock', 'unisex', 'romper'..."
           />
           <div id="search-results-list" aria-live="polite"></div>
         </div>
@@ -429,9 +440,9 @@
                 <thead>
                   <tr>
                     <th scope="col">Size</th>
-                    <th scope="col">Height</th>
-                    <th scope="col">Chest</th>
-                    <th scope="col">Waist</th>
+                    <th scope="col">Height (cm)</th>
+                    <th scope="col">Chest (cm)</th>
+                    <th scope="col">Waist (cm)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -451,7 +462,7 @@
               </table>
             </div>
             <p class="modal-note modal-note--muted">
-              All measurements in centimetres. Pre-washed fabrics allow roughly 2% natural tolerance.
+              All measurements in centimetres. Use this guide as a starting point; the final collection will include garment measurements.
             </p>
           </div>
         </div>
@@ -583,7 +594,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           </div>
           <h3 class="heading-sm">Your bag is empty</h3>
-          <p>Explore the debut capsule for boys, girls, and babies.</p>
+          <p>Explore outfits for boys, girls, babies and every little wardrobe.</p>
           <a href="shop.html" class="btn btn-primary">Shop the Collection</a>
         </div>
       `;
@@ -700,7 +711,7 @@
       const safeQuery = String(query).replace(/[&<>"']/g, (ch) => `&#${ch.charCodeAt(0)};`);
       resultsContainer.innerHTML = `
         <p class="search-empty">
-          No pieces matched “<strong>${safeQuery}</strong>”. Try <em>linen</em>, <em>frock</em>, <em>boys</em>, or <em>romper</em>.
+          No pieces matched “<strong>${safeQuery}</strong>”. Try <em>shirt</em>, <em>frock</em>, <em>unisex</em>, or <em>romper</em>.
         </p>
       `;
       return;
