@@ -644,6 +644,7 @@ ul, ol {
 
 .campaign-banner {
   --campaign-title-size: clamp(1.5rem, 3.1vw, 3rem);
+  --campaign-description-slot: 1.6rem;
   --campaign-inset: clamp(1.5rem, 3.3vw, 3rem);
   position: relative;
   display: grid;
@@ -687,8 +688,8 @@ ul, ol {
 .campaign-slide__body {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 1rem calc(var(--campaign-title-size) * 2.24) 1.5rem 48px;
-  gap: 0.65rem;
+  grid-template-rows: 1rem calc(var(--campaign-title-size) * 2.24) var(--campaign-description-slot) 56px;
+  gap: 0.75rem;
   align-content: center;
   justify-items: start;
   min-width: 0;
@@ -716,8 +717,9 @@ ul, ol {
 .campaign-slide__description {
   max-width: 34ch;
   margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
   color: var(--text-secondary);
 }
 
@@ -2945,6 +2947,7 @@ ul, ol {
   /* A compact photographic campaign first, then two collection tiles. */
   .campaign-banner {
     --campaign-title-size: clamp(1.65rem, 8.4vw, 3.25rem);
+    --campaign-description-slot: 1.5rem;
     --campaign-inset: clamp(1.125rem, 4vw, 1.5rem);
     border-radius: var(--radius-md);
   }
@@ -2959,8 +2962,8 @@ ul, ol {
     aspect-ratio: 3 / 2;
   }
   .campaign-slide__body {
-    grid-template-rows: 1rem calc(var(--campaign-title-size) * 2.24) 1.3rem 44px;
-    gap: 0.45rem;
+    grid-template-rows: 1rem calc(var(--campaign-title-size) * 2.24) var(--campaign-description-slot) 52px;
+    gap: 0.75rem;
     justify-items: start;
     text-align: left;
     padding: 1rem var(--campaign-inset);
@@ -2970,8 +2973,8 @@ ul, ol {
   }
   .campaign-slide__description {
     max-width: 100%;
-    font-size: 0.8125rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
   .campaign-slide__cta {
     min-height: 44px;
@@ -3229,9 +3232,16 @@ ul, ol {
 }
 
 /* Keep a compact split campaign on tablets instead of a tall phone stack. */
+@media (min-width: 769px) and (max-width: 900px) {
+  .campaign-banner {
+    --campaign-description-slot: 3.2rem;
+  }
+}
+
 @media (min-width: 601px) and (max-width: 768px) {
   .campaign-banner {
     --campaign-title-size: clamp(1.4rem, 3.7vw, 1.8rem);
+    --campaign-description-slot: 3.2rem;
     --campaign-inset: 1.25rem;
   }
   .campaign-slide {
@@ -3244,12 +3254,12 @@ ul, ol {
     aspect-ratio: auto;
   }
   .campaign-slide__body {
-    grid-template-rows: 1rem calc(var(--campaign-title-size) * 2.24) 2.8rem 44px;
+    grid-template-rows: 1rem calc(var(--campaign-title-size) * 2.24) var(--campaign-description-slot) 52px;
     padding: var(--campaign-inset);
     padding-bottom: calc(var(--campaign-inset) + 3.25rem);
   }
   .campaign-slide__description {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .campaign-slide__cta {
     padding-inline: 0.95rem;
