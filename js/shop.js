@@ -127,7 +127,7 @@
     if (!activeBar) return;
 
     const tags = [];
-    if (state.category !== "all") {
+    if (state.category !== "all" && state.size !== "all") {
       const catObj = categories.find((c) => c.id === state.category);
       tags.push(`
         <button type="button" class="active-filter-tag" data-set-category="all" aria-label="Remove ${catObj ? catObj.name : state.category} filter">

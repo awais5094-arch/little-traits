@@ -50,3 +50,11 @@ Rendered browser review is a separate publication step. Do not treat source/cont
 ## Before WordPress launch
 
 Obtain final branding, business contacts, product photos and stock, real material/care specifications, actual garment measurements, delivery pricing, exchange terms and payment/courier configuration. Use native WooCommerce order handling. The preview never places an order or sends a message. No invented reviews, newsletter collection or fake contact channel is added.
+
+## Rendered review of v2.0
+
+After publishing commit f083396, the live browser confirmed the new homepage and four-card grid at a 1363px viewport; the document width was 1348px, with no horizontal overflow at that width. Both hero slides settled correctly after manual selection. Unisex displayed Rayan, Safa and Milo. Safa’s required-size feedback, selecting 2–3Y, Add to Bag and the exact Rs. 4,890 checkout-preview summary were exercised in the live browser.
+
+Fresh Firecrawl browser renders were visually inspected for the complete homepage at 390px and 320px and Safa’s product page at 390px. They showed clear hero CTA/dot separation, two-column department/product layouts, readable product controls and no visible clipping. These are emulated browser screenshots, not physical-device or cross-browser checks.
+
+A follow-up trims the shop header’s redundant breadcrumb/age label and hides a redundant category-removal tag when category is the only filter. Category title/tab/active navigation remain. Combined size/category filters still show removable tags. FAQs now precede the form in DOM order as well as visually.
