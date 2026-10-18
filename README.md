@@ -66,8 +66,8 @@ little-traits/
 
 1. **Homepage (`index.html`)**:
    - Announcement bar (short COD/exchange line on mobile), sticky header (shop links left, logo centre, Our Story/Contact/Search/Bag right), mobile menu, search drawer, cart drawer.
-   - Two **campaign banners** (New Season and Baby/Toddler) using real Pexels photos: desktop copy left/photo right; mobile image above centered copy and controls. Equal heading/description/button slots keep positions steady when copy wraps.
-   - Six-second autoplay, Pause/Play, arrows/dots and keyboard controls. Rotation pauses for mouse hover, keyboard focus, open overlays, hidden tabs and an offscreen banner; reduced-motion users start paused. First slide remains usable without JavaScript.
+   - Two **campaign banners** (New Season and Baby/Toddler) using real Pexels photos: desktop copy left/photo right; mobile image above compact, left-aligned copy. Tablets (601–768px) keep a compact 360px split banner. Heavier two-line headlines and shorter shopping copy reduce dead space. Equal heading/description/button slots keep positions steady when copy wraps.
+   - Six-second autoplay, Pause/Play, dots and keyboard controls; tablet/desktop also have arrows. Phone dots and Pause/Play sit in a small pill over the image, without an extra row under the CTA. Rotation pauses for mouse hover, keyboard focus, open overlays, hidden tabs and an offscreen banner; reduced-motion users start paused. First slide remains usable without JavaScript.
    - A 32–48px pause, then **Boys/Girls collection tiles**, side by side on mobile and clickable across the entire card. The old long introductory headline and tile descriptions are removed.
    - **Shop by age** chip strip linking to pre-filtered shop views + size chart.
    - **New Season Arrivals** — all 6 pieces.

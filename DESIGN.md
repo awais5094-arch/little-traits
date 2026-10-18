@@ -192,9 +192,9 @@ Final prompt — Baby & Toddler:
 
 > Use case: ads-marketing. Asset type: real photographic imagery for a premium Pakistani baby and toddler clothing ecommerce campaign banner, image only, no typography. Wide landscape 3:2 fashion campaign photograph. Two Pakistani/South Asian toddlers around 2 and 3 years old, seated side by side on a low broad cream upholstered bench, naturally playing together with one small plain wooden stacking toy. One wears an oatmeal cotton-lined sherpa hooded jacket and warm ochre striped bloomer shorts with cream socks; the other wears a soft ivory hooded one-piece romper with tiny bear ears. Full outfits and both faces remain safely inside frame. Warm cream studio wall, sand floor, muted honey-gold curtain edge in far background, soft diffused window daylight, cozy but clean premium ecommerce catalog styling. Subjects as a centered group within the middle 65% so square mobile crops preserve them. Authentic cotton and sherpa texture, natural expressions and realistic small hands, premium candid photography, not cartoon, no plastic skin. No text, no logos, no watermarks, no embedded UI, no borders. Consistent soft cream #FDFBF7, sand #F3EFE6, muted honey accents #E5A83B with tiny navy clothing details.
 
-## 11. Stable Campaign Grid & Real Stock Photos — v1.6
+## 11. Campaign Grid & Real Stock Photo Provenance — v1.6 / v1.7
 
-Slide copy uses equal CSS Grid rows, not vertical centering based on the varying total text height: eyebrow, a two-line title slot, a two-line description slot and a fixed-height CTA. Desktop slide height is `clamp(420px, 36vw, 480px)`; mobile has a 3:2 image above an identical 312px body with centered copy, CTA and controls. Keep the reserved rows if copy changes. Do not hide overflow or truncate the description to simulate alignment.
+Slide copy uses equal CSS Grid rows, not vertical centering based on the varying total text height: eyebrow, a two-line title slot, a two-line description slot and a fixed-height CTA. Current v1.7 desktop slide height is `clamp(380px, 33vw, 440px)`; phones ≤600px have a 3:2 image above compact left-aligned copy. Tablets 601–768px use a 360px-tall split frame. Dots/Pause overlay the upper left of the photo, so the CTA needs no separate control footer. Keep the reserved rows if copy changes. Do not hide overflow or truncate the description to simulate alignment.
 
 The slider rotates every 6 seconds with a short opacity transition. Pause/Play is always available; hover, keyboard focus, hidden tab, offscreen state and overlays suspend rotation. Reduced-motion users start paused. Auto-rotation never moves focus or announces every slide.
 
@@ -206,3 +206,22 @@ The slider rotates every 6 seconds with a short opacity transition. Pause/Play i
 | `assets/images/campaign-baby-real.webp` | Matilda Wormwood | [A person holding baby clothes](https://www.pexels.com/photo/a-person-holding-baby-clothes-7484842/) | https://images.pexels.com/photos/7484842/pexels-photo-7484842.jpeg?auto=compress&cs=tinysrgb&w=1600 |
 
 Both photo pages identify the images as free stock and link to the [Pexels License](https://www.pexels.com/license/), which was read directly. It permits website and promotional use subject to its restrictions, including no implied endorsement. These are illustrative stock assets for the design preview, not proof of the client's actual inventory. Attribution is recorded here even though Pexels does not require it. Files were encoded as WebP quality 86 with their original downloaded framing; no generated replacement or semantic photo editing was applied. Combined size is approximately 126KB.
+
+## 12. Compact, Left-Aligned Retail Hero — v1.7
+
+### Research and interpretation (October 18, 2026)
+
+- [Hopscotch Pakistan](https://ilovehopscotch.com/): the current mobile view uses a clear campaign followed immediately by category photography. The useful principle is fast campaign recognition and a short path into shopping. Its sale offer and art direction are not adopted.
+- [Bachaa Party](https://www.bachaaparty.com/): source content places its seasonal campaign and Shop Now before Shop By Category. A location popup obscured the initial screenshot, so the linked campaign images were inspected directly: [desktop asset](https://www.bachaaparty.com/cdn/shop/files/Web-banner_jpg_d4f0fda6-55b7-4cac-9b08-3ef3efd278ad.jpg?v=1790957083) and [mobile asset](https://www.bachaaparty.com/cdn/shop/files/Mob-banner_jpg_42902cac-95f3-48a7-a8e0-8875b94efb29.jpg?v=1790957097). The mobile asset rearranges its short headline, photo and shopping prompt for the smaller frame.
+- [Minnie Minors](https://www.minnieminors.com/) was checked but its promotional overlay prevented a useful hero comparison. It did not determine the new layout.
+
+The design inference is to give the existing photo, a concise headline and one shopping action the space, while bringing Boys/Girls into view sooner. This is a visual reference review, not a conversion study. No competitor images or text are used in the site.
+
+### Applied composition
+
+- Existing photos and their provenance in §11 are retained without file changes. The desktop split is 42.5% copy / 57.5% photo, with a 380–440px frame.
+- Phone copy (≤600px) starts from the left, with 18–24px horizontal inset and 20px vertical padding. Fraunces stays consistent with the brand, using weight 600, line-height 1.04 and a responsive 28–35.2px title instead of a wide centered heading.
+- Shared Grid rows reserve a two-line title and two-line description. Both campaign buttons therefore share the same vertical position even when description lengths differ. The mobile copy area is approximately 225–241px, down from 312px.
+- Tablets (601–768px) keep a 360px split frame, a 28–32px title, compact CTA and controls beneath the copy; the large stacked photo is reserved for phones.
+- Phone dots and Pause/Play sit in a compact light pill over the photograph; each control keeps its 44px target. Desktop arrows remain. Autoplay, reduced-motion behavior and keyboard controls are unchanged.
+- Copy: **Everyday favourites / Made for play. Loved all day. / Feel-good cottons for every little adventure. / Shop new arrivals.** Second campaign: **Baby & toddler / Small outfits. Big cuddles. / Soft, easy layers for their first adventures. / Shop Baby & Toddler.**
