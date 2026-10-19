@@ -59,10 +59,10 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 ### A. Global Elements (`js/app.js`)
 1. **Announcement Bar + Sticky Header:**
    - Build in **Elementor Theme Builder → Header**.
-   - Top container (`#26221E`) with text + Popup trigger button for the **Size Guide Elementor Popup**.
-   - Main sticky container (`position: sticky; top: 0`) with Nav Menu widget, centered SVG/text logo, Search Popup trigger, and **Elementor Menu Cart** widget (configured as a slide-out side cart drawer).
-2. **Size Guide Modal (`#size-guide-modal`):**
-   - Build as an **Elementor Popup** containing the HTML table from `js/app.js` (`window.SIZE_GUIDE_DATA`). Triggered by a class `.open-size-guide` on both the Header and Single Product template.
+   - One short COD/exchange service line above a sticky cream header.
+   - Desktop links: Shop, Our Story, Contact. Center the existing logo; use the Menu Cart icon on the right. No Search Popup, product previews, category lists or utility buttons.
+   - Collapse navigation at 900px. Off-canvas links: Home, Shop, Our Story, Contact; one quiet Delivery & exchanges link in its footer. Preserve dialog semantics, focus management, Escape and backdrop close.
+   - Size chart is removed site-wide at client request. Do not recreate its table, popup or triggers. Retain actual product size selection and shop size filtering.
 
 ### B. Homepage (`index.html`)
 1. **Campaign Banners (`.campaign-hero`) + Boys / Girls (`.shop-departments`):**
@@ -80,13 +80,13 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 
 ### E. Our Story (`about.html`) & Contact Us (`contact.html`)
 - **Our Story (`about.html`):** Centered hero; 2-column Image + Text (`.about-story-grid`); "The details you feel" container with one image and a numbered list (`.detail-list`, 01–04); navy CTA card (`.wp-feature-card--navy`) with gold + light-outline buttons.
-- **Contact & Care (`contact.html`):** Compact hero; 3 action cards (WhatsApp, Email, Size Guide popup trigger); then 2 columns — **Elementor Form** (or CF7/WPForms) left, Accordion/Toggle FAQ right. The prototype's first two actions show preview feedback; connect real `wa.me`/`mailto:` targets only after the client confirms them. Replace demo form submission with an actual form handler, then update its button/feedback copy.
+- **Contact & Care (`contact.html`):** Compact hero; 2 action cards (WhatsApp, Email); then 2 columns — **Elementor Form** (or CF7/WPForms) left, Accordion/Toggle FAQ right. The prototype's first two actions show preview feedback; connect real `wa.me`/`mailto:` targets only after the client confirms them. Replace demo form submission with an actual form handler, then update its button/feedback copy.
 
 ### C. Shop / Category Page (`shop.html`)
 - Build in **Elementor Theme Builder → Product Archive**.
 - Header: dynamic archive title and quiet product count only. Retain Unisex in desktop/mobile menus and footer; category selection also lives in the filter drawer.
 - Assign the `unisex` product category alongside any relevant Boys/Girls/Baby/Co-ords terms. Demo references: Rayan (`lt-03`), Milo (`lt-05`) and Safa (`lt-06`); final product assignments should follow the client catalogue.
-- The homepage age strip was removed at client request. Retain size filtering in the shop and the Size Guide in the header, mobile menu, product pages and footer.
+- The homepage age strip and site-wide size chart were removed at client request. Retain size filtering in the shop and product size selection.
 - **One Filter / sort row and one off-canvas filter panel**: put department/category radios and a `pa_size` size/age filter in the same panel on desktop and mobile. Include Clear all and a View results action, accessible dialog focus handling and Escape/backdrop close. Use native WooCommerce sorting (`orderby`) outside the panel. Avoid repeated category tabs, a visible size strip and a second applied-tag row above products.
 - Below: WooCommerce Archive Products Loop Grid (3 columns desktop, 2 tablet/mobile).
 
@@ -96,7 +96,7 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 - **Right Column:**
   - Product Title (`Fraunces`), one-sentence Product Short Description (`purchaseSummary`), then Product Price (`Rs.`).
   - **Add to Cart Widget:** With *Variation Swatches for WooCommerce* active, WooCommerce automatically renders the colour swatches and size buttons and enforces required size selection before enabling the Add to Cart button.
-  - Size Guide Popup trigger button placed right above the `pa_size` selector.
+  - Keep the `pa_size` selector; no size-chart trigger.
   - Quantity next to navy **Add to Bag**; outline **Buy now** beneath; one quiet Cash on Delivery note. Do not repeat the unit price in the primary button or add a reassurance strip here.
   - On phones ≤480px, use two columns of named colour buttons and four columns of sizes, with ≥44px touch targets and 16px quantity input text.
   - Elementor **Accordion** widget, all items closed initially, populated dynamically via Dynamic Tags: *Product details* (full description, age range, fit, SKU), *Fabric & care*, and *Delivery & exchanges*.

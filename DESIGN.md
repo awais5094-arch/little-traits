@@ -240,3 +240,13 @@ The supplied screenshots identified two specific problems: a large pill on the p
 ## 14. Unisex Department & Shorter Homepage — v1.9
 
 The client requested an Unisex product category and removal of the homepage Shop by age strip. Unisex joins Boys/Girls in navigation, shop tabs and the footer; three existing demo pieces populate the edit. Keep the established two-column Boys/Girls photo tiles, followed directly by New Season Arrivals. Shop size filters in the drawer, the mobile menu's age links and the shared Size Guide still support fit selection. No replacement strip or extra homepage section is added.
+
+## Current header / off-canvas — 19 October 2026
+This spec supersedes the earlier full category navigation, search and size-guide references.
+
+- Desktop: three quiet text links (Shop, Our Story, Contact), original centered logo, bag icon. No separate brand nav or product/category links.
+- Collapse to hamburger/logo/bag at 900px, since the shorter menu can now fit tablets and small desktops.
+- Off-canvas: Home, Shop, Our Story, Contact in generous serif rows, with a small Delivery & exchanges footer link. Remove all age chips, repeated category navigation and product previews. Preserve the shared dialog manager and keyboard focus behavior.
+- Keep a single short COD/exchange announcement; remove the long seasonal message, Size Chart and Customer Care utility links.
+- Remove size chart entirely (all buttons, popup, measurement data/table and unused CSS). Contact now has two action cards. Product size selection and the shop size/age filter remain available.
+- References read: [Mango Kids](https://shop.mango.com/us/en/h/kids) and [H&M Kids](https://www2.hm.com/en_us/kids/products/clothing/view-all.html). Both distinguish primary navigation from shopping utilities. Adapt that hierarchy to this small catalogue; no account, wishlist or large-store menu is needed.

@@ -191,9 +191,6 @@
           <div class="pdp-selector-block" id="pdp-size-block">
             <div class="pdp-selector-header">
               <span class="pdp-selector-label">Size</span>
-              <button type="button" class="size-guide-trigger" data-open-size-guide>
-                Size Guide
-              </button>
             </div>
             <div class="size-options-grid" role="group" aria-label="Select size">
               ${sizesHtml}

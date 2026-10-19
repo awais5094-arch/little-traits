@@ -89,19 +89,6 @@ window.ALL_SIZES = [
   "8-10Y"
 ];
 
-window.SIZE_GUIDE_DATA = [
-  { size: "6-12M", heightCm: "68 – 76 cm", chestCm: "46 – 48 cm", waistCm: "45 – 47 cm", ageLabel: "6 – 12 Months" },
-  { size: "12-18M", heightCm: "76 – 83 cm", chestCm: "48 – 50 cm", waistCm: "47 – 49 cm", ageLabel: "12 – 18 Months" },
-  { size: "18-24M", heightCm: "83 – 90 cm", chestCm: "50 – 52 cm", waistCm: "49 – 50 cm", ageLabel: "18 – 24 Months" },
-  { size: "2-3Y", heightCm: "90 – 98 cm", chestCm: "52 – 54 cm", waistCm: "50 – 51 cm", ageLabel: "2 – 3 Years" },
-  { size: "3-4Y", heightCm: "98 – 104 cm", chestCm: "54 – 56 cm", waistCm: "51 – 52 cm", ageLabel: "3 – 4 Years" },
-  { size: "4-5Y", heightCm: "104 – 110 cm", chestCm: "56 – 58 cm", waistCm: "52 – 54 cm", ageLabel: "4 – 5 Years" },
-  { size: "5-6Y", heightCm: "110 – 116 cm", chestCm: "58 – 60 cm", waistCm: "54 – 55 cm", ageLabel: "5 – 6 Years" },
-  { size: "6-7Y", heightCm: "116 – 122 cm", chestCm: "60 – 63 cm", waistCm: "55 – 57 cm", ageLabel: "6 – 7 Years" },
-  { size: "7-8Y", heightCm: "122 – 128 cm", chestCm: "63 – 66 cm", waistCm: "57 – 59 cm", ageLabel: "7 – 8 Years" },
-  { size: "8-10Y", heightCm: "128 – 140 cm", chestCm: "66 – 71 cm", waistCm: "59 – 62 cm", ageLabel: "8 – 10 Years" }
-];
-
 window.PRODUCTS = [
   {
     id: "lt-01",

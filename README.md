@@ -43,7 +43,7 @@ little-traits/
 ├── css/
 │   └── styles.css              # Complete design system, Deep Navy & Golden Honey palette, breathable spacing
 ├── js/
-│   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & size chart data
+│   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & available sizes
 │   ├── app.js                  # Shared Header, Footer, Search Drawer, persistent Cart Drawer & Modals
 │   ├── home.js                 # Smooth 4.5-second campaign crossfades and manual/keyboard controls
 │   ├── shop.js                 # Department/size filter drawer, sorting, URL sync, empty state
@@ -81,14 +81,14 @@ little-traits/
 
 3. **Product Detail Page (`product.html`)**:
    - One template for `?id=lt-01` … `lt-06`; thumbnails with colour-linked image switching.
-   - Title, one-sentence purchase summary, price, named colour choices, **required size** (with Size Guide), quantity + navy **Add to Bag**, outline **Buy now**, and one quiet COD note.
+   - Title, one-sentence purchase summary, price, named colour choices, **required size**, quantity + navy **Add to Bag**, outline **Buy now**, and one quiet COD note.
    - Full description, age range, fabric, care, SKU and delivery/exchange information stay in three closed accordions below the buying controls.
    - Mobile: two colour columns and four size columns at ≤480px; sticky total + size/quantity + Add-to-Bag shortcut after the main button scrolls away; four related products.
    - Quantity changes update controls in place, so typing a number and immediately pressing Add to Bag or Buy now works on the first click.
 
 4. **Our Story (`about.html`)**: story, "The details you feel" numbered list, navy CTA card.
 
-5. **Contact (`contact.html`)**: WhatsApp / Email preview buttons (no outbound placeholder contacts), working Size Guide, local demo form (`#demo-contact-form`) with explicit no-message-sent feedback, FAQ (`#faq-section`).
+5. **Contact (`contact.html`)**: WhatsApp / Email preview buttons (no outbound placeholder contacts), local demo form (`#demo-contact-form`) with explicit no-message-sent feedback, FAQ (`#faq-section`).
 
 Client preview refinements: navigation collapses at 1180px, shop filter changes preserve focus/scroll position and update the header, dialogs trap keyboard focus, and contact fields use 16px text and shrink safely on narrow screens. See `HANDOFF.md` for verification scope; fresh browser screenshots could not be completed in the final pass.
 
@@ -101,3 +101,6 @@ Client preview refinements: navigation collapses at 1180px, shop filter changes 
 - **Storage:** `localStorage` (`little_traits_demo_cart_v1`) for persistent demo cart state across page reloads.
 - **Target Production Platform:** WordPress 6.x + WooCommerce + Elementor (see `WORDPRESS-MAPPING.md`).
 - **AI Assistant / Model Used:** Built in Cursor using `gemini-4-argon` (as exposed by the Cursor runtime environment).
+
+### Current header and menu (19 October 2026)
+Three desktop links (Shop, Our Story, Contact), centered logo and bag icon; below 900px the off-canvas menu has Home plus the same three links. Categories and age filters stay on Shop. Search, product previews, age chips and the site-wide size chart have been removed.

@@ -4,7 +4,7 @@
  * Provides shared functionality across index.html, shop.html, and product.html:
  * 1. Currency formatting (PKR / Rs.)
  * 2. LocalStorage Cart State (add, update quantity, remove, subtotal calculation)
- * 3. Shared Header, Navigation, Footer, Cart Drawer, Search Drawer, Size Guide Modal, and Honest Demo Checkout Modal
+ * 3. Shared Header, Navigation, Footer, Cart Drawer and Honest Demo Checkout Modal
  * 4. Reusable Product Card HTML renderer
  */
 
@@ -21,11 +21,11 @@
     return String(size || "").replace("-", "–");
   }
 
-  function updateShopNavigation(category) {
+  function updateShopNavigation() {
     document.querySelectorAll(".nav-primary__link, .mnav-link").forEach((link) => {
       const url = new URL(link.getAttribute("href"), window.location.href);
       if (!url.pathname.endsWith("/shop.html")) return;
-      const active = (url.searchParams.get("category") || "all") === category;
+      const active = window.location.pathname.endsWith("/shop.html");
       link.classList.toggle("is-active", active);
       if (active) link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
@@ -191,25 +191,13 @@
   // Inject Shared Header, Drawers, Modals, and Footer
   function initSharedShell() {
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentCat = urlParams.get("category") || "";
-
-    const shopNav = [
-      { href: "shop.html", label: "Shop All", page: "shop.html", cat: "" },
-      { href: "shop.html?category=boys", label: "Boys", page: "shop.html", cat: "boys" },
-      { href: "shop.html?category=girls", label: "Girls", page: "shop.html", cat: "girls" },
-      { href: "shop.html?category=unisex", label: "Unisex", page: "shop.html", cat: "unisex" },
-      { href: "shop.html?category=baby", label: "Baby", page: "shop.html", cat: "baby" },
-      { href: "shop.html?category=coords", label: "Co-ords", page: "shop.html", cat: "coords" }
-    ];
-    const brandNav = [
+    const mainNav = [
+      { href: "shop.html", label: "Shop", page: "shop.html" },
       { href: "about.html", label: "Our Story", page: "about.html" },
       { href: "contact.html", label: "Contact", page: "contact.html" }
     ];
-    function isActiveLink(l) {
-      if (l.page !== currentPage) return false;
-      if (l.page !== "shop.html") return true;
-      return (l.cat || "all") === (currentCat || "all");
+    function isActiveLink(link) {
+      return link.page === currentPage;
     }
 
     const headerMount = document.getElementById("site-header-mount");
@@ -217,13 +205,7 @@
       headerMount.innerHTML = `
         <div class="announcement-bar" role="region" aria-label="Store announcement">
           <div class="announcement-bar__inner">
-            <span class="announcement-bar__long">Debut Season Edit — breathable cottons &amp; soft playwear, crafted in Pakistan</span>
-            <span class="announcement-bar__short">Cash on Delivery nationwide • 7-day size exchange</span>
-            <div class="announcement-bar__links">
-              <button type="button" data-open-size-guide>Size Chart</button>
-              <span aria-hidden="true">•</span>
-              <a href="contact.html">Customer Care</a>
-            </div>
+            <span>Cash on Delivery nationwide · 7-day size exchange</span>
           </div>
         </div>
         <header class="site-header">
@@ -237,7 +219,7 @@
                 </svg>
               </button>
               <nav class="nav-primary" aria-label="Main navigation">
-                ${shopNav
+                ${mainNav
                   .map(
                     (l) =>
                       `<a href="${l.href}" class="nav-primary__link ${
@@ -260,23 +242,6 @@
             </a>
 
             <div class="header-actions">
-              <nav class="nav-primary nav-primary--secondary" aria-label="Brand navigation">
-                ${brandNav
-                  .map(
-                    (l) =>
-                      `<a href="${l.href}" class="nav-primary__link ${
-                        isActiveLink(l) ? "is-active" : ""
-                      }"${isActiveLink(l) ? ' aria-current="page"' : ""}>${l.label}</a>`
-                  )
-                  .join("")}
-              </nav>
-              <button type="button" class="icon-btn" id="open-search-btn" aria-label="Search catalogue" aria-controls="search-drawer">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7"></circle>
-                  <line x1="20" y1="20" x2="16.35" y2="16.35"></line>
-                </svg>
-                <span class="hide-on-mobile">Search</span>
-              </button>
               <button type="button" class="icon-btn icon-btn--bag" id="open-cart-btn" aria-label="Open shopping bag" aria-controls="cart-drawer">
                 <span class="icon-btn__glyph">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -286,7 +251,6 @@
                   </svg>
                   <span class="cart-badge" id="header-cart-count" data-count="0" aria-hidden="true">0</span>
                 </span>
-                <span class="hide-on-mobile">Bag</span>
               </button>
             </div>
           </div>
@@ -323,7 +287,6 @@
                 <h3 class="footer-col__heading">Help</h3>
                 <ul class="footer-links">
                   <li><a href="contact.html">Contact Us</a></li>
-                  <li><button type="button" data-open-size-guide>Size &amp; Fit Guide</button></li>
                   <li><a href="contact.html#faq-section">Delivery &amp; Exchanges</a></li>
                   <li><a href="about.html">Our Story</a></li>
                 </ul>
@@ -345,61 +308,29 @@
       `;
     }
 
-    // Inject Global Overlays (Mobile Nav, Search Drawer, Cart Drawer, Size Guide Modal, Demo Checkout Modal, Toast)
+    // Inject Global Overlays (Navigation Drawer, Cart Drawer, Demo Checkout Modal, Toast)
     const overlaysContainer = document.createElement("div");
     overlaysContainer.id = "global-overlays";
     overlaysContainer.innerHTML = `
       <div class="backdrop" id="global-backdrop" aria-hidden="true"></div>
 
-      <!-- Mobile Navigation Drawer -->
-      <aside class="drawer drawer--left" id="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation" aria-hidden="true">
+      <!-- Simple navigation; catalogue departments and ages live on the shop page. -->
+      <aside class="drawer drawer--left navigation-drawer" id="mobile-nav-drawer" role="dialog" aria-modal="true" aria-labelledby="navigation-title" aria-hidden="true">
         <div class="drawer__header">
-          <span class="drawer__title">Little Traits</span>
+          <h2 class="drawer__title" id="navigation-title">Menu</h2>
           <button type="button" class="icon-btn" data-close-drawers aria-label="Close menu">✕</button>
         </div>
         <div class="drawer__body">
-          <ul class="mnav-list">
-            ${[
-              { href: "index.html", label: "Home", page: "index.html", meta: "" },
-              ...shopNav.map((l) => ({ ...l, meta: "" })),
-              ...brandNav.map((l) => ({ ...l, meta: "" }))
-            ]
-              .map((l, i) => {
-                const active = l.page === "index.html" ? currentPage === "index.html" || currentPage === "" : isActiveLink(l);
-                const divider = i === shopNav.length + 1 ? ' class="mnav-list__divider"' : "";
-                return `<li${divider}><a href="${l.href}" class="mnav-link ${active ? "is-active" : ""}"${active ? ' aria-current="page"' : ""}><span>${l.label}</span><span aria-hidden="true">→</span></a></li>`;
-              })
-              .join("")}
-          </ul>
-
-          <p class="mnav-label">Shop by age</p>
-          <div class="mnav-sizes">
-            ${(window.ALL_SIZES || [])
-              .map((sz) => `<a href="shop.html?size=${sz}" class="size-chip">${formatSize(sz)}</a>`)
-              .join("")}
-          </div>
-
-          <button type="button" class="btn btn-outline btn-block" data-open-size-guide>
-            Size &amp; fit guide
-          </button>
+          <nav aria-label="Main navigation">
+            <ul class="mnav-list">
+              ${[{ href: "index.html", label: "Home", page: "index.html" }, ...mainNav]
+                .map((link) => `<li><a href="${link.href}" class="mnav-link ${isActiveLink(link) ? "is-active" : ""}"${isActiveLink(link) ? ' aria-current="page"' : ""}>${link.label}</a></li>`)
+                .join("")}
+            </ul>
+          </nav>
         </div>
-      </aside>
-
-      <!-- Search Drawer -->
-      <aside class="drawer" id="search-drawer" role="dialog" aria-modal="true" aria-label="Search Catalogue" aria-hidden="true">
-        <div class="drawer__header">
-          <span class="drawer__title">Search Catalogue</span>
-          <button type="button" class="icon-btn" data-close-drawers aria-label="Close search">✕</button>
-        </div>
-        <div class="drawer__body">
-          <label for="global-search-input" class="sr-only">Search by garment name, fabric, or category</label>
-          <input
-            type="search"
-            id="global-search-input"
-            class="form-input search-input"
-            placeholder="Try 'linen', 'frock', 'boys', 'romper'..."
-          />
-          <div id="search-results-list" aria-live="polite"></div>
+        <div class="navigation-drawer__footer">
+          <a href="contact.html#faq-section">Delivery &amp; exchanges</a>
         </div>
       </aside>
 
@@ -412,50 +343,6 @@
         <div class="drawer__body" id="cart-drawer-body" aria-live="polite"></div>
         <div class="drawer__footer" id="cart-drawer-footer"></div>
       </aside>
-
-      <!-- Size Guide Modal -->
-      <div class="modal-wrap" id="size-guide-modal" role="dialog" aria-modal="true" aria-labelledby="size-guide-title" aria-hidden="true">
-        <div class="modal-card">
-          <div class="drawer__header">
-            <h2 class="drawer__title" id="size-guide-title">Size &amp; Fit Guide <span class="drawer__title-sub">6M – 10Y</span></h2>
-            <button type="button" class="icon-btn" data-close-modals aria-label="Close size guide">✕</button>
-          </div>
-          <div class="modal-card__body">
-            <p class="modal-note">
-              Cut with a relaxed fit for movement and growth. Between sizes? We recommend sizing up.
-            </p>
-            <div class="size-table-wrap">
-              <table class="size-table">
-                <thead>
-                  <tr>
-                    <th scope="col">Size</th>
-                    <th scope="col">Height</th>
-                    <th scope="col">Chest</th>
-                    <th scope="col">Waist</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${(window.SIZE_GUIDE_DATA || [])
-                    .map(
-                      (row) => `
-                    <tr>
-                      <th scope="row">${formatSize(row.size)}</th>
-                      <td>${row.heightCm.replace(" cm", "")}</td>
-                      <td>${row.chestCm.replace(" cm", "")}</td>
-                      <td>${row.waistCm.replace(" cm", "")}</td>
-                    </tr>
-                  `
-                    )
-                    .join("")}
-                </tbody>
-              </table>
-            </div>
-            <p class="modal-note modal-note--muted">
-              All measurements in centimetres. Pre-washed fabrics allow roughly 2% natural tolerance.
-            </p>
-          </div>
-        </div>
-      </div>
 
       <!-- Honest Demo Checkout Modal -->
       <div class="modal-wrap" id="demo-checkout-modal" role="dialog" aria-modal="true" aria-labelledby="demo-checkout-title" aria-hidden="true">
@@ -478,7 +365,6 @@
 
     bindGlobalEvents();
     updateCartUI();
-    renderSearchResults("");
   }
 
   let lastTrigger = null;
@@ -510,7 +396,7 @@
       if (menuBtn) menuBtn.setAttribute("aria-expanded", "true");
     }
     const closeBtn = el.querySelector("[data-close-drawers], [data-close-modals], .icon-btn");
-    if (closeBtn && el.id !== "search-drawer") {
+    if (closeBtn) {
       setTimeout(() => closeBtn.focus({ preventScroll: true }), 60);
     }
   }
@@ -680,56 +566,6 @@
     openModal("demo-checkout-modal");
   }
 
-  function renderSearchResults(query) {
-    const resultsContainer = document.getElementById("search-results-list");
-    if (!resultsContainer) return;
-
-    const q = (query || "").trim().toLowerCase();
-    const allProducts = window.PRODUCTS || [];
-
-    const filtered = !q
-      ? allProducts
-      : allProducts.filter((p) => {
-          const hay = `${p.name} ${p.shortSubtitle} ${p.category} ${(p.secondaryCategories || []).join(" ")} ${p.fabricSummary} ${p.shortDescription} ${p.colors
-            .map((c) => c.name)
-            .join(" ")}`.toLowerCase();
-          return hay.includes(q);
-        });
-
-    if (filtered.length === 0) {
-      const safeQuery = String(query).replace(/[&<>"']/g, (ch) => `&#${ch.charCodeAt(0)};`);
-      resultsContainer.innerHTML = `
-        <p class="search-empty">
-          No pieces matched “<strong>${safeQuery}</strong>”. Try <em>linen</em>, <em>frock</em>, <em>boys</em>, or <em>romper</em>.
-        </p>
-      `;
-      return;
-    }
-
-    resultsContainer.innerHTML = `
-      <p class="search-results__label">
-        ${q ? `${filtered.length} matching ${filtered.length === 1 ? "piece" : "pieces"}` : `All pieces (${allProducts.length})`}
-      </p>
-      <div class="search-results">
-        ${filtered
-          .map(
-            (p) => `
-          <a href="product.html?id=${p.id}" class="search-result">
-            <img src="${p.images[0].src}" alt="" class="search-result__img" />
-            <span class="search-result__body">
-              <span class="search-result__name">${p.name}</span>
-              <span class="search-result__sub">${p.shortSubtitle}</span>
-              <span class="search-result__price">${formatPKR(p.price)}</span>
-            </span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        `
-          )
-          .join("")}
-      </div>
-    `;
-  }
-
   function bindGlobalEvents() {
     document.addEventListener("click", (e) => {
       const target = e.target;
@@ -740,25 +576,9 @@
         return;
       }
 
-      if (target.closest("#open-search-btn")) {
-        e.preventDefault();
-        openDrawer("search-drawer");
-        setTimeout(() => {
-          const input = document.getElementById("global-search-input");
-          if (input) input.focus();
-        }, 120);
-        return;
-      }
-
       if (target.closest("#mobile-menu-btn")) {
         e.preventDefault();
         openDrawer("mobile-nav-drawer");
-        return;
-      }
-
-      if (target.closest("[data-open-size-guide]")) {
-        e.preventDefault();
-        openModal("size-guide-modal");
         return;
       }
 
@@ -820,13 +640,7 @@
       }
     });
 
-    // Live Search Input
-    const searchInput = document.getElementById("global-search-input");
-    if (searchInput) {
-      searchInput.addEventListener("input", (e) => {
-        renderSearchResults(e.target.value);
-      });
-    }
+
   }
 
   // Expose API globally for page-specific scripts
