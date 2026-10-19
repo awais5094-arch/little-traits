@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=1.9" />
+  <link rel="stylesheet" href="css/styles.css?v=2.0" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -17,69 +17,62 @@
   <div id="site-header-mount"></div>
 
   <main id="main-content">
-    <!-- Category header: title + department pills (the single department control) -->
     <section class="shop-header" aria-labelledby="shop-page-title">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="index.html">Home</a>
-          <span aria-hidden="true">/</span>
-          <span id="breadcrumb-current" aria-current="page">All Pieces</span>
-        </nav>
-
-        <div class="shop-header__intro">
-          <div>
-            <span class="eyebrow" id="shop-eyebrow">Debut Capsule • Ages 6M – 10Y</span>
-            <h1 class="heading-lg" id="shop-page-title">All Pieces</h1>
-          </div>
-          <p class="shop-header__desc" id="shop-page-desc">
-            Every piece from our debut seasonal edit — breathable cottons, soft weaves, and comfortable silhouettes made for everyday play.
-          </p>
-        </div>
-
-        <div class="chip-scroller chip-scroller--tabs" id="shop-category-tabs" role="group" aria-label="Department">
-          <!-- Populated dynamically -->
-        </div>
+      <div class="container shop-heading">
+        <h1 class="heading-lg" id="shop-page-title">All Pieces</h1>
+        <span class="shop-results-count" id="shop-results-count" role="status" aria-live="polite"></span>
       </div>
     </section>
 
     <section class="shop-workspace" aria-label="Product catalogue">
       <div class="container">
-        <!-- Toolbar: size filter + sort -->
         <div class="shop-toolbar">
-          <div class="shop-toolbar__sizes">
-            <span class="shop-toolbar__label" id="size-filter-label">Size</span>
-            <div class="chip-scroller" id="shop-size-chips" role="group" aria-labelledby="size-filter-label">
-              <!-- Populated dynamically -->
-            </div>
-          </div>
-          <div class="shop-toolbar__end">
-            <span class="shop-results-count" id="shop-results-count" aria-live="polite">6 pieces</span>
-            <div class="sort-select-wrap">
-              <label for="shop-sort-select">Sort</label>
-              <select id="shop-sort-select" class="sort-select">
-                <option value="featured">Featured</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="name-asc">Name: A–Z</option>
-              </select>
-            </div>
+          <button type="button" class="shop-filter-toggle" id="shop-filter-toggle" aria-haspopup="dialog" aria-controls="shop-filter-drawer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--bg-canvas)"/><circle cx="15" cy="17" r="3" fill="var(--bg-canvas)"/></svg>
+            Filter <span id="shop-filter-count" hidden></span>
+          </button>
+          <div class="sort-select-wrap">
+            <label for="shop-sort-select" class="sr-only">Sort products</label>
+            <select id="shop-sort-select" class="sort-select">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name-asc">Name: A–Z</option>
+            </select>
           </div>
         </div>
-
-        <!-- Applied filter overview -->
-        <div class="active-filters-bar" id="active-filters-bar" hidden></div>
-
         <div class="product-grid" id="shop-product-grid"></div>
         <div id="shop-empty-state" hidden></div>
       </div>
     </section>
   </main>
 
+  <aside class="drawer shop-filter-drawer" id="shop-filter-drawer" role="dialog" aria-modal="true" aria-labelledby="shop-filter-title" aria-hidden="true">
+    <div class="drawer__header">
+      <h2 class="drawer__title" id="shop-filter-title">Filter</h2>
+      <button type="button" class="icon-btn" data-close-drawers aria-label="Close filters">✕</button>
+    </div>
+    <div class="drawer__body">
+      <fieldset class="shop-filter-group">
+        <legend>Shop by</legend>
+        <div id="shop-category-options" class="shop-filter-categories"></div>
+      </fieldset>
+      <fieldset class="shop-filter-group">
+        <legend>Size / age</legend>
+        <div id="shop-size-options" class="shop-filter-sizes"></div>
+      </fieldset>
+    </div>
+    <div class="drawer__footer shop-filter-footer">
+      <button type="button" class="btn-text" data-reset-filters>Clear all</button>
+      <button type="button" class="btn btn-primary" data-close-drawers id="shop-view-results">View pieces</button>
+    </div>
+  </aside>
+
   <!-- Shared Footer Mount -->
   <div id="site-footer-mount"></div>
 
   <script src="js/data.js?v=1.9"></script>
   <script src="js/app.js?v=1.9"></script>
-  <script src="js/shop.js"></script>
+  <script src="js/shop.js?v=2.0"></script>
 </body>
 </html>

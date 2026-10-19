@@ -3,8 +3,8 @@
  *
  * Operates on window.PRODUCTS & window.CATEGORIES:
  * - Reads initial category, size & sort from URL query parameters (?category=boys&size=2-3Y&sort=price-asc)
- * - Department pills (header) and size chips (toolbar) form one horizontal filter bar on every breakpoint
- * - Renders product count, applied-filter overview, and a helpful empty state
+ * - One filter drawer for departments and size/age, using the shared overlay and focus management
+ * - Compact title/count and filter/sort row keep products close to the header
  */
 
 (function () {
@@ -69,88 +69,36 @@
 
   function renderHeader() {
     const activeCat = categories.find((c) => c.id === state.category) || categories[0];
-
-    const titleEl = document.getElementById("shop-page-title");
-    const descEl = document.getElementById("shop-page-desc");
-    const eyebrowEl = document.getElementById("shop-eyebrow");
-    const breadcrumbEl = document.getElementById("breadcrumb-current");
-
-    if (titleEl) titleEl.textContent = activeCat.name;
-    if (descEl) descEl.textContent = activeCat.description;
-    if (eyebrowEl) eyebrowEl.textContent = `Debut Capsule • Ages ${activeCat.ageSpan}`;
-    if (breadcrumbEl) breadcrumbEl.textContent = activeCat.name;
+    document.getElementById("shop-page-title").textContent = activeCat.name;
     document.title = `${activeCat.id === "all" ? "Shop All" : activeCat.name} — Little Traits | Kidswear Pakistan`;
-
-    const tabsEl = document.getElementById("shop-category-tabs");
-    if (tabsEl) {
-      tabsEl.innerHTML = categories
-        .map((c) => {
-          const isActive = c.id === state.category;
-          return `
-            <button type="button" class="cat-tab ${isActive ? "is-active" : ""}" data-set-category="${c.id}" aria-pressed="${isActive}">
-              ${c.shortLabel} <span class="cat-tab__count">${countFor(c.id, "all")}</span>
-            </button>
-          `;
-        })
-        .join("");
-    }
   }
 
-  function renderSizeChips() {
-    const chipsEl = document.getElementById("shop-size-chips");
-    if (!chipsEl) return;
-
-    const chip = (value, label) => {
-      const isSelected = state.size === value;
-      const available = value === "all" || countFor(state.category, value) > 0;
-      return `
-        <button type="button" class="size-chip ${isSelected ? "is-selected" : ""} ${available ? "" : "is-unavailable"}"
-          data-set-size="${value}" aria-pressed="${isSelected}">
-          ${label}
-        </button>
-      `;
-    };
-
-    chipsEl.innerHTML = [chip("all", "All sizes")]
-      .concat(allSizes.map((sz) => chip(sz, sizeLabel(sz))))
-      .join("");
+  function renderFilterOptions() {
+    document.getElementById("shop-category-options").innerHTML = categories.map((c) => `
+      <label class="shop-filter-option">
+        <input type="radio" name="shop-category" value="${c.id}" ${state.category === c.id ? "checked" : ""}>
+        <span>${c.id === "all" ? "All pieces" : c.shortLabel}</span>
+      </label>
+    `).join("");
+    document.getElementById("shop-size-options").innerHTML = ["all", ...allSizes].map((size) => {
+      const unavailable = size !== "all" && countFor(state.category, size) === 0;
+      return `<label class="shop-size-option ${unavailable ? "is-unavailable" : ""}">
+        <input type="radio" name="shop-size" value="${size}" ${state.size === size ? "checked" : ""}>
+        <span>${size === "all" ? "All sizes" : sizeLabel(size)}</span>
+        ${unavailable ? '<span class="sr-only"> — no matching pieces</span>' : ""}
+      </label>`;
+    }).join("");
   }
 
-  function renderAppliedFilters(filteredCount) {
-    const countEl = document.getElementById("shop-results-count");
-    if (countEl) {
-      countEl.textContent = `${filteredCount} ${filteredCount === 1 ? "piece" : "pieces"}`;
-    }
-
-    const activeBar = document.getElementById("active-filters-bar");
-    if (!activeBar) return;
-
-    const tags = [];
-    if (state.category !== "all") {
-      const catObj = categories.find((c) => c.id === state.category);
-      tags.push(`
-        <button type="button" class="active-filter-tag" data-set-category="all" aria-label="Remove ${catObj ? catObj.name : state.category} filter">
-          ${catObj ? catObj.name : state.category} <span aria-hidden="true">✕</span>
-        </button>
-      `);
-    }
-    if (state.size !== "all") {
-      tags.push(`
-        <button type="button" class="active-filter-tag" data-set-size="all" aria-label="Remove size ${sizeLabel(state.size)} filter">
-          Size ${sizeLabel(state.size)} <span aria-hidden="true">✕</span>
-        </button>
-      `);
-    }
-
-    if (tags.length > 0) {
-      activeBar.hidden = false;
-      activeBar.innerHTML =
-        tags.join("") +
-        (tags.length > 1 ? `<button type="button" class="btn-text" data-reset-filters>Clear all</button>` : "");
-    } else {
-      activeBar.hidden = true;
-      activeBar.innerHTML = "";
-    }
+  function renderResultsSummary(count) {
+    const pieces = `${count} ${count === 1 ? "piece" : "pieces"}`;
+    document.getElementById("shop-results-count").textContent = pieces + (state.size === "all" ? "" : ` · Size ${sizeLabel(state.size)}`);
+    const activeCount = Number(state.category !== "all") + Number(state.size !== "all");
+    const badge = document.getElementById("shop-filter-count");
+    badge.textContent = activeCount;
+    badge.hidden = activeCount === 0;
+    document.getElementById("shop-filter-toggle").setAttribute("aria-label", activeCount ? `Filter, ${activeCount} active` : "Filter products");
+    document.getElementById("shop-view-results").textContent = `View ${pieces}`;
   }
 
   function renderCatalogueGrid() {
@@ -158,7 +106,7 @@
     const gridEl = document.getElementById("shop-product-grid");
     const emptyEl = document.getElementById("shop-empty-state");
 
-    renderAppliedFilters(filtered.length);
+    renderResultsSummary(filtered.length);
     if (!gridEl || !emptyEl) return;
 
     if (filtered.length === 0) {
@@ -192,46 +140,36 @@
     }
   }
 
-  function scrollActiveChipsIntoView() {
-    document
-      .querySelectorAll(".chip-scroller .is-active, .chip-scroller .is-selected")
-      .forEach((el) => {
-        const scroller = el.closest(".chip-scroller");
-        if (scroller && scroller.scrollWidth > scroller.clientWidth) {
-          const offset = el.getBoundingClientRect().left - scroller.getBoundingClientRect().left;
-          scroller.scrollLeft += offset - scroller.clientWidth / 2 + el.clientWidth / 2;
-        }
-      });
-  }
-
   function updateAll() {
     const focused = document.activeElement;
-    const focusAttr = focused && ["data-set-category", "data-set-size"].find((attr) => focused.hasAttribute(attr));
-    const focusGroup = focused && focused.closest("#shop-category-tabs, #shop-size-chips");
-    const focusValue = focusAttr ? focused.getAttribute(focusAttr) : null;
-    const restoreToolbarFocus = focused && focused.closest("#active-filters-bar, #shop-empty-state");
-    const scrollPositions = ["shop-category-tabs", "shop-size-chips"].map((id) => {
-      const element = document.getElementById(id);
-      return [element, element ? element.scrollLeft : 0];
-    });
+    const focusName = focused && focused.name;
+    const focusValue = focused && focused.value;
+    const restoreToTrigger = focused && focused.closest("#shop-empty-state");
     syncUrlParams();
     renderHeader();
-    renderSizeChips();
+    renderFilterOptions();
     renderCatalogueGrid();
+    document.getElementById("shop-sort-select").value = state.sort;
     const app = window.LittleTraitsApp;
     if (app && app.updateShopNavigation) app.updateShopNavigation(state.category);
-    scrollPositions.forEach(([element, left]) => { if (element) element.scrollLeft = left; });
-    if (focusGroup && focusAttr) {
-      const replacement = focusGroup.querySelector(`[${focusAttr}="${focusValue}"]`);
+    if (focusName === "shop-category" || focusName === "shop-size") {
+      const replacement = Array.from(document.getElementsByName(focusName)).find((el) => el.value === focusValue);
       if (replacement) replacement.focus({ preventScroll: true });
-    } else if (restoreToolbarFocus) {
-      const group = document.getElementById(focusAttr === "data-set-category" ? "shop-category-tabs" : "shop-size-chips");
-      const active = group && group.querySelector('[aria-pressed="true"]');
-      if (active) active.focus({ preventScroll: true });
+    } else if (restoreToTrigger) {
+      document.getElementById("shop-filter-toggle").focus({ preventScroll: true });
     }
   }
 
   function initShopEvents() {
+    document.getElementById("shop-filter-toggle").addEventListener("click", () => {
+      window.LittleTraitsApp.openDrawer("shop-filter-drawer");
+    });
+    document.getElementById("shop-filter-drawer").addEventListener("change", (e) => {
+      if (e.target.name === "shop-category") state.category = e.target.value;
+      else if (e.target.name === "shop-size") state.size = e.target.value;
+      else return;
+      updateAll();
+    });
     const sortSelect = document.getElementById("shop-sort-select");
     if (sortSelect) {
       sortSelect.value = state.sort;
@@ -273,9 +211,6 @@
     parseUrlParams();
     initShopEvents();
     updateAll();
-    scrollActiveChipsIntoView();
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(scrollActiveChipsIntoView);
-    }
+
   });
 })();

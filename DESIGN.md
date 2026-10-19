@@ -95,12 +95,14 @@ The v1.2 pass (independent ecommerce design + frontend review) kept the identity
 
 Removed: arch collection tiles (duplicated hero + nav), the navy closing CTA (the footer follows directly). The deeper material/detail content moved to About rather than being deleted.
 
-### Shop: one horizontal filter bar
-Baymard's guidance for catalogues with few filter types is a horizontal toolbar with applied filters shown beneath it. With 6–15 pieces and only two facets (department, size), the old sidebar + mobile drawer + pill bar duplicated each other. Now:
-- Department tabs (with counts) in the page header.
-- Toolbar: size chips (scrollable; sizes with zero matches are dashed) + result count + sort. Sizes get their own row ≤1024px.
-- Applied-filter tags below the toolbar; "Clear all" only when 2+ filters apply.
-- Empty state offers "Show all sizes in X" and "Reset filters".
+### Shop: compact listing with an on-demand filter panel (19 October 2026)
+The previous department tabs, size strip and applied tags crowded the page above the products. The current layout uses one short title, a quiet count, and a single Filter / sort row. Department and size/age options live together in one right-hand drawer at every breakpoint. No category description, capsule eyebrow, breadcrumb, duplicate category tag or always-visible size strip remains above the grid.
+
+- Native department radios and a three-column size/age grid; Clear all and View N pieces in the drawer footer.
+- Filters update results and URL immediately. The current category appears in the heading; a selected size appears beside the result count. A small number beside Filter indicates active facets.
+- Uses the shared backdrop, Escape handling, keyboard focus trap, inert background and focus return. Drawer is outside main so it remains interactive.
+- Preserve the existing product cards/grid and populated Unisex department. Empty state offers Show all sizes / Reset filters.
+- Reference listings inspected: [H&M kids clothing](https://www2.hm.com/en_us/kids/products/clothing/view-all.html) (compact Filter and sort entries), [Mango girls dresses](https://shop.mango.com/us/en/c/kids/girls/dresses-and-jumpsuits/411b2ebb) (Filter and order above products). Adapt the compact controls to Little Traits rather than adopting large-store catalogue complexity.
 
 ### PDP: purchase controls first
 This describes the v1.2 pass; the current purchase panel is specified in §8 below.
@@ -237,4 +239,4 @@ The supplied screenshots identified two specific problems: a large pill on the p
 
 ## 14. Unisex Department & Shorter Homepage — v1.9
 
-The client requested an Unisex product category and removal of the homepage Shop by age strip. Unisex joins Boys/Girls in navigation, shop tabs and the footer; three existing demo pieces populate the edit. Keep the established two-column Boys/Girls photo tiles, followed directly by New Season Arrivals. Shop size chips, the mobile menu's age links and the shared Size Guide still support fit selection. No replacement strip or extra homepage section is added.
+The client requested an Unisex product category and removal of the homepage Shop by age strip. Unisex joins Boys/Girls in navigation, shop tabs and the footer; three existing demo pieces populate the edit. Keep the established two-column Boys/Girls photo tiles, followed directly by New Season Arrivals. Shop size filters in the drawer, the mobile menu's age links and the shared Size Guide still support fit selection. No replacement strip or extra homepage section is added.

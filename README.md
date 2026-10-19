@@ -46,7 +46,7 @@ little-traits/
 │   ├── data.js                 # Centralized brand config, 6 demo products (PKR), categories & size chart data
 │   ├── app.js                  # Shared Header, Footer, Search Drawer, persistent Cart Drawer & Modals
 │   ├── home.js                 # Smooth 4.5-second campaign crossfades and manual/keyboard controls
-│   ├── shop.js                 # Department/size filter toolbar, sorting, URL sync, empty state
+│   ├── shop.js                 # Department/size filter drawer, sorting, URL sync, empty state
 │   └── product.js              # PDP controller: variants, size validation, sticky mobile bar, accordions
 ├── assets/
 │   └── images/                 # 26 original photos + 2 archived concept images + 2 real campaign photos
@@ -74,10 +74,10 @@ little-traits/
    - Baby and Co-ords editorial banners, service bar, compact footer.
 
 2. **Shop / Category Page (`shop.html`)**:
-   - Heading, description and breadcrumb update with the department (`All`, `Boys`, `Girls`, `Unisex`, `Baby & Toddler`, `Co-ords & Sets`).
+   - Compact heading updates with the department (`All`, `Boys`, `Girls`, `Unisex`, `Baby & Toddler`, `Co-ords & Sets`).
    - Unisex is linked from desktop/mobile navigation and the footer; its three demo pieces also remain in their existing departments. Search includes secondary categories.
-   - Department tabs with counts; one horizontal toolbar with size chips (`6–12M` to `8–10Y`), result count and sort.
-   - Applied-filter tags and an empty state with "Show all sizes" / "Reset filters".
+   - Quiet result count and a single Filter / sort row. Department and size/age options (`6–12M` to `8–10Y`) live in one accessible side drawer on desktop and mobile.
+   - Active filter count, Clear all and View N pieces; empty state with "Show all sizes" / "Reset filters".
 
 3. **Product Detail Page (`product.html`)**:
    - One template for `?id=lt-01` … `lt-06`; thumbnails with colour-linked image switching.

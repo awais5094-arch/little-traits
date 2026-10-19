@@ -12,7 +12,7 @@ This prototype was specifically architected so every visual section, CSS token, 
 - **Recommended Lightweight Plugins:**
   - *Variation Swatches for WooCommerce* (converts standard WooCommerce dropdown attributes `pa_colour` and `pa_size` into the exact circular colour swatches and rectangular size pills shown in `product.html`).
   - *FIBOSearch (Ajax Search for WooCommerce)* (reproduces the live header search drawer `#search-drawer`).
-  - *Husky / WOOF or Elementor Taxonomy Filter* (reproduces the horizontal size-chip toolbar on `shop.html`; use a horizontal layout, not a sidebar).
+  - Use WooCommerce category / attribute filters in one off-canvas panel to match `shop.html`; keep the archive heading and Filter / sort row compact.
 
 ---
 
@@ -84,10 +84,10 @@ Each item in `window.LITTLE_TRAITS_PRODUCTS` maps 1:1 to a **WooCommerce Variabl
 
 ### C. Shop / Category Page (`shop.html`)
 - Build in **Elementor Theme Builder → Product Archive**.
-- Header: breadcrumb, title/description (dynamic term name + description), department links with counts. Include Unisex in the archive tabs, desktop/mobile menus and footer.
+- Header: dynamic archive title and quiet product count only. Retain Unisex in desktop/mobile menus and footer; category selection also lives in the filter drawer.
 - Assign the `unisex` product category alongside any relevant Boys/Girls/Baby/Co-ords terms. Demo references: Rayan (`lt-03`), Milo (`lt-05`) and Safa (`lt-06`); final product assignments should follow the client catalogue.
 - The homepage age strip was removed at client request. Retain size filtering in the shop and the Size Guide in the header, mobile menu, product pages and footer.
-- **One horizontal toolbar, no sidebar or off-canvas filter**: a `pa_size` attribute filter rendered as pill links (e.g. WooCommerce "Filter Products by Attribute" in list mode styled as chips, or a filter plugin's horizontal layout), product count, and the native Sorting dropdown (`orderby`). Show active filters (WooCommerce "Active Product Filters" widget) directly beneath.
+- **One Filter / sort row and one off-canvas filter panel**: put department/category radios and a `pa_size` size/age filter in the same panel on desktop and mobile. Include Clear all and a View results action, accessible dialog focus handling and Escape/backdrop close. Use native WooCommerce sorting (`orderby`) outside the panel. Avoid repeated category tabs, a visible size strip and a second applied-tag row above products.
 - Below: WooCommerce Archive Products Loop Grid (3 columns desktop, 2 tablet/mobile).
 
 ### D. Single Product Page (`product.html`)
