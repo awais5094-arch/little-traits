@@ -517,7 +517,7 @@ ul, ol {
   width: 100%;
 }
 
-/* Logo (preserved) */
+/* Text wordmark */
 .brand-logo {
   display: inline-flex;
   flex-direction: column;
@@ -537,13 +537,6 @@ ul, ol {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-}
-
-.brand-logo__mark {
-  flex: none;
-  color: var(--accent-gold);
-  width: 18px;
-  height: 18px;
 }
 
 .brand-logo__sub {

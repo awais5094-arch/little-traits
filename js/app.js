@@ -230,13 +230,9 @@
               </nav>
             </div>
 
-            <a href="index.html" class="brand-logo" aria-label="Little Traits Home">
+            <a href="index.html" class="brand-logo" aria-label="${window.STORE_CONFIG.brandName} Home">
               <span class="brand-logo__title">
-                <svg class="brand-logo__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                  <path d="M12 2C9.5 6 7 9.5 7 13a5 5 0 0 0 10 0c0-3.5-2.5-7-5-11Z"/>
-                  <path d="M12 22v-9"/>
-                </svg>
-                Little Traits
+                ${window.STORE_CONFIG.brandName}
               </span>
               <span class="brand-logo__sub">Pakistan</span>
             </a>
@@ -265,7 +261,7 @@
           <div class="container">
             <div class="footer-grid">
               <div class="footer-brand">
-                <div class="footer-brand__title">Little Traits</div>
+                <div class="footer-brand__title">${window.STORE_CONFIG.brandName}</div>
                 <p class="footer-brand__desc">
                   Breathable cottons and gentle weaves for ages 6 months to 10 years, designed in Pakistan.
                 </p>
@@ -300,7 +296,7 @@
             </div>
 
             <div class="footer-bottom">
-              <span>&copy; 2026 Little Traits Pakistan</span>
+              <span>&copy; 2026 ${window.STORE_CONFIG.brandName} Pakistan</span>
               <span>Design preview</span>
             </div>
           </div>

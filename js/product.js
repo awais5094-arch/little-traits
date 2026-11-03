@@ -79,7 +79,7 @@
 
     document.title = `${currentProduct.name} — ${app.formatPKR(
       currentProduct.price
-    )} | Little Traits Pakistan`;
+    )} | ${window.STORE_CONFIG.brandName} Pakistan`;
 
     renderBreadcrumb(currentProduct);
 

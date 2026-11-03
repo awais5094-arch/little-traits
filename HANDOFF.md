@@ -165,3 +165,10 @@ Increased both campaign descriptions from 13px to 14.4px on phones and from 14.4
 - Search removed from the small demo catalogue; shopping and category/size filtering belong on Shop.
 - Client requested removal of the size chart across the entire site. All chart triggers, popup, measurement table/data and unused styles are removed, including Product, About, Contact and footer. Product size selection and shop size filters remain.
 - Navigation reuses shared overlay focus, Escape, backdrop and inert-page handling. Shop stays active for every department.
+
+
+## Generic pitch demo — 3 November 2026
+- The GitHub Pages demo uses **Kidswear** as its public name. The header is a text wordmark with the old leaf mark removed; footer, static page titles, descriptions, visible copy, and dynamic shop/product titles use the generic name.
+- `window.STORE_CONFIG.brandName` is the source for the shared header/footer and dynamic page titles. Static HTML titles and copy also need updating when rebranding.
+- Existing product IDs, cart storage keys, JavaScript APIs, photography, layouts, and shopping behavior are preserved. WordPress staging is separate from this repository change.
+- Validation: catalogue and asset integrity check plus JavaScript syntax and shared-shell rendering checks. No browser visual check.

@@ -70,7 +70,7 @@
   function renderHeader() {
     const activeCat = categories.find((c) => c.id === state.category) || categories[0];
     document.getElementById("shop-page-title").textContent = activeCat.name;
-    document.title = `${activeCat.id === "all" ? "Shop All" : activeCat.name} — Little Traits | Kidswear Pakistan`;
+    document.title = `${activeCat.id === "all" ? "Shop All" : activeCat.name} — ${window.STORE_CONFIG.brandName} | Kidswear Pakistan`;
   }
 
   function renderFilterOptions() {

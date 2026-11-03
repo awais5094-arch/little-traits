@@ -4,12 +4,12 @@
  * Separated from presentation and UI logic so this maps directly to
  * WooCommerce Variable Products, Product Categories, and Product Attributes.
  * 
- * Note: Brand name "Little Traits" (taken from project workspace) is defined in
- * STORE_CONFIG and can be replaced in one place when final client branding is confirmed.
+ * Public demo brand is defined in STORE_CONFIG and reused by the shared shell
+ * and dynamic page titles. Keep internal product IDs and cart keys stable.
  */
 
 window.STORE_CONFIG = {
-  brandName: "Little Traits",
+  brandName: "Kidswear",
   brandTagline: "Soft Cottons & Playful Heirlooms",
   currency: "PKR",
   currencySymbol: "Rs.",
