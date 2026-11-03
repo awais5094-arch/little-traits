@@ -172,3 +172,10 @@ Increased both campaign descriptions from 13px to 14.4px on phones and from 14.4
 - `window.STORE_CONFIG.brandName` is the source for the shared header/footer and dynamic page titles. Static HTML titles and copy also need updating when rebranding.
 - Existing product IDs, cart storage keys, JavaScript APIs, photography, layouts, and shopping behavior are preserved. WordPress staging is separate from this repository change.
 - Validation: catalogue and asset integrity check plus JavaScript syntax and shared-shell rendering checks. No browser visual check.
+
+
+## Actual project hero banners — 3 November 2026
+- Replaced both generic stock hero campaigns with the actual WordPress homepage's three banners in order: Caps, Jerseys, Complete Outfit, with matching copy and three navigation dots. Existing carousel code keeps text and images synchronized.
+- WebP images are stored locally in `assets/images/campaign-{caps,jerseys,outfit}.webp`, using the existing WordPress 1024px renditions (about 194 KiB combined). No runtime dependency on staging. Sources: `/wp-content/uploads/2026/10/100298-1024x732.webp`, `2149853350-1024x682.webp`, and `100297-1024x682.webp` on `https://webpulse.com.webpulsecraft.com`.
+- Preserved generic Kidswear branding. All three hero buttons open the demo shop. Reserved two lines for banner descriptions, and extra room for three mobile dots.
+- Added the Unisex homepage collection card using the actual WordPress image (`pexels-krishna-kids-photography-2148372889-32921511-600x900.jpg`), stored as `assets/images/hero-unisex.jpg`. Cards use three desktop columns and one phone column; the new card links to `shop.html?category=unisex`.

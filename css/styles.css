@@ -613,7 +613,7 @@ ul, ol {
 
 .campaign-banner {
   --campaign-title-size: clamp(1.5rem, 3.1vw, 3rem);
-  --campaign-description-slot: 1.6rem;
+  --campaign-description-slot: 3.2rem;
   --campaign-inset: clamp(1.5rem, 3.3vw, 3rem);
   position: relative;
   display: grid;
@@ -630,7 +630,7 @@ ul, ol {
   height: clamp(380px, 33vw, 440px);
 }
 
-/* Keep both slides in one grid cell so the image and copy crossfade together. */
+/* Keep all slides in one grid cell so the image and copy crossfade together. */
 .campaign-banner.is-ready .campaign-slide {
   opacity: 0;
   visibility: hidden;
@@ -714,14 +714,6 @@ ul, ol {
   object-position: center 45%;
 }
 
-.campaign-slide--baby {
-  background-color: var(--bg-blush-tint);
-}
-
-.campaign-slide--baby .campaign-slide__media img {
-  object-position: 30% center;
-}
-
 .campaign-controls {
   position: absolute;
   left: var(--campaign-inset);
@@ -773,7 +765,7 @@ ul, ol {
 
 .department-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.75rem, 1.8vw, 1.5rem);
 }
 
@@ -781,8 +773,8 @@ ul, ol {
   position: relative;
   display: flex;
   align-items: flex-end;
-  aspect-ratio: 16 / 9;
-  max-height: 360px;
+  aspect-ratio: 4 / 5;
+  max-height: 460px;
   min-width: 0;
   width: 100%;
   border-radius: var(--radius-md);
@@ -2657,7 +2649,7 @@ ul, ol {
   /* A compact photographic campaign first, then two collection tiles. */
   .campaign-banner {
     --campaign-title-size: clamp(1.65rem, 8.4vw, 3.25rem);
-    --campaign-description-slot: 1.5rem;
+    --campaign-description-slot: 3.2rem;
     --campaign-inset: clamp(1.125rem, 4vw, 1.5rem);
     border-radius: var(--radius-md);
   }
@@ -2690,7 +2682,7 @@ ul, ol {
     min-height: 44px;
     padding: 0.55rem 1rem;
     font-size: 0.8125rem;
-    max-width: calc(100% - 4.25rem);
+    max-width: calc(100% - 6rem);
   }
   .campaign-controls {
     top: auto;
@@ -2704,6 +2696,11 @@ ul, ol {
   }
   .campaign-controls .campaign-arrow {
     display: none;
+  }
+  .department-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 440px;
+    margin-inline: auto;
   }
   .department-card {
     aspect-ratio: 4 / 5;

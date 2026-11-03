@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=2.1" />
+  <link rel="stylesheet" href="css/styles.css?v=2.2" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -22,31 +22,45 @@
       <div class="container">
         <h1 class="sr-only" id="hero-heading">Kidswear for boys, girls and babies</h1>
         <div class="campaign-banner" id="campaign-banner" role="region" aria-roledescription="carousel" aria-label="Seasonal collections">
-          <div class="campaign-slide is-active" id="campaign-season" data-campaign-slide role="group" aria-roledescription="slide" aria-label="New season, 1 of 2">
+          <div class="campaign-slide is-active" id="campaign-caps" data-campaign-slide role="group" aria-roledescription="slide" aria-label="Caps, 1 of 3">
             <div class="campaign-slide__body">
-              <span class="campaign-slide__eyebrow">Everyday favourites</span>
-              <h2 class="campaign-slide__title">Made for little ones.<br />Loved every day.</h2>
-              <p class="campaign-slide__description">Everyday cottons, made to move.</p>
-              <a href="shop.html" class="btn btn-primary campaign-slide__cta">Shop new arrivals
+              <span class="campaign-slide__eyebrow">The knit-cap edit</span>
+              <h2 class="campaign-slide__title">Little caps.<br />Big personality.</h2>
+              <p class="campaign-slide__description">Chunky knit caps that bring the whole look together.</p>
+              <a href="shop.html" class="btn btn-primary campaign-slide__cta">Shop Caps
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
             <div class="campaign-slide__media">
-              <img src="assets/images/campaign-season-real.webp" alt="Three children sitting together in casual white cotton T-shirts" width="1600" height="1068" fetchpriority="high" />
+              <img src="assets/images/campaign-caps.webp" alt="Two children hugging in chunky knit hats, with mustard and grey outfits against a gold backdrop." width="1024" height="732" fetchpriority="high" />
             </div>
           </div>
 
-          <div class="campaign-slide campaign-slide--baby" id="campaign-baby" data-campaign-slide role="group" aria-roledescription="slide" aria-label="Baby and toddler, 2 of 2" hidden>
+          <div class="campaign-slide" id="campaign-jerseys" data-campaign-slide role="group" aria-roledescription="slide" aria-label="Jerseys, 2 of 3" hidden>
             <div class="campaign-slide__body">
-              <span class="campaign-slide__eyebrow">Baby &amp; toddler</span>
-              <h2 class="campaign-slide__title">Soft little outfits.<br />Great big cuddles.</h2>
-              <p class="campaign-slide__description">Soft layers for their first days.</p>
-              <a href="shop.html?category=baby" class="btn btn-primary campaign-slide__cta">Shop babywear
+              <span class="campaign-slide__eyebrow">The jersey edit</span>
+              <h2 class="campaign-slide__title">A little cosy.<br />A lot of character.</h2>
+              <p class="campaign-slide__description">Mustard jerseys, denim days and their own little style.</p>
+              <a href="shop.html" class="btn btn-primary campaign-slide__cta">Shop Jerseys
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
             <div class="campaign-slide__media">
-              <img src="assets/images/campaign-baby-real.webp" alt="A person holding a cream baby bodysuit with a teddy-bear motif" width="1600" height="1069" loading="eager" fetchpriority="low" decoding="async" />
+              <img src="assets/images/campaign-jerseys.webp" alt="Two children in mustard knitwear and denim laughing together against a gold backdrop." width="1024" height="682" loading="eager" fetchpriority="low" decoding="async" />
+            </div>
+          </div>
+
+          <div class="campaign-slide" id="campaign-outfit" data-campaign-slide role="group" aria-roledescription="slide" aria-label="Complete Looks, 3 of 3" hidden>
+            <div class="campaign-slide__body">
+              <span class="campaign-slide__eyebrow">The complete-look edit</span>
+              <h2 class="campaign-slide__title">One outfit.<br />Big adventures.</h2>
+              <p class="campaign-slide__description">Knits and denim, styled together for their next little adventure.</p>
+              <a href="shop.html" class="btn btn-primary campaign-slide__cta">Shop Complete Looks
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+            <div class="campaign-slide__media">
+              <img src="assets/images/campaign-outfit.webp" alt="Two children in knit hats hugging on a wooden balance board against a warm gold backdrop." width="1024" height="682" loading="eager" fetchpriority="low" decoding="async" />
             </div>
           </div>
 
@@ -55,8 +69,9 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
             </button>
             <div class="campaign-dots" role="group" aria-label="Choose a banner">
-              <button type="button" class="campaign-dot is-active" data-campaign-index="0" aria-label="Show new season banner" aria-controls="campaign-season" aria-pressed="true"><span></span></button>
-              <button type="button" class="campaign-dot" data-campaign-index="1" aria-label="Show baby and toddler banner" aria-controls="campaign-baby" aria-pressed="false"><span></span></button>
+              <button type="button" class="campaign-dot is-active" data-campaign-index="0" aria-label="Show caps banner" aria-controls="campaign-caps" aria-pressed="true"><span></span></button>
+              <button type="button" class="campaign-dot" data-campaign-index="1" aria-label="Show jerseys banner" aria-controls="campaign-jerseys" aria-pressed="false"><span></span></button>
+              <button type="button" class="campaign-dot" data-campaign-index="2" aria-label="Show outfit banner" aria-controls="campaign-outfit" aria-pressed="false"><span></span></button>
             </div>
             <button type="button" class="campaign-arrow" data-campaign-step="1" aria-label="Next banner">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
@@ -67,8 +82,8 @@
       </div>
     </section>
 
-    <!-- A short pause, then direct Boys / Girls collection links on every screen. -->
-    <section class="shop-departments" aria-label="Shop Boys and Girls">
+    <!-- Direct Boys / Girls / Unisex collection links. -->
+    <section class="shop-departments" aria-label="Shop Boys, Girls and Unisex">
       <div class="container">
         <div class="department-grid">
           <a href="shop.html?category=boys" class="department-card" aria-label="Shop Boys collection">
@@ -87,6 +102,16 @@
             <div class="department-card__content">
               <h2 class="department-card__title">Girls</h2>
               <span class="btn btn-light department-card__cta" aria-hidden="true">Shop Girls
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+          <a href="shop.html?category=unisex" class="department-card" aria-label="Shop Unisex collection">
+            <img src="assets/images/hero-unisex.jpg" alt="Two children wearing matching light sweatshirts and dark bottoms" class="department-card__img" width="600" height="900" loading="lazy" />
+            <div class="department-card__overlay" aria-hidden="true"></div>
+            <div class="department-card__content">
+              <h2 class="department-card__title">Unisex</h2>
+              <span class="btn btn-light department-card__cta" aria-hidden="true">Shop Unisex
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </div>
